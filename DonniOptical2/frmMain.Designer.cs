@@ -41,8 +41,8 @@
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
-            this.newToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.orderToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.customerToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.printToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -85,7 +85,7 @@
             this.orderToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black;
             this.orderToolStripMenuItem.Name = "orderToolStripMenuItem";
             this.orderToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.orderToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.orderToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.orderToolStripMenuItem.Text = "&New order";
             this.orderToolStripMenuItem.Click += new System.EventHandler(this.orderToolStripMenuItem_Click);
             // 
@@ -95,18 +95,19 @@
             this.customerToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black;
             this.customerToolStripMenuItem.Name = "customerToolStripMenuItem";
             this.customerToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.customerToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.customerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.customerToolStripMenuItem.Text = "&Customer";
+            this.customerToolStripMenuItem.Click += new System.EventHandler(this.customerToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(169, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolsStripMenuItem_Click);
             // 
@@ -141,8 +142,8 @@
             // toolStrip
             // 
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newToolStripButton,
-            this.openToolStripButton,
+            this.orderToolStripButton,
+            this.customerToolStripButton,
             this.toolStripSeparator1,
             this.printToolStripButton,
             this.toolStripSeparator2});
@@ -152,23 +153,25 @@
             this.toolStrip.TabIndex = 1;
             this.toolStrip.Text = "ToolStrip";
             // 
-            // newToolStripButton
+            // orderToolStripButton
             // 
-            this.newToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.newToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("newToolStripButton.Image")));
-            this.newToolStripButton.ImageTransparentColor = System.Drawing.Color.Black;
-            this.newToolStripButton.Name = "newToolStripButton";
-            this.newToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.newToolStripButton.Text = "New order";
+            this.orderToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.orderToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("orderToolStripButton.Image")));
+            this.orderToolStripButton.ImageTransparentColor = System.Drawing.Color.Black;
+            this.orderToolStripButton.Name = "orderToolStripButton";
+            this.orderToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.orderToolStripButton.Text = "New order";
+            this.orderToolStripButton.Click += new System.EventHandler(this.orderToolStripButton_Click);
             // 
-            // openToolStripButton
+            // customerToolStripButton
             // 
-            this.openToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.openToolStripButton.Image = global::DonniOptical2.Properties.Resources.users_men_women;
-            this.openToolStripButton.ImageTransparentColor = System.Drawing.Color.Black;
-            this.openToolStripButton.Name = "openToolStripButton";
-            this.openToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.openToolStripButton.Text = "Customer";
+            this.customerToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.customerToolStripButton.Image = global::DonniOptical2.Properties.Resources.users_men_women;
+            this.customerToolStripButton.ImageTransparentColor = System.Drawing.Color.Black;
+            this.customerToolStripButton.Name = "customerToolStripButton";
+            this.customerToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.customerToolStripButton.Text = "Customer";
+            this.customerToolStripButton.Click += new System.EventHandler(this.customerToolStripButton_Click);
             // 
             // toolStripSeparator1
             // 
@@ -265,8 +268,8 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpMenu;
         private System.Windows.Forms.ToolStripMenuItem contentsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripButton newToolStripButton;
-        private System.Windows.Forms.ToolStripButton openToolStripButton;
+        private System.Windows.Forms.ToolStripButton orderToolStripButton;
+        private System.Windows.Forms.ToolStripButton customerToolStripButton;
         private System.Windows.Forms.ToolStripButton printToolStripButton;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;

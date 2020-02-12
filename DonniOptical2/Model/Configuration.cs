@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DonniOptical2.DataAccess
+namespace DonniOptical2.Model
 {
-    class Order_DetailDataAccess
+    public class Configuration
     {
+        public decimal HstAmnt { get; set; }
     }
 }

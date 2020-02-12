@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DonniOptical2.Model
 {
-    public class Order_Detail
+    public class OrderDetail
     {
         public int Id { get; set; }
         public int OrderId { get; set; }

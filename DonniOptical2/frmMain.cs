@@ -24,7 +24,22 @@ namespace DonniOptical2
         {
             this.Close();
         }
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+            IsMdiContainer = true;
+            SetBackgroundColorForChildForm();
+        }
 
+        private void SetBackgroundColorForChildForm()
+        {
+            foreach (Control control in this.Controls)
+            {
+                if ((control) is MdiClient)
+                {
+                    control.BackColor = System.Drawing.SystemColors.ActiveCaption;
+                }
+            }
+        }
 
         private void CloseAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -55,21 +70,68 @@ namespace DonniOptical2
                 orderForm.Show();
             }
         }
-
-        private void frmMain_Load(object sender, EventArgs e)
+        private void orderToolStripButton_Click(object sender, EventArgs e)
         {
-            IsMdiContainer = true;
-            SetBackgroundColorForChildForm();
+            bool isFormOpened = false;
+
+            foreach (Form frm in Application.OpenForms)
+            {
+                if (frm.Name == "frmOrder")
+                {
+                    frm.BringToFront();
+                    isFormOpened = true;
+                }
+            }
+
+            if (isFormOpened == false)
+            {
+                frmOrder orderForm = new frmOrder();
+                orderForm.MdiParent = this;
+                orderForm.Location = new Point(5, 5);
+                orderForm.Show();
+            }
         }
 
-        private void SetBackgroundColorForChildForm()
+        private void customerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (Control control in this.Controls)
+            bool isFormOpened = false;
+
+            foreach (Form frm in Application.OpenForms)
             {
-                if ((control) is MdiClient)
+                if (frm.Name == "frmCustomer")
                 {
-                    control.BackColor = System.Drawing.SystemColors.ActiveCaption;
+                    frm.BringToFront();
+                    isFormOpened = true;
                 }
+            }
+
+            if (isFormOpened == false)
+            {
+                frmCustomer customerForm = new frmCustomer();
+                customerForm.MdiParent = this;
+                customerForm.Location = new Point(5, 5);
+                customerForm.Show();
+            }
+        }
+        private void customerToolStripButton_Click(object sender, EventArgs e)
+        {
+            bool isFormOpened = false;
+
+            foreach (Form frm in Application.OpenForms)
+            {
+                if (frm.Name == "frmCustomer")
+                {
+                    frm.BringToFront();
+                    isFormOpened = true;
+                }
+            }
+
+            if (isFormOpened == false)
+            {
+                frmCustomer customerForm = new frmCustomer();
+                customerForm.MdiParent = this;
+                customerForm.Location = new Point(5, 5);
+                customerForm.Show();
             }
         }
     }

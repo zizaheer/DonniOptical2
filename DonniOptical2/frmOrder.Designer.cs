@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnCloseOrder = new System.Windows.Forms.Button();
             this.btnRemoveFromOrderItemList = new System.Windows.Forms.Button();
             this.btnSaveOrder = new System.Windows.Forms.Button();
@@ -37,6 +37,7 @@
             this.btnAddToOrderItemList = new System.Windows.Forms.Button();
             this.label25 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lblHstAmnt = new System.Windows.Forms.Label();
             this.ddlPaidBy = new System.Windows.Forms.ComboBox();
             this.label57 = new System.Windows.Forms.Label();
             this.txtRemarks = new System.Windows.Forms.TextBox();
@@ -125,12 +126,12 @@
             this.label27 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
             this.gbPrescription = new System.Windows.Forms.GroupBox();
+            this.txtPrescriptionDate = new System.Windows.Forms.DateTimePicker();
             this.txtPrescriptionPrismLeft = new System.Windows.Forms.TextBox();
             this.txtPrescriptionAddLeft = new System.Windows.Forms.TextBox();
             this.txtPrescriptionAxisLeft = new System.Windows.Forms.TextBox();
             this.txtPrescriptionCylLeft = new System.Windows.Forms.TextBox();
             this.txtPrescriptionSphereLeft = new System.Windows.Forms.TextBox();
-            this.btnCalendatView = new System.Windows.Forms.Button();
             this.txtPrescriptionPrismRight = new System.Windows.Forms.TextBox();
             this.txtPrescriptionAddRight = new System.Windows.Forms.TextBox();
             this.txtPrescriptionAxisRight = new System.Windows.Forms.TextBox();
@@ -148,7 +149,6 @@
             this.txtDoctorClinicAddress = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.txtPrescriptionDate = new System.Windows.Forms.TextBox();
             this.txtDoctorPhone = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -167,7 +167,7 @@
             this.txtCustomerNo = new System.Windows.Forms.TextBox();
             this.txtCustomerFirstName = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.gbFindBy = new System.Windows.Forms.GroupBox();
             this.lblNoOfOrdersFound = new System.Windows.Forms.Label();
             this.label82 = new System.Windows.Forms.Label();
             this.lnkNextOrder = new System.Windows.Forms.LinkLabel();
@@ -192,18 +192,20 @@
             this.groupBox5.SuspendLayout();
             this.gbPrescription.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.groupBox9.SuspendLayout();
+            this.gbFindBy.SuspendLayout();
             this.gbFindOrder.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCloseOrder
             // 
-            this.btnCloseOrder.Location = new System.Drawing.Point(877, 633);
+            this.btnCloseOrder.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCloseOrder.Location = new System.Drawing.Point(877, 634);
             this.btnCloseOrder.Name = "btnCloseOrder";
             this.btnCloseOrder.Size = new System.Drawing.Size(75, 25);
             this.btnCloseOrder.TabIndex = 15;
             this.btnCloseOrder.Text = "Close";
             this.btnCloseOrder.UseVisualStyleBackColor = true;
+            this.btnCloseOrder.Click += new System.EventHandler(this.btnCloseOrder_Click);
             // 
             // btnRemoveFromOrderItemList
             // 
@@ -216,15 +218,17 @@
             this.btnRemoveFromOrderItemList.TabIndex = 11;
             this.btnRemoveFromOrderItemList.Text = "Remove from order";
             this.btnRemoveFromOrderItemList.UseVisualStyleBackColor = false;
+            this.btnRemoveFromOrderItemList.Click += new System.EventHandler(this.btnRemoveFromOrderItemList_Click);
             // 
             // btnSaveOrder
             // 
-            this.btnSaveOrder.Location = new System.Drawing.Point(699, 633);
+            this.btnSaveOrder.Location = new System.Drawing.Point(699, 634);
             this.btnSaveOrder.Name = "btnSaveOrder";
             this.btnSaveOrder.Size = new System.Drawing.Size(169, 25);
             this.btnSaveOrder.TabIndex = 14;
             this.btnSaveOrder.Text = "Save";
             this.btnSaveOrder.UseVisualStyleBackColor = true;
+            this.btnSaveOrder.Click += new System.EventHandler(this.btnSaveOrder_Click);
             // 
             // label39
             // 
@@ -246,6 +250,7 @@
             this.btnAddToOrderItemList.TabIndex = 10;
             this.btnAddToOrderItemList.Text = "Add to order";
             this.btnAddToOrderItemList.UseVisualStyleBackColor = false;
+            this.btnAddToOrderItemList.Click += new System.EventHandler(this.btnAddToOrderItemList_Click);
             // 
             // label25
             // 
@@ -258,6 +263,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.lblHstAmnt);
             this.groupBox3.Controls.Add(this.ddlPaidBy);
             this.groupBox3.Controls.Add(this.label57);
             this.groupBox3.Controls.Add(this.txtRemarks);
@@ -285,6 +291,15 @@
             this.groupBox3.TabIndex = 13;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Payment";
+            // 
+            // lblHstAmnt
+            // 
+            this.lblHstAmnt.AutoSize = true;
+            this.lblHstAmnt.Location = new System.Drawing.Point(44, 162);
+            this.lblHstAmnt.Name = "lblHstAmnt";
+            this.lblHstAmnt.Size = new System.Drawing.Size(48, 13);
+            this.lblHstAmnt.TabIndex = 21;
+            this.lblHstAmnt.Text = "(13.00%)";
             // 
             // ddlPaidBy
             // 
@@ -320,13 +335,14 @@
             // txtBalanceAmnt
             // 
             this.txtBalanceAmnt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.txtBalanceAmnt.Enabled = false;
             this.txtBalanceAmnt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBalanceAmnt.Location = new System.Drawing.Point(105, 283);
             this.txtBalanceAmnt.Multiline = true;
             this.txtBalanceAmnt.Name = "txtBalanceAmnt";
             this.txtBalanceAmnt.Size = new System.Drawing.Size(133, 20);
             this.txtBalanceAmnt.TabIndex = 18;
-            this.txtBalanceAmnt.Text = "0.0";
+            this.txtBalanceAmnt.Text = "0.00";
             this.txtBalanceAmnt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label56
@@ -341,12 +357,14 @@
             // txtDepositAmnt
             // 
             this.txtDepositAmnt.Location = new System.Drawing.Point(105, 257);
-            this.txtDepositAmnt.Multiline = true;
             this.txtDepositAmnt.Name = "txtDepositAmnt";
             this.txtDepositAmnt.Size = new System.Drawing.Size(133, 20);
             this.txtDepositAmnt.TabIndex = 16;
-            this.txtDepositAmnt.Text = "0.0";
+            this.txtDepositAmnt.Text = "0.00";
             this.txtDepositAmnt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtDepositAmnt.TextChanged += new System.EventHandler(this.txtDepositAmnt_TextChanged);
+            this.txtDepositAmnt.Enter += new System.EventHandler(this.txtDepositAmnt_Enter);
+            this.txtDepositAmnt.Leave += new System.EventHandler(this.txtDepositAmnt_Leave);
             // 
             // label55
             // 
@@ -373,21 +391,23 @@
             this.chkApplyHst.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkApplyHst.Location = new System.Drawing.Point(19, 23);
             this.chkApplyHst.Name = "chkApplyHst";
-            this.chkApplyHst.Size = new System.Drawing.Size(77, 17);
+            this.chkApplyHst.Size = new System.Drawing.Size(85, 17);
             this.chkApplyHst.TabIndex = 0;
-            this.chkApplyHst.Text = "Apply HST";
+            this.chkApplyHst.Text = "APPLY HST";
             this.chkApplyHst.UseVisualStyleBackColor = true;
+            this.chkApplyHst.CheckedChanged += new System.EventHandler(this.chkApplyHst_CheckedChanged);
             // 
             // txtGrandTotal
             // 
             this.txtGrandTotal.BackColor = System.Drawing.SystemColors.Info;
+            this.txtGrandTotal.Enabled = false;
             this.txtGrandTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtGrandTotal.Location = new System.Drawing.Point(105, 185);
             this.txtGrandTotal.Multiline = true;
             this.txtGrandTotal.Name = "txtGrandTotal";
             this.txtGrandTotal.Size = new System.Drawing.Size(133, 30);
             this.txtGrandTotal.TabIndex = 12;
-            this.txtGrandTotal.Text = "0.0";
+            this.txtGrandTotal.Text = "0.00";
             this.txtGrandTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label53
@@ -401,11 +421,12 @@
             // 
             // txtHSTAmnt
             // 
+            this.txtHSTAmnt.Enabled = false;
             this.txtHSTAmnt.Location = new System.Drawing.Point(105, 159);
             this.txtHSTAmnt.Name = "txtHSTAmnt";
             this.txtHSTAmnt.Size = new System.Drawing.Size(133, 20);
             this.txtHSTAmnt.TabIndex = 10;
-            this.txtHSTAmnt.Text = "0.0";
+            this.txtHSTAmnt.Text = "0.00";
             this.txtHSTAmnt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label51
@@ -419,11 +440,12 @@
             // 
             // txtOrderTotalAmnt
             // 
+            this.txtOrderTotalAmnt.Enabled = false;
             this.txtOrderTotalAmnt.Location = new System.Drawing.Point(105, 133);
             this.txtOrderTotalAmnt.Name = "txtOrderTotalAmnt";
             this.txtOrderTotalAmnt.Size = new System.Drawing.Size(133, 20);
             this.txtOrderTotalAmnt.TabIndex = 8;
-            this.txtOrderTotalAmnt.Text = "0.0";
+            this.txtOrderTotalAmnt.Text = "0.00";
             this.txtOrderTotalAmnt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label43
@@ -441,25 +463,29 @@
             this.txtOtherAdjustmentAmnt.Name = "txtOtherAdjustmentAmnt";
             this.txtOtherAdjustmentAmnt.Size = new System.Drawing.Size(133, 20);
             this.txtOtherAdjustmentAmnt.TabIndex = 6;
-            this.txtOtherAdjustmentAmnt.Text = "0.0";
+            this.txtOtherAdjustmentAmnt.Text = "0.00";
             this.txtOtherAdjustmentAmnt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtOtherAdjustmentAmnt.TextChanged += new System.EventHandler(this.txtOtherAdjustmentAmnt_TextChanged);
+            this.txtOtherAdjustmentAmnt.Enter += new System.EventHandler(this.txtOtherAdjustmentAmnt_Enter);
+            this.txtOtherAdjustmentAmnt.Leave += new System.EventHandler(this.txtOtherAdjustmentAmnt_Leave);
             // 
             // label42
             // 
             this.label42.AutoSize = true;
             this.label42.Location = new System.Drawing.Point(16, 110);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(73, 13);
+            this.label42.Size = new System.Drawing.Size(85, 13);
             this.label42.TabIndex = 5;
-            this.label42.Text = "OTHER/ADJ.";
+            this.label42.Text = "OTHER/ADJ. (-)";
             // 
             // txtLensTotalPrice
             // 
+            this.txtLensTotalPrice.Enabled = false;
             this.txtLensTotalPrice.Location = new System.Drawing.Point(105, 81);
             this.txtLensTotalPrice.Name = "txtLensTotalPrice";
             this.txtLensTotalPrice.Size = new System.Drawing.Size(133, 20);
             this.txtLensTotalPrice.TabIndex = 4;
-            this.txtLensTotalPrice.Text = "0.0";
+            this.txtLensTotalPrice.Text = "0.00";
             this.txtLensTotalPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label41
@@ -473,11 +499,12 @@
             // 
             // txtFrameTotalPrice
             // 
+            this.txtFrameTotalPrice.Enabled = false;
             this.txtFrameTotalPrice.Location = new System.Drawing.Point(105, 55);
             this.txtFrameTotalPrice.Name = "txtFrameTotalPrice";
             this.txtFrameTotalPrice.Size = new System.Drawing.Size(133, 20);
             this.txtFrameTotalPrice.TabIndex = 2;
-            this.txtFrameTotalPrice.Text = "0.0";
+            this.txtFrameTotalPrice.Text = "0.00";
             this.txtFrameTotalPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label40
@@ -501,23 +528,25 @@
             // 
             // gvOrderItemList
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvOrderItemList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.gvOrderItemList.AllowUserToAddRows = false;
+            this.gvOrderItemList.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle21.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvOrderItemList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle21;
             this.gvOrderItemList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gvOrderItemList.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gvOrderItemList.DefaultCellStyle = dataGridViewCellStyle22;
             this.gvOrderItemList.Location = new System.Drawing.Point(6, 19);
             this.gvOrderItemList.Name = "gvOrderItemList";
             this.gvOrderItemList.Size = new System.Drawing.Size(669, 120);
@@ -564,11 +593,15 @@
             // txtRightLensQuantity
             // 
             this.txtRightLensQuantity.Location = new System.Drawing.Point(349, 66);
+            this.txtRightLensQuantity.MaxLength = 3;
             this.txtRightLensQuantity.Name = "txtRightLensQuantity";
             this.txtRightLensQuantity.Size = new System.Drawing.Size(33, 20);
             this.txtRightLensQuantity.TabIndex = 17;
             this.txtRightLensQuantity.Text = "0";
             this.txtRightLensQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtRightLensQuantity.TextChanged += new System.EventHandler(this.txtRightLensQuantity_TextChanged);
+            this.txtRightLensQuantity.Enter += new System.EventHandler(this.txtRightLensQuantity_Enter);
+            this.txtRightLensQuantity.Leave += new System.EventHandler(this.txtRightLensQuantity_Leave);
             // 
             // label37
             // 
@@ -582,11 +615,15 @@
             // txtLeftLensQuantity
             // 
             this.txtLeftLensQuantity.Location = new System.Drawing.Point(349, 42);
+            this.txtLeftLensQuantity.MaxLength = 3;
             this.txtLeftLensQuantity.Name = "txtLeftLensQuantity";
             this.txtLeftLensQuantity.Size = new System.Drawing.Size(33, 20);
             this.txtLeftLensQuantity.TabIndex = 11;
             this.txtLeftLensQuantity.Text = "0";
             this.txtLeftLensQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtLeftLensQuantity.TextChanged += new System.EventHandler(this.txtLeftLensQuantity_TextChanged);
+            this.txtLeftLensQuantity.Enter += new System.EventHandler(this.txtLeftLensQuantity_Enter);
+            this.txtLeftLensQuantity.Leave += new System.EventHandler(this.txtLeftLensQuantity_Leave);
             // 
             // label34
             // 
@@ -600,11 +637,15 @@
             // txtFrameQuantity
             // 
             this.txtFrameQuantity.Location = new System.Drawing.Point(349, 19);
+            this.txtFrameQuantity.MaxLength = 3;
             this.txtFrameQuantity.Name = "txtFrameQuantity";
             this.txtFrameQuantity.Size = new System.Drawing.Size(33, 20);
             this.txtFrameQuantity.TabIndex = 5;
             this.txtFrameQuantity.Text = "0";
             this.txtFrameQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtFrameQuantity.TextChanged += new System.EventHandler(this.txtFrameQuantity_TextChanged);
+            this.txtFrameQuantity.Enter += new System.EventHandler(this.txtFrameQuantity_Enter);
+            this.txtFrameQuantity.Leave += new System.EventHandler(this.txtFrameQuantity_Leave);
             // 
             // label36
             // 
@@ -618,11 +659,15 @@
             // txtRightLensUnitPrice
             // 
             this.txtRightLensUnitPrice.Location = new System.Drawing.Point(441, 66);
+            this.txtRightLensUnitPrice.MaxLength = 8;
             this.txtRightLensUnitPrice.Name = "txtRightLensUnitPrice";
             this.txtRightLensUnitPrice.Size = new System.Drawing.Size(52, 20);
             this.txtRightLensUnitPrice.TabIndex = 19;
             this.txtRightLensUnitPrice.Text = "0.0";
             this.txtRightLensUnitPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtRightLensUnitPrice.TextChanged += new System.EventHandler(this.txtRightLensUnitPrice_TextChanged);
+            this.txtRightLensUnitPrice.Enter += new System.EventHandler(this.txtRightLensUnitPrice_Enter);
+            this.txtRightLensUnitPrice.Leave += new System.EventHandler(this.txtRightLensUnitPrice_Leave);
             // 
             // label35
             // 
@@ -636,11 +681,15 @@
             // txtLeftLensUnitPrice
             // 
             this.txtLeftLensUnitPrice.Location = new System.Drawing.Point(441, 42);
+            this.txtLeftLensUnitPrice.MaxLength = 8;
             this.txtLeftLensUnitPrice.Name = "txtLeftLensUnitPrice";
             this.txtLeftLensUnitPrice.Size = new System.Drawing.Size(52, 20);
             this.txtLeftLensUnitPrice.TabIndex = 13;
             this.txtLeftLensUnitPrice.Text = "0.0";
             this.txtLeftLensUnitPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtLeftLensUnitPrice.TextChanged += new System.EventHandler(this.txtLeftLensUnitPrice_TextChanged);
+            this.txtLeftLensUnitPrice.Enter += new System.EventHandler(this.txtLeftLensUnitPrice_Enter);
+            this.txtLeftLensUnitPrice.Leave += new System.EventHandler(this.txtLeftLensUnitPrice_Leave);
             // 
             // label26
             // 
@@ -702,11 +751,15 @@
             // txtFrameUnitPrice
             // 
             this.txtFrameUnitPrice.Location = new System.Drawing.Point(441, 19);
+            this.txtFrameUnitPrice.MaxLength = 8;
             this.txtFrameUnitPrice.Name = "txtFrameUnitPrice";
             this.txtFrameUnitPrice.Size = new System.Drawing.Size(52, 20);
             this.txtFrameUnitPrice.TabIndex = 7;
             this.txtFrameUnitPrice.Text = "0.0";
             this.txtFrameUnitPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtFrameUnitPrice.TextChanged += new System.EventHandler(this.txtFrameUnitPrice_TextChanged);
+            this.txtFrameUnitPrice.Enter += new System.EventHandler(this.txtFrameUnitPrice_Enter);
+            this.txtFrameUnitPrice.Leave += new System.EventHandler(this.txtFrameUnitPrice_Leave);
             // 
             // label52
             // 
@@ -744,6 +797,7 @@
             // txtMeasurementDbl
             // 
             this.txtMeasurementDbl.Location = new System.Drawing.Point(113, 48);
+            this.txtMeasurementDbl.MaxLength = 10;
             this.txtMeasurementDbl.Name = "txtMeasurementDbl";
             this.txtMeasurementDbl.Size = new System.Drawing.Size(47, 20);
             this.txtMeasurementDbl.TabIndex = 7;
@@ -751,6 +805,7 @@
             // txtMeasurementB
             // 
             this.txtMeasurementB.Location = new System.Drawing.Point(113, 22);
+            this.txtMeasurementB.MaxLength = 10;
             this.txtMeasurementB.Name = "txtMeasurementB";
             this.txtMeasurementB.Size = new System.Drawing.Size(47, 20);
             this.txtMeasurementB.TabIndex = 3;
@@ -758,10 +813,10 @@
             // txtMeasurementA
             // 
             this.txtMeasurementA.Location = new System.Drawing.Point(27, 22);
+            this.txtMeasurementA.MaxLength = 10;
             this.txtMeasurementA.Name = "txtMeasurementA";
             this.txtMeasurementA.Size = new System.Drawing.Size(47, 20);
             this.txtMeasurementA.TabIndex = 1;
-            this.txtMeasurementA.Text = "+99.00";
             // 
             // label44
             // 
@@ -793,6 +848,7 @@
             // txtMeasurementEd
             // 
             this.txtMeasurementEd.Location = new System.Drawing.Point(27, 48);
+            this.txtMeasurementEd.MaxLength = 10;
             this.txtMeasurementEd.Name = "txtMeasurementEd";
             this.txtMeasurementEd.Size = new System.Drawing.Size(47, 20);
             this.txtMeasurementEd.TabIndex = 5;
@@ -833,6 +889,7 @@
             // txtMeasurementOcLeft
             // 
             this.txtMeasurementOcLeft.Location = new System.Drawing.Point(140, 76);
+            this.txtMeasurementOcLeft.MaxLength = 10;
             this.txtMeasurementOcLeft.Name = "txtMeasurementOcLeft";
             this.txtMeasurementOcLeft.Size = new System.Drawing.Size(60, 20);
             this.txtMeasurementOcLeft.TabIndex = 7;
@@ -840,6 +897,7 @@
             // txtMeasurementNrPdLeft
             // 
             this.txtMeasurementNrPdLeft.Location = new System.Drawing.Point(74, 76);
+            this.txtMeasurementNrPdLeft.MaxLength = 10;
             this.txtMeasurementNrPdLeft.Name = "txtMeasurementNrPdLeft";
             this.txtMeasurementNrPdLeft.Size = new System.Drawing.Size(60, 20);
             this.txtMeasurementNrPdLeft.TabIndex = 6;
@@ -847,6 +905,7 @@
             // txtMeasurementSegLeft
             // 
             this.txtMeasurementSegLeft.Location = new System.Drawing.Point(207, 76);
+            this.txtMeasurementSegLeft.MaxLength = 10;
             this.txtMeasurementSegLeft.Name = "txtMeasurementSegLeft";
             this.txtMeasurementSegLeft.Size = new System.Drawing.Size(60, 20);
             this.txtMeasurementSegLeft.TabIndex = 8;
@@ -854,6 +913,7 @@
             // txtMeasurementBlSizeLeft
             // 
             this.txtMeasurementBlSizeLeft.Location = new System.Drawing.Point(273, 76);
+            this.txtMeasurementBlSizeLeft.MaxLength = 10;
             this.txtMeasurementBlSizeLeft.Name = "txtMeasurementBlSizeLeft";
             this.txtMeasurementBlSizeLeft.Size = new System.Drawing.Size(60, 20);
             this.txtMeasurementBlSizeLeft.TabIndex = 9;
@@ -861,6 +921,7 @@
             // txtMeasurementFpdLeft
             // 
             this.txtMeasurementFpdLeft.Location = new System.Drawing.Point(8, 76);
+            this.txtMeasurementFpdLeft.MaxLength = 10;
             this.txtMeasurementFpdLeft.Name = "txtMeasurementFpdLeft";
             this.txtMeasurementFpdLeft.Size = new System.Drawing.Size(60, 20);
             this.txtMeasurementFpdLeft.TabIndex = 5;
@@ -868,6 +929,7 @@
             // txtMeasurementOcRight
             // 
             this.txtMeasurementOcRight.Location = new System.Drawing.Point(140, 52);
+            this.txtMeasurementOcRight.MaxLength = 10;
             this.txtMeasurementOcRight.Name = "txtMeasurementOcRight";
             this.txtMeasurementOcRight.Size = new System.Drawing.Size(60, 20);
             this.txtMeasurementOcRight.TabIndex = 2;
@@ -875,6 +937,7 @@
             // txtMeasurementNrPdRight
             // 
             this.txtMeasurementNrPdRight.Location = new System.Drawing.Point(74, 52);
+            this.txtMeasurementNrPdRight.MaxLength = 10;
             this.txtMeasurementNrPdRight.Name = "txtMeasurementNrPdRight";
             this.txtMeasurementNrPdRight.Size = new System.Drawing.Size(60, 20);
             this.txtMeasurementNrPdRight.TabIndex = 1;
@@ -882,6 +945,7 @@
             // txtMeasurementSegRight
             // 
             this.txtMeasurementSegRight.Location = new System.Drawing.Point(207, 52);
+            this.txtMeasurementSegRight.MaxLength = 10;
             this.txtMeasurementSegRight.Name = "txtMeasurementSegRight";
             this.txtMeasurementSegRight.Size = new System.Drawing.Size(60, 20);
             this.txtMeasurementSegRight.TabIndex = 3;
@@ -889,6 +953,7 @@
             // txtMeasurementBlSizeRight
             // 
             this.txtMeasurementBlSizeRight.Location = new System.Drawing.Point(273, 52);
+            this.txtMeasurementBlSizeRight.MaxLength = 10;
             this.txtMeasurementBlSizeRight.Name = "txtMeasurementBlSizeRight";
             this.txtMeasurementBlSizeRight.Size = new System.Drawing.Size(60, 20);
             this.txtMeasurementBlSizeRight.TabIndex = 4;
@@ -914,6 +979,7 @@
             // txtMeasurementFpdRight
             // 
             this.txtMeasurementFpdRight.Location = new System.Drawing.Point(8, 52);
+            this.txtMeasurementFpdRight.MaxLength = 10;
             this.txtMeasurementFpdRight.Name = "txtMeasurementFpdRight";
             this.txtMeasurementFpdRight.Size = new System.Drawing.Size(60, 20);
             this.txtMeasurementFpdRight.TabIndex = 0;
@@ -974,6 +1040,7 @@
             // txtModifiedAxisLeft
             // 
             this.txtModifiedAxisLeft.Location = new System.Drawing.Point(156, 77);
+            this.txtModifiedAxisLeft.MaxLength = 10;
             this.txtModifiedAxisLeft.Name = "txtModifiedAxisLeft";
             this.txtModifiedAxisLeft.Size = new System.Drawing.Size(49, 20);
             this.txtModifiedAxisLeft.TabIndex = 7;
@@ -981,6 +1048,7 @@
             // txtModifiedCylLeft
             // 
             this.txtModifiedCylLeft.Location = new System.Drawing.Point(101, 77);
+            this.txtModifiedCylLeft.MaxLength = 10;
             this.txtModifiedCylLeft.Name = "txtModifiedCylLeft";
             this.txtModifiedCylLeft.Size = new System.Drawing.Size(49, 20);
             this.txtModifiedCylLeft.TabIndex = 6;
@@ -988,6 +1056,7 @@
             // txtModifiedAddLeft
             // 
             this.txtModifiedAddLeft.Location = new System.Drawing.Point(211, 77);
+            this.txtModifiedAddLeft.MaxLength = 10;
             this.txtModifiedAddLeft.Name = "txtModifiedAddLeft";
             this.txtModifiedAddLeft.Size = new System.Drawing.Size(49, 20);
             this.txtModifiedAddLeft.TabIndex = 8;
@@ -995,6 +1064,7 @@
             // txtModifiedPrismLeft
             // 
             this.txtModifiedPrismLeft.Location = new System.Drawing.Point(266, 77);
+            this.txtModifiedPrismLeft.MaxLength = 10;
             this.txtModifiedPrismLeft.Name = "txtModifiedPrismLeft";
             this.txtModifiedPrismLeft.Size = new System.Drawing.Size(49, 20);
             this.txtModifiedPrismLeft.TabIndex = 9;
@@ -1002,6 +1072,7 @@
             // txtModifiedSphereLeft
             // 
             this.txtModifiedSphereLeft.Location = new System.Drawing.Point(46, 77);
+            this.txtModifiedSphereLeft.MaxLength = 10;
             this.txtModifiedSphereLeft.Name = "txtModifiedSphereLeft";
             this.txtModifiedSphereLeft.Size = new System.Drawing.Size(49, 20);
             this.txtModifiedSphereLeft.TabIndex = 5;
@@ -1009,6 +1080,7 @@
             // txtModifiedAxisRight
             // 
             this.txtModifiedAxisRight.Location = new System.Drawing.Point(156, 52);
+            this.txtModifiedAxisRight.MaxLength = 10;
             this.txtModifiedAxisRight.Name = "txtModifiedAxisRight";
             this.txtModifiedAxisRight.Size = new System.Drawing.Size(49, 20);
             this.txtModifiedAxisRight.TabIndex = 2;
@@ -1016,6 +1088,7 @@
             // txtModifiedCylRight
             // 
             this.txtModifiedCylRight.Location = new System.Drawing.Point(101, 52);
+            this.txtModifiedCylRight.MaxLength = 10;
             this.txtModifiedCylRight.Name = "txtModifiedCylRight";
             this.txtModifiedCylRight.Size = new System.Drawing.Size(49, 20);
             this.txtModifiedCylRight.TabIndex = 1;
@@ -1023,6 +1096,7 @@
             // txtModifiedAddRight
             // 
             this.txtModifiedAddRight.Location = new System.Drawing.Point(211, 52);
+            this.txtModifiedAddRight.MaxLength = 10;
             this.txtModifiedAddRight.Name = "txtModifiedAddRight";
             this.txtModifiedAddRight.Size = new System.Drawing.Size(49, 20);
             this.txtModifiedAddRight.TabIndex = 3;
@@ -1030,6 +1104,7 @@
             // txtModifiedPrismRight
             // 
             this.txtModifiedPrismRight.Location = new System.Drawing.Point(266, 52);
+            this.txtModifiedPrismRight.MaxLength = 10;
             this.txtModifiedPrismRight.Name = "txtModifiedPrismRight";
             this.txtModifiedPrismRight.Size = new System.Drawing.Size(49, 20);
             this.txtModifiedPrismRight.TabIndex = 4;
@@ -1073,6 +1148,7 @@
             // txtModifiedSphereRight
             // 
             this.txtModifiedSphereRight.Location = new System.Drawing.Point(46, 52);
+            this.txtModifiedSphereRight.MaxLength = 10;
             this.txtModifiedSphereRight.Name = "txtModifiedSphereRight";
             this.txtModifiedSphereRight.Size = new System.Drawing.Size(49, 20);
             this.txtModifiedSphereRight.TabIndex = 0;
@@ -1106,12 +1182,12 @@
             // 
             // gbPrescription
             // 
+            this.gbPrescription.Controls.Add(this.txtPrescriptionDate);
             this.gbPrescription.Controls.Add(this.txtPrescriptionPrismLeft);
             this.gbPrescription.Controls.Add(this.txtPrescriptionAddLeft);
             this.gbPrescription.Controls.Add(this.txtPrescriptionAxisLeft);
             this.gbPrescription.Controls.Add(this.txtPrescriptionCylLeft);
             this.gbPrescription.Controls.Add(this.txtPrescriptionSphereLeft);
-            this.gbPrescription.Controls.Add(this.btnCalendatView);
             this.gbPrescription.Controls.Add(this.txtPrescriptionPrismRight);
             this.gbPrescription.Controls.Add(this.txtPrescriptionAddRight);
             this.gbPrescription.Controls.Add(this.txtPrescriptionAxisRight);
@@ -1129,7 +1205,6 @@
             this.gbPrescription.Controls.Add(this.txtDoctorClinicAddress);
             this.gbPrescription.Controls.Add(this.label15);
             this.gbPrescription.Controls.Add(this.label14);
-            this.gbPrescription.Controls.Add(this.txtPrescriptionDate);
             this.gbPrescription.Controls.Add(this.txtDoctorPhone);
             this.gbPrescription.Controls.Add(this.label12);
             this.gbPrescription.Controls.Add(this.label13);
@@ -1141,84 +1216,104 @@
             this.gbPrescription.TabStop = false;
             this.gbPrescription.Text = "Prescription";
             // 
+            // txtPrescriptionDate
+            // 
+            this.txtPrescriptionDate.CustomFormat = "dd-MMM-yyyy";
+            this.txtPrescriptionDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.txtPrescriptionDate.Location = new System.Drawing.Point(282, 22);
+            this.txtPrescriptionDate.Name = "txtPrescriptionDate";
+            this.txtPrescriptionDate.Size = new System.Drawing.Size(144, 20);
+            this.txtPrescriptionDate.TabIndex = 13;
+            // 
             // txtPrescriptionPrismLeft
             // 
             this.txtPrescriptionPrismLeft.Location = new System.Drawing.Point(357, 130);
+            this.txtPrescriptionPrismLeft.MaxLength = 10;
             this.txtPrescriptionPrismLeft.Name = "txtPrescriptionPrismLeft";
             this.txtPrescriptionPrismLeft.Size = new System.Drawing.Size(69, 20);
             this.txtPrescriptionPrismLeft.TabIndex = 19;
+            this.txtPrescriptionPrismLeft.Leave += new System.EventHandler(this.txtPrescriptionPrismLeft_Leave);
             // 
             // txtPrescriptionAddLeft
             // 
             this.txtPrescriptionAddLeft.Location = new System.Drawing.Point(282, 130);
+            this.txtPrescriptionAddLeft.MaxLength = 10;
             this.txtPrescriptionAddLeft.Name = "txtPrescriptionAddLeft";
             this.txtPrescriptionAddLeft.Size = new System.Drawing.Size(69, 20);
             this.txtPrescriptionAddLeft.TabIndex = 18;
+            this.txtPrescriptionAddLeft.Leave += new System.EventHandler(this.txtPrescriptionAddLeft_Leave);
             // 
             // txtPrescriptionAxisLeft
             // 
             this.txtPrescriptionAxisLeft.Location = new System.Drawing.Point(207, 130);
+            this.txtPrescriptionAxisLeft.MaxLength = 10;
             this.txtPrescriptionAxisLeft.Name = "txtPrescriptionAxisLeft";
             this.txtPrescriptionAxisLeft.Size = new System.Drawing.Size(69, 20);
             this.txtPrescriptionAxisLeft.TabIndex = 17;
+            this.txtPrescriptionAxisLeft.Leave += new System.EventHandler(this.txtPrescriptionAxisLeft_Leave);
             // 
             // txtPrescriptionCylLeft
             // 
             this.txtPrescriptionCylLeft.Location = new System.Drawing.Point(132, 130);
+            this.txtPrescriptionCylLeft.MaxLength = 10;
             this.txtPrescriptionCylLeft.Name = "txtPrescriptionCylLeft";
             this.txtPrescriptionCylLeft.Size = new System.Drawing.Size(69, 20);
             this.txtPrescriptionCylLeft.TabIndex = 16;
+            this.txtPrescriptionCylLeft.Leave += new System.EventHandler(this.txtPrescriptionCylLeft_Leave);
             // 
             // txtPrescriptionSphereLeft
             // 
             this.txtPrescriptionSphereLeft.Location = new System.Drawing.Point(57, 130);
+            this.txtPrescriptionSphereLeft.MaxLength = 10;
             this.txtPrescriptionSphereLeft.Name = "txtPrescriptionSphereLeft";
             this.txtPrescriptionSphereLeft.Size = new System.Drawing.Size(69, 20);
             this.txtPrescriptionSphereLeft.TabIndex = 15;
-            // 
-            // btnCalendatView
-            // 
-            this.btnCalendatView.Image = global::DonniOptical2.Properties.Resources.calendar;
-            this.btnCalendatView.Location = new System.Drawing.Point(402, 21);
-            this.btnCalendatView.Name = "btnCalendatView";
-            this.btnCalendatView.Size = new System.Drawing.Size(24, 23);
-            this.btnCalendatView.TabIndex = 4;
-            this.btnCalendatView.UseVisualStyleBackColor = true;
+            this.txtPrescriptionSphereLeft.Leave += new System.EventHandler(this.txtPrescriptionSphereLeft_Leave);
             // 
             // txtPrescriptionPrismRight
             // 
             this.txtPrescriptionPrismRight.Location = new System.Drawing.Point(357, 106);
+            this.txtPrescriptionPrismRight.MaxLength = 10;
             this.txtPrescriptionPrismRight.Name = "txtPrescriptionPrismRight";
             this.txtPrescriptionPrismRight.Size = new System.Drawing.Size(69, 20);
             this.txtPrescriptionPrismRight.TabIndex = 14;
+            this.txtPrescriptionPrismRight.Leave += new System.EventHandler(this.txtPrescriptionPrismRight_Leave);
             // 
             // txtPrescriptionAddRight
             // 
             this.txtPrescriptionAddRight.Location = new System.Drawing.Point(282, 106);
+            this.txtPrescriptionAddRight.MaxLength = 10;
             this.txtPrescriptionAddRight.Name = "txtPrescriptionAddRight";
             this.txtPrescriptionAddRight.Size = new System.Drawing.Size(69, 20);
             this.txtPrescriptionAddRight.TabIndex = 13;
+            this.txtPrescriptionAddRight.Leave += new System.EventHandler(this.txtPrescriptionAddRight_Leave);
             // 
             // txtPrescriptionAxisRight
             // 
             this.txtPrescriptionAxisRight.Location = new System.Drawing.Point(207, 106);
+            this.txtPrescriptionAxisRight.MaxLength = 10;
             this.txtPrescriptionAxisRight.Name = "txtPrescriptionAxisRight";
             this.txtPrescriptionAxisRight.Size = new System.Drawing.Size(69, 20);
             this.txtPrescriptionAxisRight.TabIndex = 12;
+            this.txtPrescriptionAxisRight.Leave += new System.EventHandler(this.txtPrescriptionAxisRight_Leave);
             // 
             // txtPrescriptionCylRight
             // 
             this.txtPrescriptionCylRight.Location = new System.Drawing.Point(132, 106);
+            this.txtPrescriptionCylRight.MaxLength = 10;
             this.txtPrescriptionCylRight.Name = "txtPrescriptionCylRight";
             this.txtPrescriptionCylRight.Size = new System.Drawing.Size(69, 20);
             this.txtPrescriptionCylRight.TabIndex = 11;
+            this.txtPrescriptionCylRight.Leave += new System.EventHandler(this.txtPrescriptionCylRight_Leave);
             // 
             // txtPrescriptionSphereRight
             // 
             this.txtPrescriptionSphereRight.Location = new System.Drawing.Point(57, 106);
+            this.txtPrescriptionSphereRight.MaxLength = 10;
             this.txtPrescriptionSphereRight.Name = "txtPrescriptionSphereRight";
             this.txtPrescriptionSphereRight.Size = new System.Drawing.Size(69, 20);
             this.txtPrescriptionSphereRight.TabIndex = 10;
+            this.txtPrescriptionSphereRight.Leave += new System.EventHandler(this.txtPrescriptionSphereRight_Leave);
             // 
             // label24
             // 
@@ -1305,6 +1400,7 @@
             // txtDoctorClinicAddress
             // 
             this.txtDoctorClinicAddress.Location = new System.Drawing.Point(282, 48);
+            this.txtDoctorClinicAddress.MaxLength = 150;
             this.txtDoctorClinicAddress.Name = "txtDoctorClinicAddress";
             this.txtDoctorClinicAddress.Size = new System.Drawing.Size(144, 20);
             this.txtDoctorClinicAddress.TabIndex = 7;
@@ -1327,16 +1423,10 @@
             this.label14.TabIndex = 2;
             this.label14.Text = "Date";
             // 
-            // txtPrescriptionDate
-            // 
-            this.txtPrescriptionDate.Location = new System.Drawing.Point(282, 22);
-            this.txtPrescriptionDate.Name = "txtPrescriptionDate";
-            this.txtPrescriptionDate.Size = new System.Drawing.Size(114, 20);
-            this.txtPrescriptionDate.TabIndex = 3;
-            // 
             // txtDoctorPhone
             // 
             this.txtDoctorPhone.Location = new System.Drawing.Point(81, 48);
+            this.txtDoctorPhone.MaxLength = 20;
             this.txtDoctorPhone.Name = "txtDoctorPhone";
             this.txtDoctorPhone.Size = new System.Drawing.Size(145, 20);
             this.txtDoctorPhone.TabIndex = 5;
@@ -1362,6 +1452,7 @@
             // txtDoctorName
             // 
             this.txtDoctorName.Location = new System.Drawing.Point(81, 22);
+            this.txtDoctorName.MaxLength = 100;
             this.txtDoctorName.Name = "txtDoctorName";
             this.txtDoctorName.Size = new System.Drawing.Size(145, 20);
             this.txtDoctorName.TabIndex = 1;
@@ -1390,9 +1481,9 @@
             // 
             // txtCustomerEmail
             // 
+            this.txtCustomerEmail.Enabled = false;
             this.txtCustomerEmail.Location = new System.Drawing.Point(316, 73);
             this.txtCustomerEmail.Name = "txtCustomerEmail";
-            this.txtCustomerEmail.ReadOnly = true;
             this.txtCustomerEmail.Size = new System.Drawing.Size(160, 20);
             this.txtCustomerEmail.TabIndex = 10;
             // 
@@ -1407,10 +1498,10 @@
             // 
             // txtCustomerAddress
             // 
+            this.txtCustomerAddress.Enabled = false;
             this.txtCustomerAddress.Location = new System.Drawing.Point(80, 99);
             this.txtCustomerAddress.Multiline = true;
             this.txtCustomerAddress.Name = "txtCustomerAddress";
-            this.txtCustomerAddress.ReadOnly = true;
             this.txtCustomerAddress.Size = new System.Drawing.Size(396, 50);
             this.txtCustomerAddress.TabIndex = 12;
             // 
@@ -1432,12 +1523,13 @@
             this.btnFindCustomerForOrder.Size = new System.Drawing.Size(24, 23);
             this.btnFindCustomerForOrder.TabIndex = 2;
             this.btnFindCustomerForOrder.UseVisualStyleBackColor = true;
+            this.btnFindCustomerForOrder.Click += new System.EventHandler(this.btnFindCustomerForOrder_Click);
             // 
             // txtCustomerPhone
             // 
+            this.txtCustomerPhone.Enabled = false;
             this.txtCustomerPhone.Location = new System.Drawing.Point(80, 73);
             this.txtCustomerPhone.Name = "txtCustomerPhone";
-            this.txtCustomerPhone.ReadOnly = true;
             this.txtCustomerPhone.Size = new System.Drawing.Size(160, 20);
             this.txtCustomerPhone.TabIndex = 8;
             // 
@@ -1452,9 +1544,9 @@
             // 
             // txtCustomerLastName
             // 
+            this.txtCustomerLastName.Enabled = false;
             this.txtCustomerLastName.Location = new System.Drawing.Point(316, 47);
             this.txtCustomerLastName.Name = "txtCustomerLastName";
-            this.txtCustomerLastName.ReadOnly = true;
             this.txtCustomerLastName.Size = new System.Drawing.Size(160, 20);
             this.txtCustomerLastName.TabIndex = 6;
             // 
@@ -1479,15 +1571,17 @@
             // txtCustomerNo
             // 
             this.txtCustomerNo.Location = new System.Drawing.Point(80, 22);
+            this.txtCustomerNo.MaxLength = 10;
             this.txtCustomerNo.Name = "txtCustomerNo";
             this.txtCustomerNo.Size = new System.Drawing.Size(133, 20);
             this.txtCustomerNo.TabIndex = 1;
+            this.txtCustomerNo.TextChanged += new System.EventHandler(this.txtCustomerNo_TextChanged);
             // 
             // txtCustomerFirstName
             // 
+            this.txtCustomerFirstName.Enabled = false;
             this.txtCustomerFirstName.Location = new System.Drawing.Point(80, 47);
             this.txtCustomerFirstName.Name = "txtCustomerFirstName";
-            this.txtCustomerFirstName.ReadOnly = true;
             this.txtCustomerFirstName.Size = new System.Drawing.Size(160, 20);
             this.txtCustomerFirstName.TabIndex = 4;
             // 
@@ -1500,23 +1594,24 @@
             this.label4.TabIndex = 3;
             this.label4.Text = "First name";
             // 
-            // groupBox9
+            // gbFindBy
             // 
-            this.groupBox9.Controls.Add(this.lblNoOfOrdersFound);
-            this.groupBox9.Controls.Add(this.label82);
-            this.groupBox9.Controls.Add(this.lnkNextOrder);
-            this.groupBox9.Controls.Add(this.lnkPreviousOrder);
-            this.groupBox9.Controls.Add(this.lblOrdersFoundText);
-            this.groupBox9.Controls.Add(this.btnFindOrder);
-            this.groupBox9.Controls.Add(this.txtFindByValue);
-            this.groupBox9.Controls.Add(this.ddlFindBy);
-            this.groupBox9.Controls.Add(this.label85);
-            this.groupBox9.Location = new System.Drawing.Point(405, 10);
-            this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(545, 50);
-            this.groupBox9.TabIndex = 1;
-            this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "Find";
+            this.gbFindBy.Controls.Add(this.lblNoOfOrdersFound);
+            this.gbFindBy.Controls.Add(this.label82);
+            this.gbFindBy.Controls.Add(this.lnkNextOrder);
+            this.gbFindBy.Controls.Add(this.lnkPreviousOrder);
+            this.gbFindBy.Controls.Add(this.lblOrdersFoundText);
+            this.gbFindBy.Controls.Add(this.btnFindOrder);
+            this.gbFindBy.Controls.Add(this.txtFindByValue);
+            this.gbFindBy.Controls.Add(this.ddlFindBy);
+            this.gbFindBy.Controls.Add(this.label85);
+            this.gbFindBy.Enabled = false;
+            this.gbFindBy.Location = new System.Drawing.Point(405, 10);
+            this.gbFindBy.Name = "gbFindBy";
+            this.gbFindBy.Size = new System.Drawing.Size(545, 50);
+            this.gbFindBy.TabIndex = 1;
+            this.gbFindBy.TabStop = false;
+            this.gbFindBy.Text = "Find";
             // 
             // lblNoOfOrdersFound
             // 
@@ -1573,10 +1668,12 @@
             this.btnFindOrder.TabIndex = 3;
             this.btnFindOrder.Text = "Find";
             this.btnFindOrder.UseVisualStyleBackColor = true;
+            this.btnFindOrder.Click += new System.EventHandler(this.btnFindOrder_Click);
             // 
             // txtFindByValue
             // 
             this.txtFindByValue.Location = new System.Drawing.Point(139, 18);
+            this.txtFindByValue.MaxLength = 50;
             this.txtFindByValue.Name = "txtFindByValue";
             this.txtFindByValue.Size = new System.Drawing.Size(168, 20);
             this.txtFindByValue.TabIndex = 2;
@@ -1625,6 +1722,7 @@
             this.rdoFindOrder.TabIndex = 1;
             this.rdoFindOrder.Text = "Find";
             this.rdoFindOrder.UseVisualStyleBackColor = true;
+            this.rdoFindOrder.CheckedChanged += new System.EventHandler(this.rdoFindOrder_CheckedChanged);
             // 
             // rdoNewOrder
             // 
@@ -1637,22 +1735,25 @@
             this.rdoNewOrder.TabStop = true;
             this.rdoNewOrder.Text = "New";
             this.rdoNewOrder.UseVisualStyleBackColor = true;
+            this.rdoNewOrder.CheckedChanged += new System.EventHandler(this.rdoNewOrder_CheckedChanged);
             // 
             // txtOrderDate
             // 
+            this.txtOrderDate.Enabled = false;
             this.txtOrderDate.Location = new System.Drawing.Point(275, 17);
             this.txtOrderDate.Name = "txtOrderDate";
-            this.txtOrderDate.ReadOnly = true;
             this.txtOrderDate.Size = new System.Drawing.Size(92, 20);
             this.txtOrderDate.TabIndex = 3;
             this.txtOrderDate.Text = "dd-mmm-yyyy";
             // 
             // txtOrderNo
             // 
+            this.txtOrderNo.Enabled = false;
             this.txtOrderNo.Location = new System.Drawing.Point(196, 17);
             this.txtOrderNo.Name = "txtOrderNo";
             this.txtOrderNo.Size = new System.Drawing.Size(73, 20);
             this.txtOrderNo.TabIndex = 1;
+            this.txtOrderNo.Text = "Auto";
             // 
             // label8
             // 
@@ -1668,6 +1769,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.CancelButton = this.btnCloseOrder;
             this.ClientSize = new System.Drawing.Size(965, 667);
             this.Controls.Add(this.btnCloseOrder);
             this.Controls.Add(this.btnRemoveFromOrderItemList);
@@ -1683,12 +1785,13 @@
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.gbPrescription);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.groupBox9);
+            this.Controls.Add(this.gbFindBy);
             this.Controls.Add(this.gbFindOrder);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmOrder";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Order";
+            this.Load += new System.EventHandler(this.frmOrder_Load);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -1705,8 +1808,8 @@
             this.gbPrescription.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox9.ResumeLayout(false);
-            this.groupBox9.PerformLayout();
+            this.gbFindBy.ResumeLayout(false);
+            this.gbFindBy.PerformLayout();
             this.gbFindOrder.ResumeLayout(false);
             this.gbFindOrder.PerformLayout();
             this.ResumeLayout(false);
@@ -1814,7 +1917,6 @@
         private System.Windows.Forms.TextBox txtPrescriptionAxisLeft;
         private System.Windows.Forms.TextBox txtPrescriptionCylLeft;
         private System.Windows.Forms.TextBox txtPrescriptionSphereLeft;
-        private System.Windows.Forms.Button btnCalendatView;
         private System.Windows.Forms.TextBox txtPrescriptionPrismRight;
         private System.Windows.Forms.TextBox txtPrescriptionAddRight;
         private System.Windows.Forms.TextBox txtPrescriptionAxisRight;
@@ -1832,7 +1934,6 @@
         private System.Windows.Forms.TextBox txtDoctorClinicAddress;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox txtPrescriptionDate;
         private System.Windows.Forms.TextBox txtDoctorPhone;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
@@ -1851,7 +1952,7 @@
         private System.Windows.Forms.TextBox txtCustomerNo;
         private System.Windows.Forms.TextBox txtCustomerFirstName;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.GroupBox gbFindBy;
         private System.Windows.Forms.Label lblNoOfOrdersFound;
         private System.Windows.Forms.Label label82;
         private System.Windows.Forms.LinkLabel lnkNextOrder;
@@ -1867,5 +1968,7 @@
         private System.Windows.Forms.TextBox txtOrderDate;
         private System.Windows.Forms.TextBox txtOrderNo;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.DateTimePicker txtPrescriptionDate;
+        private System.Windows.Forms.Label lblHstAmnt;
     }
 }
