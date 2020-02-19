@@ -6,11 +6,45 @@ using System.Threading.Tasks;
 
 namespace DonniOptical2.Model
 {
-    public class OrderDetail
+    public class ViewOrder
     {
-        public int Id { get; set; }
+        public int ItemId { get; set; }
         public int OrderId { get; set; }
-        public string TrayNumber { get; set; }
+        public int CustomerId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Address { get; set; }
+        public string City { get; set; }
+        public string Postcode { get; set; }
+        public string Telephone { get; set; }
+        public string Email { get; set; }
+
+        public string DoctorName { get; set; }
+        public string DoctorPhone { get; set; }
+        public string DoctorClinicAddress { get; set; }
+        public DateTime? DoctorPrescriptionDate { get; set; }
+        public string PrescriptionSphereRight { get; set; }
+        public string PrescriptionCylRight { get; set; }
+        public string PrescriptionAxisRight { get; set; }
+        public string PrescriptionAddRight { get; set; }
+        public string PrescriptionPrismRight { get; set; }
+        public string PrescriptionSphereLeft { get; set; }
+        public string PrescriptionCylLeft { get; set; }
+        public string PrescriptionAxisLeft { get; set; }
+        public string PrescriptionAddLeft { get; set; }
+        public string PrescriptionPrismLeft { get; set; }
+        public decimal? FrameTotalPrice { get; set; }
+        public decimal? LensTotalPrice { get; set; }
+        public decimal? OtherAdjustment { get; set; }
+        public decimal OrderTotal { get; set; }
+        public decimal? HstAmount { get; set; }
+        public decimal GrandTotal { get; set; }
+        public string PaidBy { get; set; }
+        public decimal? PaidAmount { get; set; }
+        public decimal? BalanceDue { get; set; }
+        public string Remarks { get; set; }
+        public DateTime OrderDate { get; set; }
+
         public string ModifiedSphereRight { get; set; }
         public string ModifiedCylRight { get; set; }
         public string ModifiedAxisRight { get; set; }
@@ -45,10 +79,6 @@ namespace DonniOptical2.Model
         public string RightLensDescription { get; set; }
         public decimal? RightLensUnitPrice { get; set; }
         public int? RightLensQuantity { get; set; }
-
-        public string OtherItemDescription { get; set; }
-        public decimal? OtherItemUnitPrice { get; set; }
-        public int? OtherItemQuantity { get; set; }
-
+        
     }
 }

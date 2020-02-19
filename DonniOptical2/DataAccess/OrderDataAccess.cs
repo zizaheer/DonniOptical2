@@ -307,6 +307,135 @@ namespace DonniOptical2.DataAccess
 
             return result;
         }
+
+        public List<ViewOrder> GetViewOrderList() {
+
+            List<ViewOrder> viewOrders = new List<ViewOrder>();
+            try
+            {
+                sqlConnection.Open();
+
+                DataTable dataTable = new DataTable();
+                string query = "SELECT D.Id AS ItemId, O.Id AS OrderId, O.CustomerId, C.FirstName, C.LastName, C.Address, C.City, C.Postcode, C.Telephone";
+                
+                query += ", C.Email, O.CreateDate AS OrderDate, O.DoctorName, O.DoctorPhone, O.DoctorClinicAddress, O.DoctorPrescriptionDate";
+                query += ", O.PrescriptionSphereRight, O.PrescriptionSphereLeft, O.PrescriptionCylRight, O.PrescriptionCylLeft";
+                query += ", O.PrescriptionAxisRight, O.PrescriptionAxisLeft, O.PrescriptionAddRight, O.PrescriptionAddLeft";
+                query += ", O.PrescriptionPrismRight, O.PrescriptionPrismLeft, O.FrameTotalPrice, O.LensTotalPrice, O.OtherAdjustment";
+                query += ", O.OrderTotal, O.HstAmount, O.GrandTotal, O.PaidBy, O.PaidAmount, O.BalanceDue, O.Remarks";
+                query += ", D.ModifiedSphereRight, D.ModifiedSphereLeft, D.ModifiedCylRight, D.ModifiedCylLeft, D.ModifiedAxisRight";
+                query += ", D.ModifiedAxisLeft, D.ModifiedAddRight, D.ModifiedAddLeft, D.ModifiedPrismRight, D.ModifiedPrismLeft";
+                query += ", D.MeasurementFpdRight, D.MeasurementFpdLeft, D.MeasurementNrPdRight, D.MeasurementNrPdLeft";
+                query += ", D.MeasurementOcRight, D.MeasurementOcLeft, D.MeasurementSegRight, D.MeasurementSegLeft, D.MeasurementBlSizeRight";
+                query += ", D.MeasurementBlSizeLeft, D.MeasurementA, D.MeasurementB, D.MeasurementED, D.MeasurementDBL, D.FrameCode";
+                query += ", D.FrameColor, D.FrameUnitPrice, D.FrameQuantity, D.LeftLensDescription, D.LeftLensQuantity, D.LeftLensUnitPrice";
+                query += ", D.RightLensDescription, D.RightLensQuantity, D.RightLensUnitPrice";
+                query += " FROM [Order] O  ";
+                query += " INNER JOIN OrderDetail D ON D.OrderId = O.Id ";
+                query += " INNER JOIN Customer C ON C.Id = O.CustomerId ";
+
+                sqlCommand = new SqlCommand(query, sqlConnection);
+                dataAdapter = new SqlDataAdapter(sqlCommand);
+                dataAdapter.Fill(dataTable);
+
+                if (dataTable.Rows.Count > 0)
+                {
+                    foreach (DataRow dr in dataTable.Rows)
+                    {
+                        ViewOrder order = new ViewOrder();
+
+                        order.ItemId = Convert.ToInt32(dr["ItemId"]);
+                        order.OrderId = Convert.ToInt32(dr["OrderId"]);
+                        order.CustomerId = Convert.ToInt32(dr["CustomerId"]);
+                        order.DoctorName = dr["DoctorName"].ToString();
+                        order.DoctorPhone = dr["DoctorPhone"].ToString();
+                        order.DoctorClinicAddress = dr["DoctorClinicAddress"].ToString();
+                        order.DoctorPrescriptionDate = Convert.ToDateTime(dr["DoctorPrescriptionDate"]);
+                        order.PrescriptionSphereRight = dr["PrescriptionSphereRight"].ToString();
+                        order.PrescriptionCylRight = dr["PrescriptionCylRight"].ToString();
+                        order.PrescriptionAxisRight = dr["PrescriptionAxisRight"].ToString();
+                        order.PrescriptionAddRight = dr["PrescriptionAddRight"].ToString();
+                        order.PrescriptionPrismRight = dr["PrescriptionPrismRight"].ToString();
+                        order.PrescriptionSphereLeft = dr["PrescriptionSphereLeft"].ToString();
+                        order.PrescriptionCylLeft = dr["PrescriptionCylLeft"].ToString();
+                        order.PrescriptionAxisLeft = dr["PrescriptionAxisLeft"].ToString();
+                        order.PrescriptionAddLeft = dr["PrescriptionAddLeft"].ToString();
+                        order.PrescriptionPrismLeft = dr["PrescriptionPrismLeft"].ToString();
+                        order.FrameTotalPrice = Convert.ToDecimal(dr["FrameTotalPrice"]);
+                        order.LensTotalPrice = Convert.ToDecimal(dr["LensTotalPrice"]);
+                        order.OtherAdjustment = Convert.ToDecimal(dr["OtherAdjustment"]);
+                        order.OrderTotal = Convert.ToDecimal(dr["OrderTotal"]);
+                        order.HstAmount = Convert.ToDecimal(dr["HstAmount"]);
+                        order.GrandTotal = Convert.ToDecimal(dr["GrandTotal"]);
+                        order.PaidBy = dr["PaidBy"].ToString();
+                        order.PaidAmount = Convert.ToDecimal(dr["PaidAmount"]);
+                        order.BalanceDue = Convert.ToDecimal(dr["BalanceDue"]);
+                        order.Remarks = dr["Remarks"].ToString();
+                        order.OrderDate = Convert.ToDateTime(dr["OrderDate"]);
+
+
+                        order.CustomerId = Convert.ToInt32(dr["CustomerId"]);
+                        order.FirstName = (dr["FirstName"]).ToString();
+                        order.LastName = (dr["LastName"]).ToString();
+                        order.Telephone = (dr["Telephone"]).ToString();
+                        order.Email = (dr["Email"]).ToString();
+                        order.Address = (dr["Address"]).ToString();
+                        order.Postcode = (dr["Postcode"]).ToString();
+                        order.City = (dr["City"]).ToString();
+
+                        order.ModifiedSphereRight = dr["ModifiedSphereRight"].ToString();
+                        order.ModifiedCylRight = dr["ModifiedCylRight"].ToString();
+                        order.ModifiedAxisRight = dr["ModifiedAxisRight"].ToString();
+                        order.ModifiedAddRight = dr["ModifiedAddRight"].ToString();
+                        order.ModifiedPrismRight = dr["ModifiedPrismRight"].ToString();
+                        order.ModifiedSphereLeft = dr["ModifiedSphereLeft"].ToString();
+                        order.ModifiedCylLeft = dr["ModifiedCylLeft"].ToString();
+                        order.ModifiedAxisLeft = dr["ModifiedAxisLeft"].ToString();
+                        order.ModifiedAddLeft = dr["ModifiedAddLeft"].ToString();
+                        order.ModifiedPrismLeft = dr["ModifiedPrismLeft"].ToString();
+                        order.MeasurementFpdRight = dr["MeasurementFpdRight"].ToString();
+                        order.MeasurementNrPdRight = dr["MeasurementNrPdRight"].ToString();
+                        order.MeasurementOcRight = dr["MeasurementOcRight"].ToString();
+                        order.MeasurementSegRight = dr["MeasurementSegRight"].ToString();
+                        order.MeasurementBlSizeRight = dr["MeasurementBlSizeRight"].ToString();
+                        order.MeasurementFpdLeft = dr["MeasurementFpdLeft"].ToString();
+                        order.MeasurementNrPdLeft = dr["MeasurementNrPdLeft"].ToString();
+                        order.MeasurementOcLeft = dr["MeasurementOcLeft"].ToString();
+                        order.MeasurementSegLeft = dr["MeasurementSegLeft"].ToString();
+                        order.MeasurementBlSizeLeft = dr["MeasurementBlSizeLeft"].ToString();
+                        order.MeasurementA = dr["MeasurementA"].ToString();
+                        order.MeasurementB = dr["MeasurementB"].ToString();
+                        order.MeasurementED = dr["MeasurementED"].ToString();
+                        order.MeasurementDBL = dr["MeasurementDBL"].ToString();
+                        order.FrameCode = dr["FrameCode"].ToString();
+                        order.FrameColor = dr["FrameColor"].ToString();
+                        order.FrameUnitPrice = Convert.ToDecimal(dr["FrameUnitPrice"]);
+                        order.FrameQuantity = Convert.ToInt16(dr["FrameQuantity"]);
+                        order.LeftLensDescription = dr["LeftLensDescription"].ToString();
+                        order.LeftLensUnitPrice = Convert.ToDecimal(dr["LeftLensUnitPrice"]);
+                        order.LeftLensQuantity = Convert.ToInt16(dr["LeftLensQuantity"]);
+                        order.RightLensDescription = dr["RightLensDescription"].ToString();
+                        order.RightLensUnitPrice = Convert.ToDecimal(dr["RightLensUnitPrice"]);
+                        order.RightLensQuantity = Convert.ToInt16(dr["RightLensQuantity"]);
+
+                        viewOrders.Add(order);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //
+            }
+
+            finally
+            {
+                sqlConnection.Close();
+            }
+
+            return viewOrders;
+        }
+
+
     }
 
 

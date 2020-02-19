@@ -38,6 +38,7 @@ namespace DonniOptical2.DataAccess
 
                         orderDetail.Id = Convert.ToInt32(dr["Id"]);
                         orderDetail.OrderId = Convert.ToInt32(dr["OrderId"]);
+                        orderDetail.TrayNumber = dr["TrayNumber"].ToString();
                         orderDetail.ModifiedSphereRight = dr["ModifiedSphereRight"].ToString();
                         orderDetail.ModifiedCylRight = dr["ModifiedCylRight"].ToString();
                         orderDetail.ModifiedAxisRight = dr["ModifiedAxisRight"].ToString();
@@ -72,6 +73,10 @@ namespace DonniOptical2.DataAccess
                         orderDetail.RightLensDescription = dr["RightLensDescription"].ToString();
                         orderDetail.RightLensUnitPrice = Convert.ToDecimal(dr["RightLensUnitPrice"]);
                         orderDetail.RightLensQuantity = Convert.ToInt16(dr["RightLensQuantity"]);
+
+                        orderDetail.OtherItemDescription = dr["OtherItemDescription"].ToString();
+                        orderDetail.OtherItemUnitPrice = Convert.ToDecimal(dr["OtherItemUnitPrice"]);
+                        orderDetail.OtherItemQuantity = Convert.ToInt16(dr["OtherItemQuantity"]);
 
                         orderDetailList.Add(orderDetail);
                     }
@@ -113,6 +118,7 @@ namespace DonniOptical2.DataAccess
 
                         orderDetail.Id = Convert.ToInt32(dr["Id"]);
                         orderDetail.OrderId = Convert.ToInt32(dr["OrderId"]);
+                        orderDetail.TrayNumber = dr["TrayNumber"].ToString();
                         orderDetail.ModifiedSphereRight = dr["ModifiedSphereRight"].ToString();
                         orderDetail.ModifiedCylRight = dr["ModifiedCylRight"].ToString();
                         orderDetail.ModifiedAxisRight = dr["ModifiedAxisRight"].ToString();
@@ -148,6 +154,10 @@ namespace DonniOptical2.DataAccess
                         orderDetail.RightLensUnitPrice = Convert.ToDecimal(dr["RightLensUnitPrice"]);
                         orderDetail.RightLensQuantity = Convert.ToInt16(dr["RightLensQuantity"]);
 
+                        orderDetail.OtherItemDescription = dr["OtherItemDescription"].ToString();
+                        orderDetail.OtherItemUnitPrice = Convert.ToDecimal(dr["OtherItemUnitPrice"]);
+                        orderDetail.OtherItemQuantity = Convert.ToInt16(dr["OtherItemQuantity"]);
+
                         orderDetailList.Add(orderDetail);
                     }
                 }
@@ -164,7 +174,7 @@ namespace DonniOptical2.DataAccess
 
             return orderDetailList;
         }
-        
+
         public int InsertNewOrderDetail(OrderDetail orderDetail)
         {
             int result = 0;
@@ -172,23 +182,24 @@ namespace DonniOptical2.DataAccess
             {
                 sqlConnection.Open();
 
-                string query = "INSERT INTO OrderDetail(OrderId, ModifiedSphereRight, ModifiedCylRight, ModifiedAxisRight, ModifiedAddRight, ModifiedPrismRight";
+                string query = "INSERT INTO OrderDetail(OrderId, TrayNumber, ModifiedSphereRight, ModifiedCylRight, ModifiedAxisRight, ModifiedAddRight, ModifiedPrismRight";
                 query += ", ModifiedSphereLeft, ModifiedCylLeft, ModifiedAxisLeft, ModifiedAddLeft, ModifiedPrismLeft, MeasurementFpdRight";
                 query += ", MeasurementNrPdRight, MeasurementOcRight, MeasurementSegRight, MeasurementBlSizeRight, MeasurementFpdLeft";
                 query += ", MeasurementNrPdLeft, MeasurementOcLeft, MeasurementSegLeft, MeasurementBlSizeLeft, MeasurementA, MeasurementB";
                 query += ", MeasurementED, MeasurementDBL, FrameCode, FrameColor, FrameUnitPrice, FrameQuantity, LeftLensDescription";
-                query += ", LeftLensUnitPrice, LeftLensQuantity, RightLensDescription, RightLensUnitPrice, RightLensQuantity) VALUES(@OrderId";
+                query += ", LeftLensUnitPrice, LeftLensQuantity, RightLensDescription, RightLensUnitPrice, RightLensQuantity) VALUES(@OrderId, @TrayNumber";
 
                 query += ", @ModifiedSphereRight, @ModifiedCylRight, @ModifiedAxisRight, @ModifiedAddRight, @ModifiedPrismRight";
                 query += ", @ModifiedSphereLeft, @ModifiedCylLeft, @ModifiedAxisLeft, @ModifiedAddLeft, @ModifiedPrismLeft, @MeasurementFpdRight";
                 query += ", @MeasurementNrPdRight, @MeasurementOcRight, @MeasurementSegRight, @MeasurementBlSizeRight, @MeasurementFpdLeft";
                 query += ", @MeasurementNrPdLeft, @MeasurementOcLeft, @MeasurementSegLeft, @MeasurementBlSizeLeft, @MeasurementA, @MeasurementB";
                 query += ", @MeasurementED, @MeasurementDBL, @FrameCode, @FrameColor, @FrameUnitPrice, @FrameQuantity, @LeftLensDescription";
-                query += ", @LeftLensUnitPrice, @LeftLensQuantity, @RightLensDescription, @RightLensUnitPrice, @RightLensQuantity)";
-
-
+                query += ", @LeftLensUnitPrice, @LeftLensQuantity, @RightLensDescription, @RightLensUnitPrice, @RightLensQuantity";
+                query += ", @OtherItemDescription, @OtherItemUnitPrice, @OtherItemQuantity)";
+               
                 sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@OrderId", orderDetail.OrderId);
+                sqlCommand.Parameters.AddWithValue("@TrayNumber", orderDetail.TrayNumber);
                 sqlCommand.Parameters.AddWithValue("@ModifiedSphereRight", orderDetail.ModifiedSphereRight);
                 sqlCommand.Parameters.AddWithValue("@ModifiedCylRight", orderDetail.ModifiedCylRight);
                 sqlCommand.Parameters.AddWithValue("@ModifiedAxisRight", orderDetail.ModifiedAxisRight);
@@ -226,7 +237,11 @@ namespace DonniOptical2.DataAccess
                 sqlCommand.Parameters.AddWithValue("@RightLensDescription", orderDetail.RightLensDescription);
                 sqlCommand.Parameters.AddWithValue("@RightLensUnitPrice", orderDetail.RightLensUnitPrice);
                 sqlCommand.Parameters.AddWithValue("@RightLensQuantity", orderDetail.RightLensQuantity);
-              
+
+                sqlCommand.Parameters.AddWithValue("@OtherItemDescription", orderDetail.OtherItemDescription);
+                sqlCommand.Parameters.AddWithValue("@OtherItemUnitPrice", orderDetail.OtherItemUnitPrice);
+                sqlCommand.Parameters.AddWithValue("@OtherItemQuantity", orderDetail.OtherItemQuantity);
+
                 result = sqlCommand.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -249,7 +264,7 @@ namespace DonniOptical2.DataAccess
             {
                 sqlConnection.Open();
 
-                string query = "UPDATE OrderDetail SET OrderId = @OrderId, ModifiedSphereRight = @ModifiedSphereRight, ModifiedCylRight = @ModifiedCylRight, ModifiedAxisRight = @ModifiedAxisRight";
+                string query = "UPDATE OrderDetail SET OrderId = @OrderId, TrayNumber = @TrayNumber ModifiedSphereRight = @ModifiedSphereRight, ModifiedCylRight = @ModifiedCylRight, ModifiedAxisRight = @ModifiedAxisRight";
                 query += ", ModifiedAddRight = @ModifiedAddRight, ModifiedPrismRight = @ModifiedPrismRight, ModifiedSphereLeft = @ModifiedSphereLeft";
                 query += ", ModifiedCylLeft = @ModifiedCylLeft, ModifiedAxisLeft = @ModifiedAxisLeft, ModifiedAddLeft = @ModifiedAddLeft";
                 query += ", ModifiedPrismLeft = @ModifiedPrismLeft, MeasurementFpdRight = @MeasurementFpdRight, MeasurementNrPdRight = @MeasurementNrPdRight";
@@ -258,10 +273,11 @@ namespace DonniOptical2.DataAccess
                 query += ", MeasurementSegLeft = @MeasurementSegLeft, MeasurementBlSizeLeft = @MeasurementBlSizeLeft, MeasurementA = @MeasurementA, MeasurementB = @MeasurementB, MeasurementED = @MeasurementED";
                 query += ", MeasurementDBL = @MeasurementDBL, FrameCode = @FrameCode, FrameColor = @FrameColor, FrameUnitPrice = @FrameUnitPrice, FrameQuantity = @FrameQuantity";
                 query += ", LeftLensDescription = @LeftLensDescription, LeftLensUnitPrice = @LeftLensUnitPrice, LeftLensQuantity = @LeftLensQuantity, RightLensDescription = @RightLensDescription, RightLensUnitPrice = @RightLensUnitPrice";
-                query += ", RightLensQuantity = @RightLensQuantity";
+                query += ", RightLensQuantity = @RightLensQuantity, OtherItemDescription = @OtherItemDescription, OtherItemUnitPrice = @OtherItemUnitPrice, OtherItemQuantity = @OtherItemQuantity";
 
                 sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@OrderId", orderDetail.OrderId);
+                sqlCommand.Parameters.AddWithValue("@TrayNumber", orderDetail.TrayNumber);
                 sqlCommand.Parameters.AddWithValue("@ModifiedSphereRight", orderDetail.ModifiedSphereRight);
                 sqlCommand.Parameters.AddWithValue("@ModifiedCylRight", orderDetail.ModifiedCylRight);
                 sqlCommand.Parameters.AddWithValue("@ModifiedAxisRight", orderDetail.ModifiedAxisRight);
@@ -299,6 +315,10 @@ namespace DonniOptical2.DataAccess
                 sqlCommand.Parameters.AddWithValue("@RightLensDescription", orderDetail.RightLensDescription);
                 sqlCommand.Parameters.AddWithValue("@RightLensUnitPrice", orderDetail.RightLensUnitPrice);
                 sqlCommand.Parameters.AddWithValue("@RightLensQuantity", orderDetail.RightLensQuantity);
+
+                sqlCommand.Parameters.AddWithValue("@OtherItemDescription", orderDetail.OtherItemDescription);
+                sqlCommand.Parameters.AddWithValue("@OtherItemUnitPrice", orderDetail.OtherItemUnitPrice);
+                sqlCommand.Parameters.AddWithValue("@OtherItemQuantity", orderDetail.OtherItemQuantity);
 
                 result = sqlCommand.ExecuteNonQuery();
             }

@@ -134,5 +134,21 @@ namespace DonniOptical2
                 customerForm.Show();
             }
         }
+
+        private void printToolStripButton_Click(object sender, EventArgs e)
+        {
+            frmRptOrderDetail frmRptOrderDetail = new frmRptOrderDetail();
+            frmRptOrderDetail.MdiParent = this;
+            frmRptOrderDetail.Location = new Point(5, 5);
+            frmRptOrderDetail.Show();
+        }
+
+        private void toolStripButtonFind_Click(object sender, EventArgs e)
+        {
+            FrmViewOrder viewOrder = new FrmViewOrder();
+            viewOrder.MdiParent = this;
+            viewOrder.Location = new Point(5, 5);
+            viewOrder.Show();
+        }
     }
 }

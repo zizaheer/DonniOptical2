@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnCloseOrder = new System.Windows.Forms.Button();
             this.btnRemoveFromOrderItemList = new System.Windows.Forms.Button();
             this.btnSaveOrder = new System.Windows.Forms.Button();
@@ -37,6 +37,8 @@
             this.btnAddToOrderItemList = new System.Windows.Forms.Button();
             this.label25 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txtDiscountAmnt = new System.Windows.Forms.TextBox();
+            this.label60 = new System.Windows.Forms.Label();
             this.lblHstAmnt = new System.Windows.Forms.Label();
             this.ddlPaidBy = new System.Windows.Forms.ComboBox();
             this.label57 = new System.Windows.Forms.Label();
@@ -53,7 +55,7 @@
             this.label51 = new System.Windows.Forms.Label();
             this.txtOrderTotalAmnt = new System.Windows.Forms.TextBox();
             this.label43 = new System.Windows.Forms.Label();
-            this.txtOtherAdjustmentAmnt = new System.Windows.Forms.TextBox();
+            this.txtOtherTotal = new System.Windows.Forms.TextBox();
             this.label42 = new System.Windows.Forms.Label();
             this.txtLensTotalPrice = new System.Windows.Forms.TextBox();
             this.label41 = new System.Windows.Forms.Label();
@@ -62,6 +64,12 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.gvOrderItemList = new System.Windows.Forms.DataGridView();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtOtherItemQuantity = new System.Windows.Forms.TextBox();
+            this.label58 = new System.Windows.Forms.Label();
+            this.txtOtherItemUnitPrice = new System.Windows.Forms.TextBox();
+            this.label59 = new System.Windows.Forms.Label();
+            this.txtOtherDescription = new System.Windows.Forms.TextBox();
             this.label38 = new System.Windows.Forms.Label();
             this.txtRightLensQuantity = new System.Windows.Forms.TextBox();
             this.label37 = new System.Windows.Forms.Label();
@@ -183,6 +191,11 @@
             this.txtOrderDate = new System.Windows.Forms.TextBox();
             this.txtOrderNo = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.txtSerialNo = new System.Windows.Forms.TextBox();
+            this.lblSerialNo = new System.Windows.Forms.Label();
+            this.txtTrayNumber = new System.Windows.Forms.TextBox();
+            this.label61 = new System.Windows.Forms.Label();
+            this.btnClearItemTextboxes = new System.Windows.Forms.Button();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvOrderItemList)).BeginInit();
@@ -199,7 +212,7 @@
             // btnCloseOrder
             // 
             this.btnCloseOrder.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCloseOrder.Location = new System.Drawing.Point(877, 634);
+            this.btnCloseOrder.Location = new System.Drawing.Point(877, 696);
             this.btnCloseOrder.Name = "btnCloseOrder";
             this.btnCloseOrder.Size = new System.Drawing.Size(75, 25);
             this.btnCloseOrder.TabIndex = 15;
@@ -212,7 +225,7 @@
             this.btnRemoveFromOrderItemList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btnRemoveFromOrderItemList.FlatAppearance.BorderSize = 0;
             this.btnRemoveFromOrderItemList.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnRemoveFromOrderItemList.Location = new System.Drawing.Point(568, 451);
+            this.btnRemoveFromOrderItemList.Location = new System.Drawing.Point(568, 490);
             this.btnRemoveFromOrderItemList.Name = "btnRemoveFromOrderItemList";
             this.btnRemoveFromOrderItemList.Size = new System.Drawing.Size(120, 23);
             this.btnRemoveFromOrderItemList.TabIndex = 11;
@@ -222,7 +235,7 @@
             // 
             // btnSaveOrder
             // 
-            this.btnSaveOrder.Location = new System.Drawing.Point(699, 634);
+            this.btnSaveOrder.Location = new System.Drawing.Point(699, 696);
             this.btnSaveOrder.Name = "btnSaveOrder";
             this.btnSaveOrder.Size = new System.Drawing.Size(169, 25);
             this.btnSaveOrder.TabIndex = 14;
@@ -234,7 +247,7 @@
             // 
             this.label39.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label39.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.label39.Location = new System.Drawing.Point(6, 627);
+            this.label39.Location = new System.Drawing.Point(6, 687);
             this.label39.Name = "label39";
             this.label39.Size = new System.Drawing.Size(950, 2);
             this.label39.TabIndex = 260;
@@ -244,7 +257,7 @@
             this.btnAddToOrderItemList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnAddToOrderItemList.FlatAppearance.BorderSize = 0;
             this.btnAddToOrderItemList.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAddToOrderItemList.Location = new System.Drawing.Point(449, 451);
+            this.btnAddToOrderItemList.Location = new System.Drawing.Point(449, 490);
             this.btnAddToOrderItemList.Name = "btnAddToOrderItemList";
             this.btnAddToOrderItemList.Size = new System.Drawing.Size(113, 23);
             this.btnAddToOrderItemList.TabIndex = 10;
@@ -263,6 +276,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.txtDiscountAmnt);
+            this.groupBox3.Controls.Add(this.label60);
             this.groupBox3.Controls.Add(this.lblHstAmnt);
             this.groupBox3.Controls.Add(this.ddlPaidBy);
             this.groupBox3.Controls.Add(this.label57);
@@ -279,7 +294,7 @@
             this.groupBox3.Controls.Add(this.label51);
             this.groupBox3.Controls.Add(this.txtOrderTotalAmnt);
             this.groupBox3.Controls.Add(this.label43);
-            this.groupBox3.Controls.Add(this.txtOtherAdjustmentAmnt);
+            this.groupBox3.Controls.Add(this.txtOtherTotal);
             this.groupBox3.Controls.Add(this.label42);
             this.groupBox3.Controls.Add(this.txtLensTotalPrice);
             this.groupBox3.Controls.Add(this.label41);
@@ -287,15 +302,36 @@
             this.groupBox3.Controls.Add(this.label40);
             this.groupBox3.Location = new System.Drawing.Point(699, 244);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(251, 376);
+            this.groupBox3.Size = new System.Drawing.Size(251, 422);
             this.groupBox3.TabIndex = 13;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Payment";
             // 
+            // txtDiscountAmnt
+            // 
+            this.txtDiscountAmnt.Location = new System.Drawing.Point(105, 133);
+            this.txtDiscountAmnt.Name = "txtDiscountAmnt";
+            this.txtDiscountAmnt.Size = new System.Drawing.Size(133, 20);
+            this.txtDiscountAmnt.TabIndex = 23;
+            this.txtDiscountAmnt.Text = "0.00";
+            this.txtDiscountAmnt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtDiscountAmnt.TextChanged += new System.EventHandler(this.txtDiscountAmnt_TextChanged);
+            this.txtDiscountAmnt.Enter += new System.EventHandler(this.txtDiscountAmnt_Enter);
+            this.txtDiscountAmnt.Leave += new System.EventHandler(this.txtDiscountAmnt_Leave);
+            // 
+            // label60
+            // 
+            this.label60.AutoSize = true;
+            this.label60.Location = new System.Drawing.Point(16, 136);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(75, 13);
+            this.label60.TabIndex = 22;
+            this.label60.Text = "DISCOUNT (-)";
+            // 
             // lblHstAmnt
             // 
             this.lblHstAmnt.AutoSize = true;
-            this.lblHstAmnt.Location = new System.Drawing.Point(44, 162);
+            this.lblHstAmnt.Location = new System.Drawing.Point(44, 196);
             this.lblHstAmnt.Name = "lblHstAmnt";
             this.lblHstAmnt.Size = new System.Drawing.Size(48, 13);
             this.lblHstAmnt.TabIndex = 21;
@@ -304,12 +340,7 @@
             // ddlPaidBy
             // 
             this.ddlPaidBy.FormattingEnabled = true;
-            this.ddlPaidBy.Items.AddRange(new object[] {
-            "Cash",
-            "Card ",
-            "Cheque",
-            "E-Transfer"});
-            this.ddlPaidBy.Location = new System.Drawing.Point(105, 230);
+            this.ddlPaidBy.Location = new System.Drawing.Point(105, 264);
             this.ddlPaidBy.Name = "ddlPaidBy";
             this.ddlPaidBy.Size = new System.Drawing.Size(133, 21);
             this.ddlPaidBy.TabIndex = 14;
@@ -317,7 +348,7 @@
             // label57
             // 
             this.label57.AutoSize = true;
-            this.label57.Location = new System.Drawing.Point(17, 314);
+            this.label57.Location = new System.Drawing.Point(17, 360);
             this.label57.Name = "label57";
             this.label57.Size = new System.Drawing.Size(49, 13);
             this.label57.TabIndex = 19;
@@ -325,19 +356,18 @@
             // 
             // txtRemarks
             // 
-            this.txtRemarks.Location = new System.Drawing.Point(19, 330);
+            this.txtRemarks.Location = new System.Drawing.Point(19, 376);
             this.txtRemarks.Multiline = true;
             this.txtRemarks.Name = "txtRemarks";
             this.txtRemarks.Size = new System.Drawing.Size(219, 36);
             this.txtRemarks.TabIndex = 20;
-            this.txtRemarks.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtBalanceAmnt
             // 
             this.txtBalanceAmnt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.txtBalanceAmnt.Enabled = false;
             this.txtBalanceAmnt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBalanceAmnt.Location = new System.Drawing.Point(105, 283);
+            this.txtBalanceAmnt.Location = new System.Drawing.Point(105, 317);
             this.txtBalanceAmnt.Multiline = true;
             this.txtBalanceAmnt.Name = "txtBalanceAmnt";
             this.txtBalanceAmnt.Size = new System.Drawing.Size(133, 20);
@@ -348,7 +378,7 @@
             // label56
             // 
             this.label56.AutoSize = true;
-            this.label56.Location = new System.Drawing.Point(16, 286);
+            this.label56.Location = new System.Drawing.Point(16, 320);
             this.label56.Name = "label56";
             this.label56.Size = new System.Drawing.Size(56, 13);
             this.label56.TabIndex = 17;
@@ -356,7 +386,7 @@
             // 
             // txtDepositAmnt
             // 
-            this.txtDepositAmnt.Location = new System.Drawing.Point(105, 257);
+            this.txtDepositAmnt.Location = new System.Drawing.Point(105, 291);
             this.txtDepositAmnt.Name = "txtDepositAmnt";
             this.txtDepositAmnt.Size = new System.Drawing.Size(133, 20);
             this.txtDepositAmnt.TabIndex = 16;
@@ -369,7 +399,7 @@
             // label55
             // 
             this.label55.AutoSize = true;
-            this.label55.Location = new System.Drawing.Point(16, 260);
+            this.label55.Location = new System.Drawing.Point(16, 294);
             this.label55.Name = "label55";
             this.label55.Size = new System.Drawing.Size(54, 13);
             this.label55.TabIndex = 15;
@@ -378,7 +408,7 @@
             // label54
             // 
             this.label54.AutoSize = true;
-            this.label54.Location = new System.Drawing.Point(16, 234);
+            this.label54.Location = new System.Drawing.Point(16, 268);
             this.label54.Name = "label54";
             this.label54.Size = new System.Drawing.Size(49, 13);
             this.label54.TabIndex = 13;
@@ -387,8 +417,6 @@
             // chkApplyHst
             // 
             this.chkApplyHst.AutoSize = true;
-            this.chkApplyHst.Checked = true;
-            this.chkApplyHst.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkApplyHst.Location = new System.Drawing.Point(19, 23);
             this.chkApplyHst.Name = "chkApplyHst";
             this.chkApplyHst.Size = new System.Drawing.Size(85, 17);
@@ -402,7 +430,7 @@
             this.txtGrandTotal.BackColor = System.Drawing.SystemColors.Info;
             this.txtGrandTotal.Enabled = false;
             this.txtGrandTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtGrandTotal.Location = new System.Drawing.Point(105, 185);
+            this.txtGrandTotal.Location = new System.Drawing.Point(105, 219);
             this.txtGrandTotal.Multiline = true;
             this.txtGrandTotal.Name = "txtGrandTotal";
             this.txtGrandTotal.Size = new System.Drawing.Size(133, 30);
@@ -413,7 +441,7 @@
             // label53
             // 
             this.label53.AutoSize = true;
-            this.label53.Location = new System.Drawing.Point(16, 194);
+            this.label53.Location = new System.Drawing.Point(16, 228);
             this.label53.Name = "label53";
             this.label53.Size = new System.Drawing.Size(84, 13);
             this.label53.TabIndex = 11;
@@ -422,7 +450,7 @@
             // txtHSTAmnt
             // 
             this.txtHSTAmnt.Enabled = false;
-            this.txtHSTAmnt.Location = new System.Drawing.Point(105, 159);
+            this.txtHSTAmnt.Location = new System.Drawing.Point(105, 193);
             this.txtHSTAmnt.Name = "txtHSTAmnt";
             this.txtHSTAmnt.Size = new System.Drawing.Size(133, 20);
             this.txtHSTAmnt.TabIndex = 10;
@@ -432,7 +460,7 @@
             // label51
             // 
             this.label51.AutoSize = true;
-            this.label51.Location = new System.Drawing.Point(16, 162);
+            this.label51.Location = new System.Drawing.Point(16, 196);
             this.label51.Name = "label51";
             this.label51.Size = new System.Drawing.Size(29, 13);
             this.label51.TabIndex = 9;
@@ -441,7 +469,7 @@
             // txtOrderTotalAmnt
             // 
             this.txtOrderTotalAmnt.Enabled = false;
-            this.txtOrderTotalAmnt.Location = new System.Drawing.Point(105, 133);
+            this.txtOrderTotalAmnt.Location = new System.Drawing.Point(105, 159);
             this.txtOrderTotalAmnt.Name = "txtOrderTotalAmnt";
             this.txtOrderTotalAmnt.Size = new System.Drawing.Size(133, 20);
             this.txtOrderTotalAmnt.TabIndex = 8;
@@ -451,32 +479,30 @@
             // label43
             // 
             this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(16, 136);
+            this.label43.Location = new System.Drawing.Point(16, 162);
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(42, 13);
             this.label43.TabIndex = 7;
             this.label43.Text = "TOTAL";
             // 
-            // txtOtherAdjustmentAmnt
+            // txtOtherTotal
             // 
-            this.txtOtherAdjustmentAmnt.Location = new System.Drawing.Point(105, 107);
-            this.txtOtherAdjustmentAmnt.Name = "txtOtherAdjustmentAmnt";
-            this.txtOtherAdjustmentAmnt.Size = new System.Drawing.Size(133, 20);
-            this.txtOtherAdjustmentAmnt.TabIndex = 6;
-            this.txtOtherAdjustmentAmnt.Text = "0.00";
-            this.txtOtherAdjustmentAmnt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtOtherAdjustmentAmnt.TextChanged += new System.EventHandler(this.txtOtherAdjustmentAmnt_TextChanged);
-            this.txtOtherAdjustmentAmnt.Enter += new System.EventHandler(this.txtOtherAdjustmentAmnt_Enter);
-            this.txtOtherAdjustmentAmnt.Leave += new System.EventHandler(this.txtOtherAdjustmentAmnt_Leave);
+            this.txtOtherTotal.Enabled = false;
+            this.txtOtherTotal.Location = new System.Drawing.Point(105, 107);
+            this.txtOtherTotal.Name = "txtOtherTotal";
+            this.txtOtherTotal.Size = new System.Drawing.Size(133, 20);
+            this.txtOtherTotal.TabIndex = 6;
+            this.txtOtherTotal.Text = "0.00";
+            this.txtOtherTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label42
             // 
             this.label42.AutoSize = true;
             this.label42.Location = new System.Drawing.Point(16, 110);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(85, 13);
+            this.label42.Size = new System.Drawing.Size(45, 13);
             this.label42.TabIndex = 5;
-            this.label42.Text = "OTHER/ADJ. (-)";
+            this.label42.Text = "OTHER";
             // 
             // txtLensTotalPrice
             // 
@@ -519,9 +545,9 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.gvOrderItemList);
-            this.groupBox2.Location = new System.Drawing.Point(9, 475);
+            this.groupBox2.Location = new System.Drawing.Point(12, 521);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(680, 145);
+            this.groupBox2.Size = new System.Drawing.Size(677, 145);
             this.groupBox2.TabIndex = 12;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Order items";
@@ -530,30 +556,40 @@
             // 
             this.gvOrderItemList.AllowUserToAddRows = false;
             this.gvOrderItemList.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle21.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvOrderItemList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvOrderItemList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.gvOrderItemList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gvOrderItemList.DefaultCellStyle = dataGridViewCellStyle22;
-            this.gvOrderItemList.Location = new System.Drawing.Point(6, 19);
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gvOrderItemList.DefaultCellStyle = dataGridViewCellStyle4;
+            this.gvOrderItemList.Location = new System.Drawing.Point(7, 19);
+            this.gvOrderItemList.MultiSelect = false;
             this.gvOrderItemList.Name = "gvOrderItemList";
-            this.gvOrderItemList.Size = new System.Drawing.Size(669, 120);
+            this.gvOrderItemList.ReadOnly = true;
+            this.gvOrderItemList.Size = new System.Drawing.Size(662, 120);
             this.gvOrderItemList.TabIndex = 0;
+            this.gvOrderItemList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvOrderItemList_CellClick);
+            this.gvOrderItemList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvOrderItemList_CellContentClick);
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.label10);
+            this.groupBox6.Controls.Add(this.txtOtherItemQuantity);
+            this.groupBox6.Controls.Add(this.label58);
+            this.groupBox6.Controls.Add(this.txtOtherItemUnitPrice);
+            this.groupBox6.Controls.Add(this.label59);
+            this.groupBox6.Controls.Add(this.txtOtherDescription);
             this.groupBox6.Controls.Add(this.label38);
             this.groupBox6.Controls.Add(this.txtRightLensQuantity);
             this.groupBox6.Controls.Add(this.label37);
@@ -574,12 +610,70 @@
             this.groupBox6.Controls.Add(this.txtFrameUnitPrice);
             this.groupBox6.Controls.Add(this.label52);
             this.groupBox6.Controls.Add(this.txtLeftLensDescription);
-            this.groupBox6.Location = new System.Drawing.Point(188, 354);
+            this.groupBox6.Location = new System.Drawing.Point(188, 360);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(500, 94);
+            this.groupBox6.Size = new System.Drawing.Size(500, 121);
             this.groupBox6.TabIndex = 9;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Frame/Lens";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(319, 94);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(26, 13);
+            this.label10.TabIndex = 22;
+            this.label10.Text = "Qty.";
+            // 
+            // txtOtherItemQuantity
+            // 
+            this.txtOtherItemQuantity.Location = new System.Drawing.Point(349, 90);
+            this.txtOtherItemQuantity.MaxLength = 3;
+            this.txtOtherItemQuantity.Name = "txtOtherItemQuantity";
+            this.txtOtherItemQuantity.Size = new System.Drawing.Size(33, 20);
+            this.txtOtherItemQuantity.TabIndex = 23;
+            this.txtOtherItemQuantity.Text = "0";
+            this.txtOtherItemQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtOtherItemQuantity.Enter += new System.EventHandler(this.txtOtherItemQuantity_Enter);
+            this.txtOtherItemQuantity.Leave += new System.EventHandler(this.txtOtherItemQuantity_Leave);
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.Location = new System.Drawing.Point(389, 94);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(52, 13);
+            this.label58.TabIndex = 24;
+            this.label58.Text = "Unit price";
+            // 
+            // txtOtherItemUnitPrice
+            // 
+            this.txtOtherItemUnitPrice.Location = new System.Drawing.Point(441, 90);
+            this.txtOtherItemUnitPrice.MaxLength = 8;
+            this.txtOtherItemUnitPrice.Name = "txtOtherItemUnitPrice";
+            this.txtOtherItemUnitPrice.Size = new System.Drawing.Size(52, 20);
+            this.txtOtherItemUnitPrice.TabIndex = 25;
+            this.txtOtherItemUnitPrice.Text = "0.0";
+            this.txtOtherItemUnitPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtOtherItemUnitPrice.Enter += new System.EventHandler(this.txtOtherItemUnitPrice_Enter);
+            this.txtOtherItemUnitPrice.Leave += new System.EventHandler(this.txtOtherItemUnitPrice_Leave);
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.Location = new System.Drawing.Point(7, 94);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(33, 13);
+            this.label59.TabIndex = 20;
+            this.label59.Text = "Other";
+            // 
+            // txtOtherDescription
+            // 
+            this.txtOtherDescription.Location = new System.Drawing.Point(71, 90);
+            this.txtOtherDescription.Name = "txtOtherDescription";
+            this.txtOtherDescription.Size = new System.Drawing.Size(242, 20);
+            this.txtOtherDescription.TabIndex = 21;
             // 
             // label38
             // 
@@ -599,7 +693,6 @@
             this.txtRightLensQuantity.TabIndex = 17;
             this.txtRightLensQuantity.Text = "0";
             this.txtRightLensQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtRightLensQuantity.TextChanged += new System.EventHandler(this.txtRightLensQuantity_TextChanged);
             this.txtRightLensQuantity.Enter += new System.EventHandler(this.txtRightLensQuantity_Enter);
             this.txtRightLensQuantity.Leave += new System.EventHandler(this.txtRightLensQuantity_Leave);
             // 
@@ -621,7 +714,6 @@
             this.txtLeftLensQuantity.TabIndex = 11;
             this.txtLeftLensQuantity.Text = "0";
             this.txtLeftLensQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtLeftLensQuantity.TextChanged += new System.EventHandler(this.txtLeftLensQuantity_TextChanged);
             this.txtLeftLensQuantity.Enter += new System.EventHandler(this.txtLeftLensQuantity_Enter);
             this.txtLeftLensQuantity.Leave += new System.EventHandler(this.txtLeftLensQuantity_Leave);
             // 
@@ -643,7 +735,6 @@
             this.txtFrameQuantity.TabIndex = 5;
             this.txtFrameQuantity.Text = "0";
             this.txtFrameQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtFrameQuantity.TextChanged += new System.EventHandler(this.txtFrameQuantity_TextChanged);
             this.txtFrameQuantity.Enter += new System.EventHandler(this.txtFrameQuantity_Enter);
             this.txtFrameQuantity.Leave += new System.EventHandler(this.txtFrameQuantity_Leave);
             // 
@@ -665,7 +756,6 @@
             this.txtRightLensUnitPrice.TabIndex = 19;
             this.txtRightLensUnitPrice.Text = "0.0";
             this.txtRightLensUnitPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtRightLensUnitPrice.TextChanged += new System.EventHandler(this.txtRightLensUnitPrice_TextChanged);
             this.txtRightLensUnitPrice.Enter += new System.EventHandler(this.txtRightLensUnitPrice_Enter);
             this.txtRightLensUnitPrice.Leave += new System.EventHandler(this.txtRightLensUnitPrice_Leave);
             // 
@@ -687,7 +777,6 @@
             this.txtLeftLensUnitPrice.TabIndex = 13;
             this.txtLeftLensUnitPrice.Text = "0.0";
             this.txtLeftLensUnitPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtLeftLensUnitPrice.TextChanged += new System.EventHandler(this.txtLeftLensUnitPrice_TextChanged);
             this.txtLeftLensUnitPrice.Enter += new System.EventHandler(this.txtLeftLensUnitPrice_Enter);
             this.txtLeftLensUnitPrice.Leave += new System.EventHandler(this.txtLeftLensUnitPrice_Leave);
             // 
@@ -757,7 +846,6 @@
             this.txtFrameUnitPrice.TabIndex = 7;
             this.txtFrameUnitPrice.Text = "0.0";
             this.txtFrameUnitPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtFrameUnitPrice.TextChanged += new System.EventHandler(this.txtFrameUnitPrice_TextChanged);
             this.txtFrameUnitPrice.Enter += new System.EventHandler(this.txtFrameUnitPrice_Enter);
             this.txtFrameUnitPrice.Leave += new System.EventHandler(this.txtFrameUnitPrice_Leave);
             // 
@@ -787,9 +875,9 @@
             this.groupBox4.Controls.Add(this.label46);
             this.groupBox4.Controls.Add(this.txtMeasurementEd);
             this.groupBox4.Controls.Add(this.label47);
-            this.groupBox4.Location = new System.Drawing.Point(12, 354);
+            this.groupBox4.Location = new System.Drawing.Point(12, 360);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(170, 94);
+            this.groupBox4.Size = new System.Drawing.Size(170, 121);
             this.groupBox4.TabIndex = 8;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Other";
@@ -1640,6 +1728,7 @@
             this.lnkNextOrder.TabIndex = 6;
             this.lnkNextOrder.TabStop = true;
             this.lnkNextOrder.Text = "Next";
+            this.lnkNextOrder.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkNextOrder_LinkClicked);
             // 
             // lnkPreviousOrder
             // 
@@ -1650,6 +1739,7 @@
             this.lnkPreviousOrder.TabIndex = 4;
             this.lnkPreviousOrder.TabStop = true;
             this.lnkPreviousOrder.Text = "Previous";
+            this.lnkPreviousOrder.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkPreviousOrder_LinkClicked);
             // 
             // lblOrdersFoundText
             // 
@@ -1684,7 +1774,8 @@
             this.ddlFindBy.Items.AddRange(new object[] {
             "Order number",
             "Customer phone",
-            "Customer name"});
+            "Customer first name",
+            "Customer last name"});
             this.ddlFindBy.Location = new System.Drawing.Point(27, 18);
             this.ddlFindBy.Name = "ddlFindBy";
             this.ddlFindBy.Size = new System.Drawing.Size(108, 21);
@@ -1764,13 +1855,64 @@
             this.label8.TabIndex = 2;
             this.label8.Text = "Order no.";
             // 
+            // txtSerialNo
+            // 
+            this.txtSerialNo.Enabled = false;
+            this.txtSerialNo.Location = new System.Drawing.Point(219, 493);
+            this.txtSerialNo.Name = "txtSerialNo";
+            this.txtSerialNo.Size = new System.Drawing.Size(30, 20);
+            this.txtSerialNo.TabIndex = 17;
+            this.txtSerialNo.Visible = false;
+            // 
+            // lblSerialNo
+            // 
+            this.lblSerialNo.AutoSize = true;
+            this.lblSerialNo.Enabled = false;
+            this.lblSerialNo.Location = new System.Drawing.Point(192, 497);
+            this.lblSerialNo.Name = "lblSerialNo";
+            this.lblSerialNo.Size = new System.Drawing.Size(27, 13);
+            this.lblSerialNo.TabIndex = 261;
+            this.lblSerialNo.Text = "SL#";
+            this.lblSerialNo.Visible = false;
+            // 
+            // txtTrayNumber
+            // 
+            this.txtTrayNumber.Location = new System.Drawing.Point(48, 492);
+            this.txtTrayNumber.Name = "txtTrayNumber";
+            this.txtTrayNumber.Size = new System.Drawing.Size(89, 20);
+            this.txtTrayNumber.TabIndex = 262;
+            // 
+            // label61
+            // 
+            this.label61.AutoSize = true;
+            this.label61.Location = new System.Drawing.Point(10, 496);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(35, 13);
+            this.label61.TabIndex = 263;
+            this.label61.Text = "Tray#";
+            // 
+            // btnClearItemTextboxes
+            // 
+            this.btnClearItemTextboxes.Image = global::DonniOptical2.Properties.Resources.arrow_refresh;
+            this.btnClearItemTextboxes.Location = new System.Drawing.Point(148, 490);
+            this.btnClearItemTextboxes.Name = "btnClearItemTextboxes";
+            this.btnClearItemTextboxes.Size = new System.Drawing.Size(24, 24);
+            this.btnClearItemTextboxes.TabIndex = 264;
+            this.btnClearItemTextboxes.UseVisualStyleBackColor = true;
+            this.btnClearItemTextboxes.Click += new System.EventHandler(this.btnClearItemTextboxes_Click);
+            // 
             // frmOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.CancelButton = this.btnCloseOrder;
-            this.ClientSize = new System.Drawing.Size(965, 667);
+            this.ClientSize = new System.Drawing.Size(965, 737);
+            this.Controls.Add(this.btnClearItemTextboxes);
+            this.Controls.Add(this.txtTrayNumber);
+            this.Controls.Add(this.label61);
+            this.Controls.Add(this.txtSerialNo);
+            this.Controls.Add(this.lblSerialNo);
             this.Controls.Add(this.btnCloseOrder);
             this.Controls.Add(this.btnRemoveFromOrderItemList);
             this.Controls.Add(this.btnSaveOrder);
@@ -1813,6 +1955,7 @@
             this.gbFindOrder.ResumeLayout(false);
             this.gbFindOrder.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1839,7 +1982,7 @@
         private System.Windows.Forms.Label label51;
         private System.Windows.Forms.TextBox txtOrderTotalAmnt;
         private System.Windows.Forms.Label label43;
-        private System.Windows.Forms.TextBox txtOtherAdjustmentAmnt;
+        private System.Windows.Forms.TextBox txtOtherTotal;
         private System.Windows.Forms.Label label42;
         private System.Windows.Forms.TextBox txtLensTotalPrice;
         private System.Windows.Forms.Label label41;
@@ -1970,5 +2113,18 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DateTimePicker txtPrescriptionDate;
         private System.Windows.Forms.Label lblHstAmnt;
+        private System.Windows.Forms.TextBox txtDiscountAmnt;
+        private System.Windows.Forms.Label label60;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txtOtherItemQuantity;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.TextBox txtOtherItemUnitPrice;
+        private System.Windows.Forms.Label label59;
+        private System.Windows.Forms.TextBox txtOtherDescription;
+        private System.Windows.Forms.TextBox txtSerialNo;
+        private System.Windows.Forms.Label lblSerialNo;
+        private System.Windows.Forms.TextBox txtTrayNumber;
+        private System.Windows.Forms.Label label61;
+        private System.Windows.Forms.Button btnClearItemTextboxes;
     }
 }

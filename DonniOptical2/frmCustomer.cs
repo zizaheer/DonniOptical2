@@ -23,6 +23,7 @@ namespace DonniOptical2
         private void frmCustomer_Load(object sender, EventArgs e)
         {
             LoadCustomerGrid();
+            PrepareForNewEntry();
         }
 
         private void rdoNewCustomer_CheckedChanged(object sender, EventArgs e)
@@ -30,6 +31,7 @@ namespace DonniOptical2
             ClearFindByGroupBox();
             txtCustomerNo.Text = "";
             gbFindBy.Enabled = false;
+            PrepareForNewEntry();
         }
 
         private void rdoFindCustomer_CheckedChanged(object sender, EventArgs e)
@@ -160,6 +162,9 @@ namespace DonniOptical2
 
         private void gvCustomerList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            rdoFindCustomer.Checked = true;
+            gbFindBy.Enabled = true;
+
             txtCustomerNo.Text = gvCustomerList.CurrentRow.Cells["Id"].Value.ToString();
             txtCustomerFirstName.Text = gvCustomerList.CurrentRow.Cells["FirstName"].Value.ToString();
             txtCustomerLastName.Text = gvCustomerList.CurrentRow.Cells["LastName"].Value.ToString();
@@ -175,5 +180,17 @@ namespace DonniOptical2
             var customerList = customerManager.GetCustomers();
             gvCustomerList.DataSource = customerList;
         }
+
+        private void PrepareForNewEntry()
+        {
+            foreach (Control control in Controls)
+            {
+                foreach (TextBox tb in control.Controls.OfType<TextBox>())
+                {
+                    tb.Text = string.Empty;
+                }
+            }
+        }
+
     }
 }

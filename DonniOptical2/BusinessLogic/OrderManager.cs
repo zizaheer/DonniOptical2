@@ -242,5 +242,98 @@ namespace DonniOptical2.BusinessLogic
             ConfigurationDataAccess config = new ConfigurationDataAccess();
             return config.GetHstAmount();
         }
+
+        public List<ViewOrder> GetOrdersByOrderId(int orderId)
+        {
+            var orderList = dataAccess.GetViewOrderList();
+            orderList = orderList.Where(c => c.OrderId == orderId).ToList();
+
+            return orderList;
+        }
+        public List<ViewOrder> GetOrdersByCustomerId(int customerId)
+        {
+            var orderList = dataAccess.GetViewOrderList();
+            orderList = orderList.Where(c => c.CustomerId == customerId).ToList();
+
+            return orderList;
+        }
+        public List<ViewOrder> GetOrdersByDate(DateTime fromDate, DateTime toDate) {
+
+            var orderList = dataAccess.GetViewOrderList();
+            orderList  = orderList.Where(c => c.OrderDate >= fromDate && c.OrderDate <= toDate).ToList();
+
+            return orderList;
+        
+        }
+        public List<ViewOrder> GetOrdersByCustomerFirstName(string customerFirstName)
+        {
+            var orderList = dataAccess.GetViewOrderList();
+            orderList = orderList.Where(c => string.Equals(c.FirstName, customerFirstName, StringComparison.OrdinalIgnoreCase)).ToList();
+
+            return orderList;
+        }
+        public List<ViewOrder> GetOrdersByDateAndFirstName(DateTime fromDate, DateTime toDate, string customerFirstName)
+        {
+            var orderList = dataAccess.GetViewOrderList();
+            orderList = orderList.Where(c => c.OrderDate >= fromDate && c.OrderDate <= toDate && string.Equals(c.FirstName, customerFirstName, StringComparison.OrdinalIgnoreCase)).ToList();
+
+            return orderList;
+
+        }
+        public List<ViewOrder> GetOrdersByLastName(string customerLastName)
+        {
+            var orderList = dataAccess.GetViewOrderList();
+            orderList = orderList.Where(c => string.Equals(c.LastName, customerLastName, StringComparison.OrdinalIgnoreCase)).ToList();
+
+            return orderList;
+
+        }
+        public List<ViewOrder> GetOrdersByDateAndLastName(DateTime fromDate, DateTime toDate, string customerLastName)
+        {
+            var orderList = dataAccess.GetViewOrderList();
+            orderList = orderList.Where(c => c.OrderDate >= fromDate && c.OrderDate <= toDate && string.Equals(c.LastName, customerLastName, StringComparison.OrdinalIgnoreCase)).ToList();
+
+            return orderList;
+
+        }
+        public List<ViewOrder> GetOrdersByCustomerPhone(string customerPhone)
+        {
+            var orderList = dataAccess.GetViewOrderList();
+            orderList = orderList.Where(c => string.Equals(c.Telephone, customerPhone, StringComparison.OrdinalIgnoreCase)).ToList();
+
+            return orderList;
+        }
+        public List<ViewOrder> GetOrdersByDateAndPhoneNumber(DateTime fromDate, DateTime toDate, string customerPhone)
+        {
+            var orderList = dataAccess.GetViewOrderList();
+            orderList = orderList.Where(c => c.OrderDate >= fromDate && c.OrderDate <= toDate && string.Equals(c.Telephone, customerPhone, StringComparison.OrdinalIgnoreCase)).ToList();
+
+            return orderList;
+
+        }
+        public List<ViewOrder> GetOrdersByEmail(string customerEmail)
+        {
+            var orderList = dataAccess.GetViewOrderList();
+            orderList = orderList.Where(c => string.Equals(c.Email, customerEmail, StringComparison.OrdinalIgnoreCase)).ToList();
+
+            return orderList;
+
+        }
+        public List<ViewOrder> GetOrdersByDateAndEmail(DateTime fromDate, DateTime toDate, string customerEmail)
+        {
+            var orderList = dataAccess.GetViewOrderList();
+            orderList = orderList.Where(c => c.OrderDate >= fromDate && c.OrderDate <= toDate && string.Equals(c.Email, customerEmail, StringComparison.OrdinalIgnoreCase)).ToList();
+
+            return orderList;
+
+        }
+
+
+
+     
+        
+
+        
+        
     }
 }

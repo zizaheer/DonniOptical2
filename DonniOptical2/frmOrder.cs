@@ -17,6 +17,7 @@ namespace DonniOptical2
         CustomerManager customerManager = new CustomerManager();
         OrderManager orderManager = new OrderManager();
         decimal hstAmount = 0;
+        int[] orderFound;
         public frmOrder()
         {
             InitializeComponent();
@@ -63,8 +64,8 @@ namespace DonniOptical2
         private void btnFindOrder_Click(object sender, EventArgs e)
         {
             int orderId = 0;
-            int custId = 0;
-
+            lblNoOfOrdersFound.Text = "0";
+            
             if (ddlFindBy.SelectedIndex == 0)
             {
                 int.TryParse(txtFindByValue.Text, out orderId);
@@ -74,10 +75,133 @@ namespace DonniOptical2
                 }
                 else
                 {
+                    orderFound = Array.Empty<int>();
                     MessageBox.Show("Please enter a valid order id.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
+
+            if (ddlFindBy.SelectedIndex == 1)
+            {
+                string custPhone = txtFindByValue.Text;
+
+                if (custPhone.Trim().Length > 0)
+                {
+                    var orderList = orderManager.GetOrdersByCustomerPhone(custPhone).Select(c => c.OrderId).Distinct().ToArray();
+                    if (orderList.Length > 0)
+                    {
+                        lblNoOfOrdersFound.Text = orderList.Length.ToString();
+                        orderFound = orderList;
+                        PrepareForUpdateEntry(orderFound[0]);
+                    }
+                    else
+                    {
+                        orderFound = Array.Empty<int>();
+                        MessageBox.Show("No order found with your search criteria.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Please enter valid customer phone number.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+
+            if (ddlFindBy.SelectedIndex == 2)
+            {
+                string custFirstName = txtFindByValue.Text;
+
+                if (custFirstName.Trim().Length > 0)
+                {
+                    var orderList = orderManager.GetOrdersByCustomerFirstName(custFirstName).Select(c => c.OrderId).Distinct().ToArray();
+                    if (orderList.Length > 0)
+                    {
+                        lblNoOfOrdersFound.Text = orderList.Length.ToString();
+                        orderFound = orderList;
+                        PrepareForUpdateEntry(orderFound[0]);
+                    }
+                    else
+                    {
+                        orderFound = Array.Empty<int>();
+                        MessageBox.Show("No order found with your search criteria.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Please enter valid customer first name.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+
+            if (ddlFindBy.SelectedIndex == 3)
+            {
+                string custLastName = txtFindByValue.Text;
+
+                if (custLastName.Trim().Length > 0)
+                {
+                    var orderList = orderManager.GetOrdersByCustomerFirstName(custLastName).Select(c => c.OrderId).Distinct().ToArray();
+                    if (orderList.Length > 0)
+                    {
+                        lblNoOfOrdersFound.Text = orderList.Length.ToString();
+                        orderFound = orderList;
+                        PrepareForUpdateEntry(orderFound[0]);
+                    }
+                    else
+                    {
+                        orderFound = Array.Empty<int>();
+                        MessageBox.Show("No order found with your search criteria.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Please enter valid customer last name.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+
+
+
+
         }
+
+        private void lnkPreviousOrder_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (orderFound.Length > 0)
+            {
+                int orderNo = Convert.ToInt32(txtOrderNo.Text);
+                int index = 0;
+                if (orderNo > 0)
+                {
+                    index = Array.IndexOf(orderFound, orderNo);
+                    index--;
+                }
+
+                if (index >= 0)
+                {
+                    PrepareForUpdateEntry(orderFound[index]);
+                }
+
+            }
+        }
+        
+        private void lnkNextOrder_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (orderFound.Length > 0)
+            {
+                int orderNo = Convert.ToInt32(txtOrderNo.Text);
+                int index = 0;
+                if (orderNo > 0)
+                {
+                    index = Array.IndexOf(orderFound, orderNo);
+                    index++;
+                }
+
+                if (index < orderFound.Length)
+                {
+                    PrepareForUpdateEntry(orderFound[index]);
+                }
+            }
+        }
+
         private void btnCloseOrder_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -151,7 +275,7 @@ namespace DonniOptical2
                 orderInfo.PrescriptionPrismLeft = txtPrescriptionPrismLeft.Text;
                 orderInfo.FrameTotalPrice = Convert.ToDecimal(txtFrameTotalPrice.Text);
                 orderInfo.LensTotalPrice = Convert.ToDecimal(txtLensTotalPrice.Text);
-                orderInfo.OtherAdjustment = Convert.ToDecimal(txtOtherAdjustmentAmnt.Text);
+                orderInfo.OtherAdjustment = Convert.ToDecimal(txtOtherTotal.Text);
                 orderInfo.OrderTotal = Convert.ToDecimal(txtOrderTotalAmnt.Text);
                 orderInfo.HstAmount = Convert.ToDecimal(txtHSTAmnt.Text);
                 orderInfo.GrandTotal = Convert.ToDecimal(txtGrandTotal.Text);
@@ -159,7 +283,7 @@ namespace DonniOptical2
                 orderInfo.PaidAmount = Convert.ToDecimal(txtDepositAmnt.Text);
                 orderInfo.BalanceDue = Convert.ToDecimal(txtBalanceAmnt.Text);
                 orderInfo.Remarks = txtRemarks.Text;
-                orderInfo.CreateDate = DateTime.Now;
+                orderInfo.CreateDate = Convert.ToDateTime(DateTime.Now.ToString("dd-MMM-yyyy"));
 
                 List<OrderDetail> orderDetailList = new List<OrderDetail>();
 
@@ -168,45 +292,52 @@ namespace DonniOptical2
                     OrderDetail orderDetail = new OrderDetail();
 
                     orderDetail.OrderId = orderInfo.Id;
-                    orderDetail.ModifiedSphereRight = row.Cells[1].Value.ToString();
-                    orderDetail.ModifiedCylRight = row.Cells[2].Value.ToString();
-                    orderDetail.ModifiedAxisRight = row.Cells[3].Value.ToString();
-                    orderDetail.ModifiedAddRight = row.Cells[4].Value.ToString();
-                    orderDetail.ModifiedPrismRight = row.Cells[5].Value.ToString();
 
-                    orderDetail.ModifiedSphereLeft = row.Cells[6].Value.ToString();
-                    orderDetail.ModifiedCylLeft = row.Cells[7].Value.ToString();
-                    orderDetail.ModifiedAxisLeft = row.Cells[8].Value.ToString();
-                    orderDetail.ModifiedAddLeft = row.Cells[9].Value.ToString();
-                    orderDetail.ModifiedPrismLeft = row.Cells[10].Value.ToString();
+                    orderDetail.TrayNumber = row.Cells["TRAY#"].Value.ToString();
 
-                    orderDetail.MeasurementFpdRight = row.Cells[11].Value.ToString();
-                    orderDetail.MeasurementNrPdRight = row.Cells[12].Value.ToString();
-                    orderDetail.MeasurementOcRight = row.Cells[13].Value.ToString();
-                    orderDetail.MeasurementSegRight = row.Cells[14].Value.ToString();
-                    orderDetail.MeasurementBlSizeRight = row.Cells[15].Value.ToString();
+                    orderDetail.ModifiedSphereRight = row.Cells["SPH_R"].Value.ToString();
+                    orderDetail.ModifiedCylRight = row.Cells["CYL_R"].Value.ToString();
+                    orderDetail.ModifiedAxisRight = row.Cells["AXIS_R"].Value.ToString();
+                    orderDetail.ModifiedAddRight = row.Cells["ADD_R"].Value.ToString();
+                    orderDetail.ModifiedPrismRight = row.Cells["PRISM_R"].Value.ToString();
 
-                    orderDetail.MeasurementFpdLeft = row.Cells[16].Value.ToString();
-                    orderDetail.MeasurementNrPdLeft = row.Cells[17].Value.ToString();
-                    orderDetail.MeasurementOcLeft = row.Cells[18].Value.ToString();
-                    orderDetail.MeasurementSegLeft = row.Cells[19].Value.ToString();
-                    orderDetail.MeasurementBlSizeLeft = row.Cells[20].Value.ToString();
+                    orderDetail.ModifiedSphereLeft = row.Cells["SPH_L"].Value.ToString();
+                    orderDetail.ModifiedCylLeft = row.Cells["CYL_L"].Value.ToString();
+                    orderDetail.ModifiedAxisLeft = row.Cells["AXIS_L"].Value.ToString();
+                    orderDetail.ModifiedAddLeft = row.Cells["ADD_L"].Value.ToString();
+                    orderDetail.ModifiedPrismLeft = row.Cells["PRISM_L"].Value.ToString();
 
-                    orderDetail.MeasurementA = row.Cells[21].Value.ToString();
-                    orderDetail.MeasurementB = row.Cells[22].Value.ToString();
-                    orderDetail.MeasurementED = row.Cells[23].Value.ToString();
-                    orderDetail.MeasurementDBL = row.Cells[24].Value.ToString();
+                    orderDetail.MeasurementFpdRight = row.Cells["FPD_R"].Value.ToString();
+                    orderDetail.MeasurementNrPdRight = row.Cells["NR.PD_R"].Value.ToString();
+                    orderDetail.MeasurementOcRight = row.Cells["OC_R"].Value.ToString();
+                    orderDetail.MeasurementSegRight = row.Cells["SEG_R"].Value.ToString();
+                    orderDetail.MeasurementBlSizeRight = row.Cells["BL.SIZE_R"].Value.ToString();
 
-                    orderDetail.FrameCode = row.Cells[25].Value.ToString();
-                    orderDetail.FrameColor = row.Cells[26].Value.ToString();
-                    orderDetail.FrameUnitPrice = Convert.ToDecimal(row.Cells[27].Value);
-                    orderDetail.FrameQuantity = Convert.ToInt32(row.Cells[28].Value);
-                    orderDetail.LeftLensDescription = row.Cells[29].Value.ToString();
-                    orderDetail.LeftLensUnitPrice = Convert.ToDecimal(row.Cells[30].Value);
-                    orderDetail.LeftLensQuantity = Convert.ToInt32(row.Cells[31].Value);
-                    orderDetail.RightLensDescription = row.Cells[32].Value.ToString();
-                    orderDetail.RightLensUnitPrice = Convert.ToDecimal(row.Cells[33].Value);
-                    orderDetail.RightLensQuantity = Convert.ToInt32(row.Cells[34].Value);
+                    orderDetail.MeasurementFpdLeft = row.Cells["FPD_L"].Value.ToString();
+                    orderDetail.MeasurementNrPdLeft = row.Cells["NR.PD_L"].Value.ToString();
+                    orderDetail.MeasurementOcLeft = row.Cells["OC_L"].Value.ToString();
+                    orderDetail.MeasurementSegLeft = row.Cells["SEG_L"].Value.ToString();
+                    orderDetail.MeasurementBlSizeLeft = row.Cells["BL.SIZE_L"].Value.ToString();
+
+                    orderDetail.MeasurementA = row.Cells["MSRMNT_A"].Value.ToString();
+                    orderDetail.MeasurementB = row.Cells["MSRMNT_B"].Value.ToString();
+                    orderDetail.MeasurementED = row.Cells["MSRMNT_ED"].Value.ToString();
+                    orderDetail.MeasurementDBL = row.Cells["MSRMNT_DBL"].Value.ToString();
+
+                    orderDetail.FrameCode = row.Cells["FRM_CODE"].Value.ToString();
+                    orderDetail.FrameColor = row.Cells["FRM_COLOR"].Value.ToString();
+                    orderDetail.FrameUnitPrice = Convert.ToDecimal(row.Cells["FRM_UNT_PRICE"].Value);
+                    orderDetail.FrameQuantity = Convert.ToInt32(row.Cells["FRM_QTY"].Value);
+                    orderDetail.LeftLensDescription = row.Cells["LL_DESC"].Value.ToString();
+                    orderDetail.LeftLensUnitPrice = Convert.ToDecimal(row.Cells["LL_UNT_PRICE"].Value);
+                    orderDetail.LeftLensQuantity = Convert.ToInt32(row.Cells["LL_QTY"].Value);
+                    orderDetail.RightLensDescription = row.Cells["RL_DESC"].Value.ToString();
+                    orderDetail.RightLensUnitPrice = Convert.ToDecimal(row.Cells["RL_UNT_PRICE"].Value);
+                    orderDetail.RightLensQuantity = Convert.ToInt32(row.Cells["RL_QTY"].Value);
+
+                    orderDetail.OtherItemDescription = row.Cells["OTHR_DESC"].Value.ToString();
+                    orderDetail.OtherItemUnitPrice = Convert.ToDecimal(row.Cells["OTHR_UNT_PRICE"].Value);
+                    orderDetail.OtherItemQuantity = Convert.ToInt32(row.Cells["OTHR_QTY"].Value);
 
                     orderDetailList.Add(orderDetail);
                 }
@@ -215,8 +346,52 @@ namespace DonniOptical2
 
                 if (orderId > 0)
                 {
-                    PrepareForUpdateEntry(orderId);
-                    MessageBox.Show("The order saved successfully. ", "Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //PrepareForUpdateEntry(orderId);
+                    PrepareForNewEntry();
+                    DialogResult dr = MessageBox.Show("The order saved successfully. Do you want to print receipt?", "Successful", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+                    if (dr == DialogResult.Yes)
+                    {
+                        customerManager = new CustomerManager();
+                        var custInfo = customerManager.GetCustomerById(orderInfo.CustomerId);
+
+                        frmPrintReceipt frmPrintReceipt = new frmPrintReceipt();
+                        frmPrintReceipt.lblOrderNoValue.Text = orderId.ToString().PadLeft(8, '0');
+                        frmPrintReceipt.lblOrderDate.Text = orderInfo.CreateDate.ToString("dd-MMM-yyyy");
+
+                        frmPrintReceipt.lblCustomerNoValue.Text = orderInfo.CustomerId.ToString().PadLeft(6, '0');
+                        frmPrintReceipt.lblCustomerName.Text = custInfo.FirstName + " " + custInfo.LastName;
+                        frmPrintReceipt.lblCustomerAddress.Text = custInfo.Address;
+                        frmPrintReceipt.lblCity.Text = custInfo.City;
+                        frmPrintReceipt.lblPostCode.Text = custInfo.Postcode;
+                        frmPrintReceipt.lblCustomerPhone.Text = custInfo.Telephone;
+
+                        frmPrintReceipt.lblFrameTotalPrice.Text = Convert.ToString(orderInfo.FrameTotalPrice);
+                        frmPrintReceipt.lblLensTotalPrice.Text = Convert.ToString(orderInfo.LensTotalPrice);
+                        frmPrintReceipt.lblAdjustment.Text = Convert.ToString(orderInfo.OtherAdjustment);
+                        frmPrintReceipt.lblSubtotal.Text = Convert.ToString(orderInfo.OrderTotal);
+                        frmPrintReceipt.lblHstAmount.Text = Convert.ToString(orderInfo.HstAmount);
+                        frmPrintReceipt.lblGrandTotal.Text = Convert.ToString(orderInfo.GrandTotal);
+                        frmPrintReceipt.lblDepositAmount.Text = Convert.ToString(orderInfo.PaidAmount);
+                        frmPrintReceipt.lblBalanceDue.Text = Convert.ToString(orderInfo.BalanceDue);
+
+                        //frmPrintReceipt.lblRemarks.Text = orderInfo.Remarks;
+
+                        var allPrinters = System.Drawing.Printing.PrinterSettings.InstalledPrinters;
+                        int index = 0;
+                        foreach (var printer in allPrinters)
+                        {
+                            frmPrintReceipt.ddlPrinterList.Items.Insert(index, printer.ToString());
+                            index++;
+                        }
+
+                        frmPrintReceipt.ShowDialog();
+
+                    }
+
+
+
+
                 }
 
             }
@@ -236,6 +411,8 @@ namespace DonniOptical2
 
             OrderDetail orderDetail = new OrderDetail();
 
+            orderDetail.Id = 0;
+            orderDetail.TrayNumber = txtTrayNumber.Text;
             orderDetail.ModifiedSphereRight = txtModifiedSphereRight.Text;
             orderDetail.ModifiedCylRight = txtModifiedCylRight.Text;
             orderDetail.ModifiedAxisRight = txtModifiedAxisRight.Text;
@@ -276,7 +453,30 @@ namespace DonniOptical2
             orderDetail.RightLensUnitPrice = Convert.ToDecimal(txtRightLensUnitPrice.Text);
             orderDetail.RightLensQuantity = Convert.ToInt32(txtRightLensQuantity.Text);
 
-            ClearOrderDetail();
+            orderDetail.OtherItemDescription = txtOtherDescription.Text;
+            orderDetail.OtherItemUnitPrice = Convert.ToDecimal(txtOtherItemUnitPrice.Text);
+            orderDetail.OtherItemQuantity = Convert.ToInt32(txtOtherItemQuantity.Text);
+
+
+            if (txtSerialNo.Text != string.Empty)
+            {
+                foreach (DataGridViewRow row in gvOrderItemList.Rows)
+                {
+                    if (row.Cells["SL#"].Value.ToString() == txtSerialNo.Text)
+                    {
+                        int selectedIndex = row.Cells["SL#"].RowIndex;
+                        DialogResult result = MessageBox.Show("This item already exist in the item list. Do you want to update?", "Warning", MessageBoxButtons.YesNo);
+                        if (result == DialogResult.Yes)
+                        {
+                            gvOrderItemList.Rows.RemoveAt(selectedIndex);
+                        }
+                    }
+                }
+            }
+
+
+            FillOrderDetailGridview(orderDetail);
+            ClearOrderDetailTextboxes();
             CalculateOrderTotal();
         }
 
@@ -289,6 +489,7 @@ namespace DonniOptical2
                 if (result == DialogResult.Yes)
                 {
                     gvOrderItemList.Rows.RemoveAt(selectedIndex);
+                    ClearOrderDetailTextboxes();
                     RefreshSerial();
                     CalculateOrderTotal();
                 }
@@ -329,22 +530,18 @@ namespace DonniOptical2
         {
             txtModifiedCylLeft.Text = txtPrescriptionCylLeft.Text;
         }
-
         private void txtPrescriptionAxisLeft_Leave(object sender, EventArgs e)
         {
             txtModifiedAxisLeft.Text = txtPrescriptionAxisLeft.Text;
         }
-
         private void txtPrescriptionAddLeft_Leave(object sender, EventArgs e)
         {
             txtModifiedAddLeft.Text = txtPrescriptionAddLeft.Text;
         }
-
         private void txtPrescriptionPrismLeft_Leave(object sender, EventArgs e)
         {
             txtModifiedPrismLeft.Text = txtPrescriptionPrismLeft.Text;
         }
-
         private void txtFrameQuantity_Enter(object sender, EventArgs e)
         {
             int qtyOut;
@@ -356,7 +553,6 @@ namespace DonniOptical2
                 }
             }
         }
-
         private void txtFrameQuantity_Leave(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtFrameQuantity.Text))
@@ -364,11 +560,6 @@ namespace DonniOptical2
                 txtFrameQuantity.Text = "0";
             }
         }
-
-        private void txtFrameQuantity_TextChanged(object sender, EventArgs e)
-        {
-        }
-
         private void txtFrameUnitPrice_Enter(object sender, EventArgs e)
         {
             decimal unitPrice;
@@ -384,7 +575,6 @@ namespace DonniOptical2
                 }
             }
         }
-
         private void txtFrameUnitPrice_Leave(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtFrameUnitPrice.Text))
@@ -392,11 +582,6 @@ namespace DonniOptical2
                 txtFrameUnitPrice.Text = "0.0";
             }
         }
-
-        private void txtFrameUnitPrice_TextChanged(object sender, EventArgs e)
-        {
-        }
-
         private void txtLeftLensQuantity_Enter(object sender, EventArgs e)
         {
             int qtyOut;
@@ -414,9 +599,6 @@ namespace DonniOptical2
             {
                 txtLeftLensQuantity.Text = "0";
             }
-        }
-        private void txtLeftLensQuantity_TextChanged(object sender, EventArgs e)
-        {
         }
         private void txtLeftLensUnitPrice_Enter(object sender, EventArgs e)
         {
@@ -440,9 +622,6 @@ namespace DonniOptical2
                 txtLeftLensUnitPrice.Text = "0.0";
             }
         }
-        private void txtLeftLensUnitPrice_TextChanged(object sender, EventArgs e)
-        {
-        }
         private void txtRightLensQuantity_Enter(object sender, EventArgs e)
         {
             int qtyOut;
@@ -460,9 +639,6 @@ namespace DonniOptical2
             {
                 txtRightLensQuantity.Text = "0";
             }
-        }
-        private void txtRightLensQuantity_TextChanged(object sender, EventArgs e)
-        {
         }
         private void txtRightLensUnitPrice_Enter(object sender, EventArgs e)
         {
@@ -486,14 +662,51 @@ namespace DonniOptical2
                 txtRightLensUnitPrice.Text = "0.0";
             }
         }
-        private void txtRightLensUnitPrice_TextChanged(object sender, EventArgs e)
+        private void txtOtherItemQuantity_Enter(object sender, EventArgs e)
         {
+            int qtyOut;
+            if (int.TryParse(txtOtherItemQuantity.Text, out qtyOut))
+            {
+                if (qtyOut < 1)
+                {
+                    txtOtherItemQuantity.Text = "";
+                }
+            }
+        }
+        private void txtOtherItemQuantity_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtOtherItemQuantity.Text))
+            {
+                txtOtherItemQuantity.Text = "0";
+            }
+        }
+        private void txtOtherItemUnitPrice_Enter(object sender, EventArgs e)
+        {
+            decimal unitPrice;
+            if (decimal.TryParse(txtOtherItemUnitPrice.Text, out unitPrice))
+            {
+                if (unitPrice > 0)
+                {
+
+                }
+                else
+                {
+                    txtOtherItemUnitPrice.Text = "";
+                }
+            }
+        }
+        private void txtOtherItemUnitPrice_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtOtherItemUnitPrice.Text))
+            {
+                txtOtherItemUnitPrice.Text = "0.0";
+            }
         }
 
-        private void txtOtherAdjustmentAmnt_Enter(object sender, EventArgs e)
+        private void txtDiscountAmnt_Enter(object sender, EventArgs e)
         {
             decimal amount;
-            if (decimal.TryParse(txtOtherAdjustmentAmnt.Text, out amount))
+            if (decimal.TryParse(txtDiscountAmnt.Text, out amount))
             {
                 if (amount > 0)
                 {
@@ -501,25 +714,23 @@ namespace DonniOptical2
                 }
                 else
                 {
-                    txtOtherAdjustmentAmnt.Text = "";
+                    txtDiscountAmnt.Text = "";
                 }
             }
         }
-
-        private void txtOtherAdjustmentAmnt_Leave(object sender, EventArgs e)
+        private void txtDiscountAmnt_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtOtherAdjustmentAmnt.Text))
+            if (string.IsNullOrEmpty(txtDiscountAmnt.Text))
             {
-                txtOtherAdjustmentAmnt.Text = "0.00";
+                txtDiscountAmnt.Text = "0.00";
             }
             CalculateOrderTotal();
         }
-
-        private void txtOtherAdjustmentAmnt_TextChanged(object sender, EventArgs e)
+        private void txtDiscountAmnt_TextChanged(object sender, EventArgs e)
         {
             CalculateOrderTotal();
         }
-
+        
         private void chkApplyHst_CheckedChanged(object sender, EventArgs e)
         {
             CalculateOrderTotal();
@@ -539,7 +750,6 @@ namespace DonniOptical2
                 }
             }
         }
-
         private void txtDepositAmnt_Leave(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtDepositAmnt.Text))
@@ -549,11 +759,26 @@ namespace DonniOptical2
 
             CalcualteDepositAndBalanceAmnt();
         }
-
         private void txtDepositAmnt_TextChanged(object sender, EventArgs e)
         {
             CalcualteDepositAndBalanceAmnt();
         }
+
+        private void gvOrderItemList_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var selectedRow = gvOrderItemList.CurrentRow;
+            ShowOrderItemDetail(selectedRow);
+        }
+        private void gvOrderItemList_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var selectedRow = gvOrderItemList.CurrentRow;
+            ShowOrderItemDetail(selectedRow);
+        }
+        private void btnClearItemTextboxes_Click(object sender, EventArgs e)
+        {
+            ClearOrderDetailTextboxes();
+        }
+
 
         #endregion
 
@@ -593,6 +818,9 @@ namespace DonniOptical2
 
                 int rlensQty = 0;
                 decimal rlensPrice = 0;
+
+                int otherQty = 0;
+                decimal otherPrice = 0;
 
                 int custId = 0;
 
@@ -635,11 +863,13 @@ namespace DonniOptical2
                 decimal.TryParse(txtFrameUnitPrice.Text, out frmPrice);
                 decimal.TryParse(txtLeftLensUnitPrice.Text, out llensPrice);
                 decimal.TryParse(txtRightLensUnitPrice.Text, out rlensPrice);
+                decimal.TryParse(txtOtherItemUnitPrice.Text, out otherPrice);
                 int.TryParse(txtFrameQuantity.Text, out frmQty);
                 int.TryParse(txtLeftLensQuantity.Text, out llensQty);
                 int.TryParse(txtRightLensQuantity.Text, out rlensQty);
+                int.TryParse(txtOtherItemQuantity.Text, out otherQty);
 
-                if (frmPrice <= 0 && llensPrice <= 0 && rlensPrice <= 0)
+                if (frmPrice <= 0 && llensPrice <= 0 && rlensPrice <= 0 && otherPrice<=0)
                 {
                     MessageBox.Show("Add item price.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtFrameUnitPrice.Focus();
@@ -703,6 +933,31 @@ namespace DonniOptical2
                     }
                 }
 
+                if (otherQty <= 0)
+                {
+                    if (otherPrice > 0)
+                    {
+                        MessageBox.Show("Please enter other item quantity.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtOtherItemQuantity.Focus();
+                        return false;
+                    }
+                }
+                if (otherQty > 0)
+                {
+                    if (otherPrice <= 0)
+                    {
+                        MessageBox.Show("Please enter other item price.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtOtherItemUnitPrice.Focus();
+                        return false;
+                    }
+                }
+
+                if (txtTrayNumber.Text.Trim() == string.Empty) {
+                    MessageBox.Show("Please enter tray number.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txtTrayNumber.Focus();
+                    return false;
+                }
+
                 return true;
             }
             catch (Exception ex)
@@ -711,7 +966,6 @@ namespace DonniOptical2
                 //
             }
         }
-
         private void CalculateOrderTotal()
         {
             int frameQty;
@@ -719,50 +973,61 @@ namespace DonniOptical2
             decimal totalFramePrice = 0;
 
             int leftLensQty;
-            decimal leftLensUnitPrice;
-
             int rightLensQty;
+            decimal leftLensUnitPrice;
             decimal rightLensUnitPrice;
             decimal totalLensPrice = 0;
 
+            int otherItemQuantity = 0;
+            decimal otherUnitPrice = 0;
+            decimal otherTotalPrice = 0;
+
             decimal orderTotalAmount = 0;
             decimal grandTotalAmount = 0;
-            decimal otherAdjustment = 0;
+            decimal discountAmount = 0;
 
             foreach (DataGridViewRow row in gvOrderItemList.Rows)
             {
-                var frmQty = row.Cells[28].Value.ToString();
-                var frmPrice = row.Cells[27].Value.ToString();
+                var frmQty = row.Cells["FRM_QTY"].Value.ToString();
+                var frmPrice = row.Cells["FRM_UNT_PRICE"].Value.ToString();
                 if (int.TryParse(frmQty, out frameQty) && decimal.TryParse(frmPrice, out frameUnitPrice))
                 {
                     totalFramePrice += frameQty * frameUnitPrice;
                 }
 
-                var llensQty = row.Cells[31].Value.ToString();
-                var llensPrice = row.Cells[30].Value.ToString();
+                var llensQty = row.Cells["LL_QTY"].Value.ToString();
+                var llensPrice = row.Cells["LL_UNT_PRICE"].Value.ToString();
                 if (int.TryParse(llensQty, out leftLensQty) && decimal.TryParse(llensPrice, out leftLensUnitPrice))
                 {
                     totalLensPrice += leftLensQty * leftLensUnitPrice;
                 }
 
-                var rlensQty = row.Cells[34].Value.ToString();
-                var rlensPrice = row.Cells[33].Value.ToString();
+                var rlensQty = row.Cells["RL_QTY"].Value.ToString();
+                var rlensPrice = row.Cells["RL_UNT_PRICE"].Value.ToString();
                 if (int.TryParse(rlensQty, out rightLensQty) && decimal.TryParse(rlensPrice, out rightLensUnitPrice))
                 {
                     totalLensPrice += rightLensQty * rightLensUnitPrice;
+                }
+
+                var otherQty = row.Cells["OTHR_QTY"].Value.ToString();
+                var otherPrice = row.Cells["OTHR_UNT_PRICE"].Value.ToString();
+                if (int.TryParse(otherQty, out otherItemQuantity) && decimal.TryParse(otherPrice, out otherUnitPrice))
+                {
+                    otherTotalPrice += otherItemQuantity * otherUnitPrice;
                 }
             }
 
             txtFrameTotalPrice.Text = totalFramePrice.ToString("0.00");
             txtLensTotalPrice.Text = totalLensPrice.ToString("0.00");
+            txtOtherTotal.Text = otherTotalPrice.ToString("0.00");
 
-            orderTotalAmount = totalFramePrice + totalLensPrice;
+            orderTotalAmount = totalFramePrice + totalLensPrice + otherTotalPrice;
 
-            if (decimal.TryParse(txtOtherAdjustmentAmnt.Text, out otherAdjustment))
+            if (decimal.TryParse(txtDiscountAmnt.Text, out discountAmount))
             {
-                if (otherAdjustment > 0)
+                if (discountAmount > 0)
                 {
-                    orderTotalAmount = orderTotalAmount + ((-1) * otherAdjustment);
+                    orderTotalAmount = orderTotalAmount - discountAmount;
                 }
             }
 
@@ -785,7 +1050,6 @@ namespace DonniOptical2
 
             CalcualteDepositAndBalanceAmnt();
         }
-
         private void CalcualteDepositAndBalanceAmnt()
         {
             decimal depositAmount = 0;
@@ -806,7 +1070,7 @@ namespace DonniOptical2
             int sl = 0;
             foreach (DataGridViewRow drow in gvOrderItemList.Rows)
             {
-                drow.Cells[0].Value = sl + 1;
+                drow.Cells["SL#"].Value = sl + 1;
                 sl++;
             }
 
@@ -817,10 +1081,10 @@ namespace DonniOptical2
             txtFindByValue.Text = "";
             lblNoOfOrdersFound.Text = "0";
         }
-
-        private void ClearOrderDetail()
+        private void ClearOrderDetailTextboxes()
         {
-
+            txtSerialNo.Text = "";
+            txtTrayNumber.Text = "";
             txtModifiedSphereRight.Text = "";
             txtModifiedCylRight.Text = "";
             txtModifiedAxisRight.Text = "";
@@ -860,6 +1124,11 @@ namespace DonniOptical2
             txtRightLensDescription.Text = "";
             txtRightLensUnitPrice.Text = "0.0";
             txtRightLensQuantity.Text = "0";
+
+            txtOtherDescription.Text = "";
+            txtOtherItemUnitPrice.Text = "0.0";
+            txtOtherItemQuantity.Text = "0";
+
         }
         private void GetCustomerInformation(int customerId)
         {
@@ -880,49 +1149,57 @@ namespace DonniOptical2
             gvOrderItemList.DataSource = null;
             gvOrderItemList.Rows.Clear();
 
-            gvOrderItemList.ColumnCount = 35;
+            gvOrderItemList.ColumnCount = 40;
             gvOrderItemList.ColumnHeadersVisible = true;
 
             gvOrderItemList.Columns[0].Name = "SL#";
-            gvOrderItemList.Columns[1].Name = "SPH_R";
-            gvOrderItemList.Columns[2].Name = "CYL_R";
-            gvOrderItemList.Columns[3].Name = "AXIS_R";
-            gvOrderItemList.Columns[4].Name = "ADD_R";
-            gvOrderItemList.Columns[5].Name = "PRISM_R";
-            gvOrderItemList.Columns[6].Name = "SPH_L";
-            gvOrderItemList.Columns[7].Name = "CYL_L";
-            gvOrderItemList.Columns[8].Name = "AXIS_L";
-            gvOrderItemList.Columns[9].Name = "ADD_L";
-            gvOrderItemList.Columns[10].Name = "PRISM_L";
+            gvOrderItemList.Columns[1].Name = "TRAY#";
+            gvOrderItemList.Columns[2].Name = "SPH_R";
+            gvOrderItemList.Columns[3].Name = "CYL_R";
+            gvOrderItemList.Columns[4].Name = "AXIS_R";
+            gvOrderItemList.Columns[5].Name = "ADD_R";
+            gvOrderItemList.Columns[6].Name = "PRISM_R";
+            gvOrderItemList.Columns[7].Name = "SPH_L";
+            gvOrderItemList.Columns[8].Name = "CYL_L";
+            gvOrderItemList.Columns[9].Name = "AXIS_L";
+            gvOrderItemList.Columns[10].Name = "ADD_L";
+            gvOrderItemList.Columns[11].Name = "PRISM_L";
 
-            gvOrderItemList.Columns[11].Name = "FPD_R";
-            gvOrderItemList.Columns[12].Name = "NR.PD_R";
-            gvOrderItemList.Columns[13].Name = "OC_R";
-            gvOrderItemList.Columns[14].Name = "SEG_R";
-            gvOrderItemList.Columns[15].Name = "BL.SIZE_R";
+            gvOrderItemList.Columns[12].Name = "FPD_R";
+            gvOrderItemList.Columns[13].Name = "NR.PD_R";
+            gvOrderItemList.Columns[14].Name = "OC_R";
+            gvOrderItemList.Columns[15].Name = "SEG_R";
+            gvOrderItemList.Columns[16].Name = "BL.SIZE_R";
 
-            gvOrderItemList.Columns[16].Name = "FPD_L";
-            gvOrderItemList.Columns[17].Name = "NR.PD_L";
-            gvOrderItemList.Columns[18].Name = "OC_L";
-            gvOrderItemList.Columns[19].Name = "SEG_L";
-            gvOrderItemList.Columns[20].Name = "BL.SIZE_L";
-            gvOrderItemList.Columns[21].Name = "MSRMNT_A";
-            gvOrderItemList.Columns[22].Name = "MSRMNT_B";
-            gvOrderItemList.Columns[23].Name = "MSRMNT_ED";
-            gvOrderItemList.Columns[24].Name = "MSRMNT_DBL";
+            gvOrderItemList.Columns[17].Name = "FPD_L";
+            gvOrderItemList.Columns[18].Name = "NR.PD_L";
+            gvOrderItemList.Columns[19].Name = "OC_L";
+            gvOrderItemList.Columns[20].Name = "SEG_L";
+            gvOrderItemList.Columns[21].Name = "BL.SIZE_L";
+            gvOrderItemList.Columns[22].Name = "MSRMNT_A";
+            gvOrderItemList.Columns[23].Name = "MSRMNT_B";
+            gvOrderItemList.Columns[24].Name = "MSRMNT_ED";
+            gvOrderItemList.Columns[25].Name = "MSRMNT_DBL";
 
-            gvOrderItemList.Columns[25].Name = "Frame Code";
-            gvOrderItemList.Columns[26].Name = "Color";
-            gvOrderItemList.Columns[27].Name = "Frm Unit price";
-            gvOrderItemList.Columns[28].Name = "Frm Qty";
-            gvOrderItemList.Columns[29].Name = "Left lens";
-            gvOrderItemList.Columns[30].Name = "LL Unit price";
-            gvOrderItemList.Columns[31].Name = "LL Qty";
-            gvOrderItemList.Columns[32].Name = "Right lens";
-            gvOrderItemList.Columns[33].Name = "RL unit price";
-            gvOrderItemList.Columns[34].Name = "RL Qty";
+            gvOrderItemList.Columns[26].Name = "FRM_CODE";
+            gvOrderItemList.Columns[27].Name = "FRM_COLOR";
+            gvOrderItemList.Columns[28].Name = "FRM_UNT_PRICE";
+            gvOrderItemList.Columns[29].Name = "FRM_QTY";
+            gvOrderItemList.Columns[30].Name = "LL_DESC";
+            gvOrderItemList.Columns[31].Name = "LL_UNT_PRICE";
+            gvOrderItemList.Columns[32].Name = "LL_QTY";
+            gvOrderItemList.Columns[33].Name = "RL_DESC";
+            gvOrderItemList.Columns[34].Name = "RL_UNT_PRICE";
+            gvOrderItemList.Columns[35].Name = "RL_QTY";
+
+            gvOrderItemList.Columns[36].Name = "OTHR_DESC";
+            gvOrderItemList.Columns[37].Name = "OTHR_UNT_PRICE";
+            gvOrderItemList.Columns[38].Name = "OTHR_QTY";
+
+
+            gvOrderItemList.Columns[39].Name = "ITEM_ID";
+            gvOrderItemList.Columns[39].Visible = false;
         }
-
         private void PrepareForNewEntry()
         {
             rdoNewOrder.Checked = true;
@@ -945,7 +1222,7 @@ namespace DonniOptical2
             txtRightLensUnitPrice.Text = "0.0";
             txtFrameTotalPrice.Text = "";
             txtLensTotalPrice.Text = "0.00";
-            txtOtherAdjustmentAmnt.Text = "0.00";
+            txtOtherTotal.Text = "0.00";
             txtOrderTotalAmnt.Text = "0.00";
             txtHSTAmnt.Text = "0.00";
             txtGrandTotal.Text = "0.00";
@@ -954,7 +1231,6 @@ namespace DonniOptical2
 
             PrepareOrderDetailGridview();
         }
-
         private void PrepareForUpdateEntry(int orderId)
         {
             rdoFindOrder.Checked = true;
@@ -985,7 +1261,7 @@ namespace DonniOptical2
                 txtPrescriptionPrismLeft.Text = orderInfo.PrescriptionPrismLeft;
                 txtFrameTotalPrice.Text = ((decimal)orderInfo.FrameTotalPrice).ToString("0.00");
                 txtLensTotalPrice.Text = ((decimal)orderInfo.LensTotalPrice).ToString("0.00");
-                txtOtherAdjustmentAmnt.Text = ((decimal)orderInfo.OtherAdjustment).ToString("0.00");
+                txtOtherTotal.Text = ((decimal)orderInfo.OtherAdjustment).ToString("0.00");
                 txtOrderTotalAmnt.Text = orderInfo.OrderTotal.ToString("0.00");
                 txtHSTAmnt.Text = ((decimal)orderInfo.HstAmount).ToString("0.00");
                 txtGrandTotal.Text = orderInfo.GrandTotal.ToString("0.00");
@@ -1004,6 +1280,8 @@ namespace DonniOptical2
                     {
                         FillOrderDetailGridview(orderDetail);
                     }
+                    gvOrderItemList.Rows[0].Selected = true;
+                    ShowOrderItemDetail(gvOrderItemList.Rows[0]);
                 }
 
             }
@@ -1012,12 +1290,11 @@ namespace DonniOptical2
                 MessageBox.Show("No order found with the order id you entered.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-
         private void FillOrderDetailGridview(OrderDetail orderDetail)
         {
             if (orderDetail != null)
             {
-                gvOrderItemList.Rows.Add(0, orderDetail.ModifiedSphereRight, orderDetail.ModifiedCylRight, orderDetail.ModifiedAxisRight
+                gvOrderItemList.Rows.Add(0, orderDetail.TrayNumber, orderDetail.ModifiedSphereRight, orderDetail.ModifiedCylRight, orderDetail.ModifiedAxisRight
                     , orderDetail.ModifiedAddRight, orderDetail.ModifiedPrismRight, orderDetail.ModifiedSphereLeft
                     , orderDetail.ModifiedCylLeft, orderDetail.ModifiedAxisLeft, orderDetail.ModifiedAddLeft
                     , orderDetail.ModifiedPrismLeft, orderDetail.MeasurementFpdRight, orderDetail.MeasurementNrPdRight
@@ -1027,14 +1304,70 @@ namespace DonniOptical2
                     , orderDetail.MeasurementB, orderDetail.MeasurementED, orderDetail.MeasurementDBL, orderDetail.FrameCode
                     , orderDetail.FrameColor, orderDetail.FrameUnitPrice, orderDetail.FrameQuantity, orderDetail.LeftLensDescription
                     , orderDetail.LeftLensUnitPrice, orderDetail.LeftLensQuantity, orderDetail.RightLensDescription
-                    , orderDetail.RightLensUnitPrice, orderDetail.RightLensQuantity
+                    , orderDetail.RightLensUnitPrice, orderDetail.RightLensQuantity, orderDetail.OtherItemDescription
+                    , orderDetail.OtherItemUnitPrice, orderDetail.OtherItemQuantity, orderDetail.Id
                     );
 
                 RefreshSerial();
             }
         }
+        private void ShowOrderItemDetail(DataGridViewRow row)
+        {
+            txtSerialNo.Text = row.Cells["SL#"].Value.ToString();
+            txtTrayNumber.Text = row.Cells["TRAY#"].Value.ToString();
+            txtModifiedSphereRight.Text = row.Cells["SPH_R"].Value.ToString();
+            txtModifiedCylRight.Text = row.Cells["CYL_R"].Value.ToString();
+            txtModifiedAxisRight.Text = row.Cells["AXIS_R"].Value.ToString();
+            txtModifiedAddRight.Text = row.Cells["ADD_R"].Value.ToString();
+            txtModifiedPrismRight.Text = row.Cells["PRISM_R"].Value.ToString();
+
+            txtModifiedSphereLeft.Text = row.Cells["SPH_L"].Value.ToString();
+            txtModifiedCylLeft.Text = row.Cells["CYL_L"].Value.ToString();
+            txtModifiedAxisLeft.Text = row.Cells["AXIS_L"].Value.ToString();
+            txtModifiedAddLeft.Text = row.Cells["ADD_L"].Value.ToString();
+            txtModifiedPrismLeft.Text = row.Cells["PRISM_L"].Value.ToString();
+
+            txtMeasurementFpdRight.Text = row.Cells["FPD_R"].Value.ToString();
+            txtMeasurementNrPdRight.Text = row.Cells["NR.PD_R"].Value.ToString();
+            txtMeasurementOcRight.Text = row.Cells["OC_R"].Value.ToString();
+            txtMeasurementSegRight.Text = row.Cells["SEG_R"].Value.ToString();
+            txtMeasurementBlSizeRight.Text = row.Cells["BL.SIZE_R"].Value.ToString();
+
+            txtMeasurementFpdLeft.Text = row.Cells["FPD_L"].Value.ToString();
+            txtMeasurementNrPdLeft.Text = row.Cells["NR.PD_L"].Value.ToString();
+            txtMeasurementOcLeft.Text = row.Cells["OC_L"].Value.ToString();
+            txtMeasurementSegLeft.Text = row.Cells["SEG_L"].Value.ToString();
+            txtMeasurementBlSizeLeft.Text = row.Cells["BL.SIZE_L"].Value.ToString();
+
+            txtMeasurementA.Text = row.Cells["MSRMNT_A"].Value.ToString();
+            txtMeasurementB.Text = row.Cells["MSRMNT_B"].Value.ToString();
+            txtMeasurementEd.Text = row.Cells["MSRMNT_ED"].Value.ToString();
+            txtMeasurementDbl.Text = row.Cells["MSRMNT_DBL"].Value.ToString();
+
+            txtFrameCode.Text = row.Cells["FRM_CODE"].Value.ToString();
+            txtFrameColor.Text = row.Cells["FRM_COLOR"].Value.ToString();
+            txtFrameUnitPrice.Text = row.Cells["FRM_UNT_PRICE"].Value.ToString();
+            txtFrameQuantity.Text = row.Cells["FRM_QTY"].Value.ToString();
+
+            txtLeftLensDescription.Text = row.Cells["LL_DESC"].Value.ToString();
+            txtLeftLensUnitPrice.Text = row.Cells["LL_UNT_PRICE"].Value.ToString();
+            txtLeftLensQuantity.Text = row.Cells["LL_QTY"].Value.ToString();
+
+            txtRightLensDescription.Text = row.Cells["RL_DESC"].Value.ToString();
+            txtRightLensUnitPrice.Text = row.Cells["RL_UNT_PRICE"].Value.ToString();
+            txtRightLensQuantity.Text = row.Cells["RL_QTY"].Value.ToString();
+
+            txtOtherDescription.Text = row.Cells["OTHR_DESC"].Value.ToString();
+            txtOtherItemUnitPrice.Text = row.Cells["OTHR_UNT_PRICE"].Value.ToString();
+            txtOtherItemQuantity.Text = row.Cells["OTHR_QTY"].Value.ToString();
+        }
+
+
+
+
 
         #endregion
 
+       
     }
 }
