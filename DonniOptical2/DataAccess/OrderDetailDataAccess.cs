@@ -187,7 +187,8 @@ namespace DonniOptical2.DataAccess
                 query += ", MeasurementNrPdRight, MeasurementOcRight, MeasurementSegRight, MeasurementBlSizeRight, MeasurementFpdLeft";
                 query += ", MeasurementNrPdLeft, MeasurementOcLeft, MeasurementSegLeft, MeasurementBlSizeLeft, MeasurementA, MeasurementB";
                 query += ", MeasurementED, MeasurementDBL, FrameCode, FrameColor, FrameUnitPrice, FrameQuantity, LeftLensDescription";
-                query += ", LeftLensUnitPrice, LeftLensQuantity, RightLensDescription, RightLensUnitPrice, RightLensQuantity) VALUES(@OrderId, @TrayNumber";
+                query += ", LeftLensUnitPrice, LeftLensQuantity, RightLensDescription, RightLensUnitPrice, RightLensQuantity";
+                query += ", OtherItemDescription, OtherItemUnitPrice, OtherItemQuantity) VALUES(@OrderId, @TrayNumber";
 
                 query += ", @ModifiedSphereRight, @ModifiedCylRight, @ModifiedAxisRight, @ModifiedAddRight, @ModifiedPrismRight";
                 query += ", @ModifiedSphereLeft, @ModifiedCylLeft, @ModifiedAxisLeft, @ModifiedAddLeft, @ModifiedPrismLeft, @MeasurementFpdRight";

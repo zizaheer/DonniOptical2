@@ -32,6 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.orderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.customerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,19 +41,17 @@
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
+            this.orderToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.customerToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.printToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonFind = new System.Windows.Forms.ToolStripButton();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelIcon = new System.Windows.Forms.ToolStripStatusLabel();
-            this.orderToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.customerToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.printToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonFind = new System.Windows.Forms.ToolStripButton();
-            this.orderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.customerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -80,15 +80,35 @@
             this.fileMenu.Size = new System.Drawing.Size(37, 20);
             this.fileMenu.Text = "&File";
             // 
+            // orderToolStripMenuItem
+            // 
+            this.orderToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("orderToolStripMenuItem.Image")));
+            this.orderToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black;
+            this.orderToolStripMenuItem.Name = "orderToolStripMenuItem";
+            this.orderToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.orderToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.orderToolStripMenuItem.Text = "&New order";
+            this.orderToolStripMenuItem.Click += new System.EventHandler(this.orderToolStripMenuItem_Click);
+            // 
+            // customerToolStripMenuItem
+            // 
+            this.customerToolStripMenuItem.Image = global::DonniOptical2.Properties.Resources.users_men_women;
+            this.customerToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black;
+            this.customerToolStripMenuItem.Name = "customerToolStripMenuItem";
+            this.customerToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.customerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.customerToolStripMenuItem.Text = "&Customer";
+            this.customerToolStripMenuItem.Click += new System.EventHandler(this.customerToolStripMenuItem_Click);
+            // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(169, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolsStripMenuItem_Click);
             // 
@@ -135,15 +155,55 @@
             this.toolStrip.TabIndex = 1;
             this.toolStrip.Text = "ToolStrip";
             // 
+            // orderToolStripButton
+            // 
+            this.orderToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.orderToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("orderToolStripButton.Image")));
+            this.orderToolStripButton.ImageTransparentColor = System.Drawing.Color.Black;
+            this.orderToolStripButton.Name = "orderToolStripButton";
+            this.orderToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.orderToolStripButton.Text = "New order";
+            this.orderToolStripButton.Click += new System.EventHandler(this.orderToolStripButton_Click);
+            // 
+            // customerToolStripButton
+            // 
+            this.customerToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.customerToolStripButton.Image = global::DonniOptical2.Properties.Resources.users_men_women;
+            this.customerToolStripButton.ImageTransparentColor = System.Drawing.Color.Black;
+            this.customerToolStripButton.Name = "customerToolStripButton";
+            this.customerToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.customerToolStripButton.Text = "Customer";
+            this.customerToolStripButton.Click += new System.EventHandler(this.customerToolStripButton_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
+            // printToolStripButton
+            // 
+            this.printToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.printToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printToolStripButton.Image")));
+            this.printToolStripButton.ImageTransparentColor = System.Drawing.Color.Black;
+            this.printToolStripButton.Name = "printToolStripButton";
+            this.printToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.printToolStripButton.Text = "Print";
+            this.printToolStripButton.Click += new System.EventHandler(this.printToolStripButton_Click);
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripButtonFind
+            // 
+            this.toolStripButtonFind.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonFind.Image = global::DonniOptical2.Properties.Resources.find;
+            this.toolStripButtonFind.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonFind.Name = "toolStripButtonFind";
+            this.toolStripButtonFind.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonFind.Text = "toolStripButton1";
+            this.toolStripButtonFind.Click += new System.EventHandler(this.toolStripButtonFind_Click);
             // 
             // toolStripStatusLabel
             // 
@@ -178,67 +238,7 @@
             // 
             this.toolStripStatusLabelIcon.Image = global::DonniOptical2.Properties.Resources.lightning;
             this.toolStripStatusLabelIcon.Name = "toolStripStatusLabelIcon";
-            this.toolStripStatusLabelIcon.Size = new System.Drawing.Size(16, 16);
-            // 
-            // orderToolStripButton
-            // 
-            this.orderToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.orderToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("orderToolStripButton.Image")));
-            this.orderToolStripButton.ImageTransparentColor = System.Drawing.Color.Black;
-            this.orderToolStripButton.Name = "orderToolStripButton";
-            this.orderToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.orderToolStripButton.Text = "New order";
-            this.orderToolStripButton.Click += new System.EventHandler(this.orderToolStripButton_Click);
-            // 
-            // customerToolStripButton
-            // 
-            this.customerToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.customerToolStripButton.Image = global::DonniOptical2.Properties.Resources.users_men_women;
-            this.customerToolStripButton.ImageTransparentColor = System.Drawing.Color.Black;
-            this.customerToolStripButton.Name = "customerToolStripButton";
-            this.customerToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.customerToolStripButton.Text = "Customer";
-            this.customerToolStripButton.Click += new System.EventHandler(this.customerToolStripButton_Click);
-            // 
-            // printToolStripButton
-            // 
-            this.printToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.printToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printToolStripButton.Image")));
-            this.printToolStripButton.ImageTransparentColor = System.Drawing.Color.Black;
-            this.printToolStripButton.Name = "printToolStripButton";
-            this.printToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.printToolStripButton.Text = "Print";
-            this.printToolStripButton.Click += new System.EventHandler(this.printToolStripButton_Click);
-            // 
-            // toolStripButtonFind
-            // 
-            this.toolStripButtonFind.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonFind.Image = global::DonniOptical2.Properties.Resources.find;
-            this.toolStripButtonFind.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonFind.Name = "toolStripButtonFind";
-            this.toolStripButtonFind.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonFind.Text = "toolStripButton1";
-            this.toolStripButtonFind.Click += new System.EventHandler(this.toolStripButtonFind_Click);
-            // 
-            // orderToolStripMenuItem
-            // 
-            this.orderToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("orderToolStripMenuItem.Image")));
-            this.orderToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black;
-            this.orderToolStripMenuItem.Name = "orderToolStripMenuItem";
-            this.orderToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.orderToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.orderToolStripMenuItem.Text = "&New order";
-            this.orderToolStripMenuItem.Click += new System.EventHandler(this.orderToolStripMenuItem_Click);
-            // 
-            // customerToolStripMenuItem
-            // 
-            this.customerToolStripMenuItem.Image = global::DonniOptical2.Properties.Resources.users_men_women;
-            this.customerToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black;
-            this.customerToolStripMenuItem.Name = "customerToolStripMenuItem";
-            this.customerToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.customerToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.customerToolStripMenuItem.Text = "&Customer";
-            this.customerToolStripMenuItem.Click += new System.EventHandler(this.customerToolStripMenuItem_Click);
+            this.toolStripStatusLabelIcon.Size = new System.Drawing.Size(16, 17);
             // 
             // frmMain
             // 

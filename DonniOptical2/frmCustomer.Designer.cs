@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblNoOfCustomersFound = new System.Windows.Forms.Label();
             this.label82 = new System.Windows.Forms.Label();
             this.lnkNextCustomer = new System.Windows.Forms.LinkLabel();
@@ -101,6 +101,7 @@
             this.lnkNextCustomer.TabIndex = 6;
             this.lnkNextCustomer.TabStop = true;
             this.lnkNextCustomer.Text = "Next";
+            this.lnkNextCustomer.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkNextCustomer_LinkClicked);
             // 
             // lnkPreviousCustomer
             // 
@@ -111,6 +112,7 @@
             this.lnkPreviousCustomer.TabIndex = 4;
             this.lnkPreviousCustomer.TabStop = true;
             this.lnkPreviousCustomer.Text = "Previous";
+            this.lnkPreviousCustomer.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkPreviousCustomer_LinkClicked);
             // 
             // lblCustomerFoundText
             // 
@@ -129,6 +131,7 @@
             this.btnFindCustomer.TabIndex = 3;
             this.btnFindCustomer.Text = "Find";
             this.btnFindCustomer.UseVisualStyleBackColor = true;
+            this.btnFindCustomer.Click += new System.EventHandler(this.btnFindCustomer_Click);
             // 
             // txtCustomerEmail
             // 
@@ -142,8 +145,8 @@
             // 
             this.ddlFindBy.FormattingEnabled = true;
             this.ddlFindBy.Items.AddRange(new object[] {
-            "Customer phone",
             "Customer first name",
+            "Customer phone",
             "Customer last name",
             "Customer full name"});
             this.ddlFindBy.Location = new System.Drawing.Point(27, 18);
@@ -214,6 +217,7 @@
             // 
             this.btnFindCustomerById.BackgroundImage = global::DonniOptical2.Properties.Resources.magnifier;
             this.btnFindCustomerById.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnFindCustomerById.Enabled = false;
             this.btnFindCustomerById.Location = new System.Drawing.Point(216, 21);
             this.btnFindCustomerById.Name = "btnFindCustomerById";
             this.btnFindCustomerById.Size = new System.Drawing.Size(24, 23);
@@ -410,23 +414,23 @@
             // 
             // gvCustomerList
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvCustomerList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvCustomerList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
             this.gvCustomerList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gvCustomerList.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gvCustomerList.DefaultCellStyle = dataGridViewCellStyle12;
             this.gvCustomerList.Location = new System.Drawing.Point(12, 19);
             this.gvCustomerList.Name = "gvCustomerList";
             this.gvCustomerList.Size = new System.Drawing.Size(669, 242);
@@ -460,6 +464,7 @@
             this.btnPlaceOrder.TabIndex = 277;
             this.btnPlaceOrder.Text = "Place order";
             this.btnPlaceOrder.UseVisualStyleBackColor = true;
+            this.btnPlaceOrder.Click += new System.EventHandler(this.btnPlaceOrder_Click);
             // 
             // frmCustomer
             // 

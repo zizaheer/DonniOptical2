@@ -61,7 +61,7 @@
             this.label22 = new System.Windows.Forms.Label();
             this.lblFrameTotalPrice = new System.Windows.Forms.Label();
             this.lblLensTotalPrice = new System.Windows.Forms.Label();
-            this.lblAdjustment = new System.Windows.Forms.Label();
+            this.lblDiscountAmnt = new System.Windows.Forms.Label();
             this.lblSubtotal = new System.Windows.Forms.Label();
             this.lblHstAmount = new System.Windows.Forms.Label();
             this.lblGrandTotal = new System.Windows.Forms.Label();
@@ -83,6 +83,9 @@
             this.label35 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnPrint = new System.Windows.Forms.Button();
+            this.label15 = new System.Windows.Forms.Label();
+            this.lblOtherAmount = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -251,16 +254,16 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(565, 257);
+            this.label10.Location = new System.Drawing.Point(565, 273);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(71, 13);
+            this.label10.Size = new System.Drawing.Size(64, 13);
             this.label10.TabIndex = 16;
-            this.label10.Text = "Other/Adj. (-):";
+            this.label10.Text = "Discount (-):";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(565, 278);
+            this.label11.Location = new System.Drawing.Point(565, 294);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(49, 13);
             this.label11.TabIndex = 17;
@@ -269,7 +272,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(565, 299);
+            this.label12.Location = new System.Drawing.Point(565, 315);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(32, 13);
             this.label12.TabIndex = 18;
@@ -279,7 +282,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(565, 332);
+            this.label13.Location = new System.Drawing.Point(565, 348);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(40, 13);
             this.label13.TabIndex = 19;
@@ -378,19 +381,19 @@
             this.lblLensTotalPrice.TabIndex = 21;
             this.lblLensTotalPrice.Text = "0.00";
             // 
-            // lblAdjustment
+            // lblDiscountAmnt
             // 
-            this.lblAdjustment.AutoSize = true;
-            this.lblAdjustment.Location = new System.Drawing.Point(736, 257);
-            this.lblAdjustment.Name = "lblAdjustment";
-            this.lblAdjustment.Size = new System.Drawing.Size(28, 13);
-            this.lblAdjustment.TabIndex = 22;
-            this.lblAdjustment.Text = "0.00";
+            this.lblDiscountAmnt.AutoSize = true;
+            this.lblDiscountAmnt.Location = new System.Drawing.Point(736, 273);
+            this.lblDiscountAmnt.Name = "lblDiscountAmnt";
+            this.lblDiscountAmnt.Size = new System.Drawing.Size(28, 13);
+            this.lblDiscountAmnt.TabIndex = 22;
+            this.lblDiscountAmnt.Text = "0.00";
             // 
             // lblSubtotal
             // 
             this.lblSubtotal.AutoSize = true;
-            this.lblSubtotal.Location = new System.Drawing.Point(736, 278);
+            this.lblSubtotal.Location = new System.Drawing.Point(736, 294);
             this.lblSubtotal.Name = "lblSubtotal";
             this.lblSubtotal.Size = new System.Drawing.Size(28, 13);
             this.lblSubtotal.TabIndex = 23;
@@ -399,7 +402,7 @@
             // lblHstAmount
             // 
             this.lblHstAmount.AutoSize = true;
-            this.lblHstAmount.Location = new System.Drawing.Point(736, 299);
+            this.lblHstAmount.Location = new System.Drawing.Point(736, 315);
             this.lblHstAmount.Name = "lblHstAmount";
             this.lblHstAmount.Size = new System.Drawing.Size(28, 13);
             this.lblHstAmount.TabIndex = 24;
@@ -409,7 +412,7 @@
             // 
             this.lblGrandTotal.AutoSize = true;
             this.lblGrandTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGrandTotal.Location = new System.Drawing.Point(736, 332);
+            this.lblGrandTotal.Location = new System.Drawing.Point(736, 348);
             this.lblGrandTotal.Name = "lblGrandTotal";
             this.lblGrandTotal.Size = new System.Drawing.Size(32, 13);
             this.lblGrandTotal.TabIndex = 25;
@@ -418,7 +421,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(565, 355);
+            this.label7.Location = new System.Drawing.Point(565, 371);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(46, 13);
             this.label7.TabIndex = 26;
@@ -427,7 +430,7 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(565, 375);
+            this.label23.Location = new System.Drawing.Point(565, 391);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(49, 13);
             this.label23.TabIndex = 27;
@@ -436,7 +439,7 @@
             // lblDepositAmount
             // 
             this.lblDepositAmount.AutoSize = true;
-            this.lblDepositAmount.Location = new System.Drawing.Point(736, 355);
+            this.lblDepositAmount.Location = new System.Drawing.Point(736, 371);
             this.lblDepositAmount.Name = "lblDepositAmount";
             this.lblDepositAmount.Size = new System.Drawing.Size(28, 13);
             this.lblDepositAmount.TabIndex = 28;
@@ -445,7 +448,7 @@
             // lblBalanceDue
             // 
             this.lblBalanceDue.AutoSize = true;
-            this.lblBalanceDue.Location = new System.Drawing.Point(736, 375);
+            this.lblBalanceDue.Location = new System.Drawing.Point(736, 391);
             this.lblBalanceDue.Name = "lblBalanceDue";
             this.lblBalanceDue.Size = new System.Drawing.Size(28, 13);
             this.lblBalanceDue.TabIndex = 29;
@@ -454,7 +457,7 @@
             // label24
             // 
             this.label24.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label24.Location = new System.Drawing.Point(422, 321);
+            this.label24.Location = new System.Drawing.Point(422, 337);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(380, 2);
             this.label24.TabIndex = 30;
@@ -507,7 +510,7 @@
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(717, 257);
+            this.label30.Location = new System.Drawing.Point(717, 273);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(13, 13);
             this.label30.TabIndex = 38;
@@ -516,7 +519,7 @@
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(717, 278);
+            this.label31.Location = new System.Drawing.Point(717, 294);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(13, 13);
             this.label31.TabIndex = 39;
@@ -525,7 +528,7 @@
             // label32
             // 
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(717, 299);
+            this.label32.Location = new System.Drawing.Point(717, 315);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(13, 13);
             this.label32.TabIndex = 40;
@@ -534,7 +537,7 @@
             // label33
             // 
             this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(717, 332);
+            this.label33.Location = new System.Drawing.Point(717, 348);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(13, 13);
             this.label33.TabIndex = 41;
@@ -543,7 +546,7 @@
             // label34
             // 
             this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(717, 355);
+            this.label34.Location = new System.Drawing.Point(717, 371);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(13, 13);
             this.label34.TabIndex = 42;
@@ -552,7 +555,7 @@
             // label35
             // 
             this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(717, 375);
+            this.label35.Location = new System.Drawing.Point(717, 391);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(13, 13);
             this.label35.TabIndex = 43;
@@ -579,12 +582,42 @@
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(717, 255);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(13, 13);
+            this.label15.TabIndex = 47;
+            this.label15.Text = "$";
+            // 
+            // lblOtherAmount
+            // 
+            this.lblOtherAmount.AutoSize = true;
+            this.lblOtherAmount.Location = new System.Drawing.Point(736, 255);
+            this.lblOtherAmount.Name = "lblOtherAmount";
+            this.lblOtherAmount.Size = new System.Drawing.Size(28, 13);
+            this.lblOtherAmount.TabIndex = 46;
+            this.lblOtherAmount.Text = "0.00";
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(565, 253);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(36, 13);
+            this.label36.TabIndex = 45;
+            this.label36.Text = "Other:";
+            // 
             // frmPrintReceipt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(815, 523);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.lblOtherAmount);
+            this.Controls.Add(this.label36);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label35);
             this.Controls.Add(this.label34);
@@ -605,7 +638,7 @@
             this.Controls.Add(this.lblGrandTotal);
             this.Controls.Add(this.lblHstAmount);
             this.Controls.Add(this.lblSubtotal);
-            this.Controls.Add(this.lblAdjustment);
+            this.Controls.Add(this.lblDiscountAmnt);
             this.Controls.Add(this.lblLensTotalPrice);
             this.Controls.Add(this.lblFrameTotalPrice);
             this.Controls.Add(this.label22);
@@ -688,7 +721,7 @@
         public System.Windows.Forms.Label lblOrderDate;
         public System.Windows.Forms.Label lblFrameTotalPrice;
         public System.Windows.Forms.Label lblLensTotalPrice;
-        public System.Windows.Forms.Label lblAdjustment;
+        public System.Windows.Forms.Label lblDiscountAmnt;
         public System.Windows.Forms.Label lblSubtotal;
         public System.Windows.Forms.Label lblHstAmount;
         public System.Windows.Forms.Label lblGrandTotal;
@@ -704,5 +737,8 @@
         private System.Windows.Forms.Label label34;
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label15;
+        public System.Windows.Forms.Label lblOtherAmount;
+        private System.Windows.Forms.Label label36;
     }
 }

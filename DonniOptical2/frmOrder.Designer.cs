@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnCloseOrder = new System.Windows.Forms.Button();
             this.btnRemoveFromOrderItemList = new System.Windows.Forms.Button();
             this.btnSaveOrder = new System.Windows.Forms.Button();
@@ -166,7 +166,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.txtCustomerAddress = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.btnFindCustomerForOrder = new System.Windows.Forms.Button();
             this.txtCustomerPhone = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtCustomerLastName = new System.Windows.Forms.TextBox();
@@ -195,7 +194,11 @@
             this.lblSerialNo = new System.Windows.Forms.Label();
             this.txtTrayNumber = new System.Windows.Forms.TextBox();
             this.label61 = new System.Windows.Forms.Label();
+            this.btnPrintReceipt = new System.Windows.Forms.Button();
+            this.btnPrintOrder = new System.Windows.Forms.Button();
             this.btnClearItemTextboxes = new System.Windows.Forms.Button();
+            this.btnFindCustomerForOrder = new System.Windows.Forms.Button();
+            this.btnDeleteOrder = new System.Windows.Forms.Button();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvOrderItemList)).BeginInit();
@@ -556,23 +559,23 @@
             // 
             this.gvOrderItemList.AllowUserToAddRows = false;
             this.gvOrderItemList.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvOrderItemList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvOrderItemList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
             this.gvOrderItemList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gvOrderItemList.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gvOrderItemList.DefaultCellStyle = dataGridViewCellStyle14;
             this.gvOrderItemList.Location = new System.Drawing.Point(7, 19);
             this.gvOrderItemList.MultiSelect = false;
             this.gvOrderItemList.Name = "gvOrderItemList";
@@ -940,6 +943,7 @@
             this.txtMeasurementEd.Name = "txtMeasurementEd";
             this.txtMeasurementEd.Size = new System.Drawing.Size(47, 20);
             this.txtMeasurementEd.TabIndex = 5;
+            this.txtMeasurementEd.TextChanged += new System.EventHandler(this.txtMeasurementEd_TextChanged);
             // 
             // label47
             // 
@@ -989,6 +993,7 @@
             this.txtMeasurementNrPdLeft.Name = "txtMeasurementNrPdLeft";
             this.txtMeasurementNrPdLeft.Size = new System.Drawing.Size(60, 20);
             this.txtMeasurementNrPdLeft.TabIndex = 6;
+            this.txtMeasurementNrPdLeft.TextChanged += new System.EventHandler(this.txtMeasurementNrPdLeft_TextChanged);
             // 
             // txtMeasurementSegLeft
             // 
@@ -1013,6 +1018,7 @@
             this.txtMeasurementFpdLeft.Name = "txtMeasurementFpdLeft";
             this.txtMeasurementFpdLeft.Size = new System.Drawing.Size(60, 20);
             this.txtMeasurementFpdLeft.TabIndex = 5;
+            this.txtMeasurementFpdLeft.TextChanged += new System.EventHandler(this.txtMeasurementFpdLeft_TextChanged);
             // 
             // txtMeasurementOcRight
             // 
@@ -1029,6 +1035,7 @@
             this.txtMeasurementNrPdRight.Name = "txtMeasurementNrPdRight";
             this.txtMeasurementNrPdRight.Size = new System.Drawing.Size(60, 20);
             this.txtMeasurementNrPdRight.TabIndex = 1;
+            this.txtMeasurementNrPdRight.TextChanged += new System.EventHandler(this.txtMeasurementNrPdRight_TextChanged);
             // 
             // txtMeasurementSegRight
             // 
@@ -1071,6 +1078,7 @@
             this.txtMeasurementFpdRight.Name = "txtMeasurementFpdRight";
             this.txtMeasurementFpdRight.Size = new System.Drawing.Size(60, 20);
             this.txtMeasurementFpdRight.TabIndex = 0;
+            this.txtMeasurementFpdRight.TextChanged += new System.EventHandler(this.txtMeasurementFpdRight_TextChanged);
             // 
             // label11
             // 
@@ -1602,17 +1610,6 @@
             this.label5.TabIndex = 11;
             this.label5.Text = "Address";
             // 
-            // btnFindCustomerForOrder
-            // 
-            this.btnFindCustomerForOrder.BackgroundImage = global::DonniOptical2.Properties.Resources.magnifier;
-            this.btnFindCustomerForOrder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnFindCustomerForOrder.Location = new System.Drawing.Point(216, 21);
-            this.btnFindCustomerForOrder.Name = "btnFindCustomerForOrder";
-            this.btnFindCustomerForOrder.Size = new System.Drawing.Size(24, 23);
-            this.btnFindCustomerForOrder.TabIndex = 2;
-            this.btnFindCustomerForOrder.UseVisualStyleBackColor = true;
-            this.btnFindCustomerForOrder.Click += new System.EventHandler(this.btnFindCustomerForOrder_Click);
-            // 
             // txtCustomerPhone
             // 
             this.txtCustomerPhone.Enabled = false;
@@ -1792,6 +1789,7 @@
             // 
             // gbFindOrder
             // 
+            this.gbFindOrder.Controls.Add(this.btnDeleteOrder);
             this.gbFindOrder.Controls.Add(this.rdoFindOrder);
             this.gbFindOrder.Controls.Add(this.rdoNewOrder);
             this.gbFindOrder.Controls.Add(this.txtOrderDate);
@@ -1807,7 +1805,7 @@
             // rdoFindOrder
             // 
             this.rdoFindOrder.AutoSize = true;
-            this.rdoFindOrder.Location = new System.Drawing.Point(65, 20);
+            this.rdoFindOrder.Location = new System.Drawing.Point(62, 20);
             this.rdoFindOrder.Name = "rdoFindOrder";
             this.rdoFindOrder.Size = new System.Drawing.Size(45, 17);
             this.rdoFindOrder.TabIndex = 1;
@@ -1831,16 +1829,16 @@
             // txtOrderDate
             // 
             this.txtOrderDate.Enabled = false;
-            this.txtOrderDate.Location = new System.Drawing.Point(275, 17);
+            this.txtOrderDate.Location = new System.Drawing.Point(256, 17);
             this.txtOrderDate.Name = "txtOrderDate";
-            this.txtOrderDate.Size = new System.Drawing.Size(92, 20);
+            this.txtOrderDate.Size = new System.Drawing.Size(79, 20);
             this.txtOrderDate.TabIndex = 3;
             this.txtOrderDate.Text = "dd-mmm-yyyy";
             // 
             // txtOrderNo
             // 
             this.txtOrderNo.Enabled = false;
-            this.txtOrderNo.Location = new System.Drawing.Point(196, 17);
+            this.txtOrderNo.Location = new System.Drawing.Point(177, 17);
             this.txtOrderNo.Name = "txtOrderNo";
             this.txtOrderNo.Size = new System.Drawing.Size(73, 20);
             this.txtOrderNo.TabIndex = 1;
@@ -1849,7 +1847,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(139, 20);
+            this.label8.Location = new System.Drawing.Point(123, 20);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(51, 13);
             this.label8.TabIndex = 2;
@@ -1891,6 +1889,32 @@
             this.label61.TabIndex = 263;
             this.label61.Text = "Tray#";
             // 
+            // btnPrintReceipt
+            // 
+            this.btnPrintReceipt.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnPrintReceipt.Image = global::DonniOptical2.Properties.Resources.printer;
+            this.btnPrintReceipt.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPrintReceipt.Location = new System.Drawing.Point(100, 696);
+            this.btnPrintReceipt.Name = "btnPrintReceipt";
+            this.btnPrintReceipt.Size = new System.Drawing.Size(91, 25);
+            this.btnPrintReceipt.TabIndex = 266;
+            this.btnPrintReceipt.Text = "Print receipt";
+            this.btnPrintReceipt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnPrintReceipt.UseVisualStyleBackColor = true;
+            // 
+            // btnPrintOrder
+            // 
+            this.btnPrintOrder.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnPrintOrder.Image = global::DonniOptical2.Properties.Resources.printer;
+            this.btnPrintOrder.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPrintOrder.Location = new System.Drawing.Point(12, 696);
+            this.btnPrintOrder.Name = "btnPrintOrder";
+            this.btnPrintOrder.Size = new System.Drawing.Size(83, 25);
+            this.btnPrintOrder.TabIndex = 265;
+            this.btnPrintOrder.Text = "Print order";
+            this.btnPrintOrder.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnPrintOrder.UseVisualStyleBackColor = true;
+            // 
             // btnClearItemTextboxes
             // 
             this.btnClearItemTextboxes.Image = global::DonniOptical2.Properties.Resources.arrow_refresh;
@@ -1901,13 +1925,37 @@
             this.btnClearItemTextboxes.UseVisualStyleBackColor = true;
             this.btnClearItemTextboxes.Click += new System.EventHandler(this.btnClearItemTextboxes_Click);
             // 
+            // btnFindCustomerForOrder
+            // 
+            this.btnFindCustomerForOrder.BackgroundImage = global::DonniOptical2.Properties.Resources.magnifier;
+            this.btnFindCustomerForOrder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnFindCustomerForOrder.Location = new System.Drawing.Point(216, 21);
+            this.btnFindCustomerForOrder.Name = "btnFindCustomerForOrder";
+            this.btnFindCustomerForOrder.Size = new System.Drawing.Size(24, 23);
+            this.btnFindCustomerForOrder.TabIndex = 2;
+            this.btnFindCustomerForOrder.UseVisualStyleBackColor = true;
+            this.btnFindCustomerForOrder.Click += new System.EventHandler(this.btnFindCustomerForOrder_Click);
+            // 
+            // btnDeleteOrder
+            // 
+            this.btnDeleteOrder.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnDeleteOrder.Image = global::DonniOptical2.Properties.Resources.bin;
+            this.btnDeleteOrder.Location = new System.Drawing.Point(339, 16);
+            this.btnDeleteOrder.Name = "btnDeleteOrder";
+            this.btnDeleteOrder.Size = new System.Drawing.Size(35, 23);
+            this.btnDeleteOrder.TabIndex = 4;
+            this.btnDeleteOrder.UseVisualStyleBackColor = false;
+            this.btnDeleteOrder.Click += new System.EventHandler(this.btnDeleteOrder_Click);
+            // 
             // frmOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.CancelButton = this.btnCloseOrder;
-            this.ClientSize = new System.Drawing.Size(965, 737);
+            this.ClientSize = new System.Drawing.Size(965, 730);
+            this.Controls.Add(this.btnPrintReceipt);
+            this.Controls.Add(this.btnPrintOrder);
             this.Controls.Add(this.btnClearItemTextboxes);
             this.Controls.Add(this.txtTrayNumber);
             this.Controls.Add(this.label61);
@@ -2126,5 +2174,8 @@
         private System.Windows.Forms.TextBox txtTrayNumber;
         private System.Windows.Forms.Label label61;
         private System.Windows.Forms.Button btnClearItemTextboxes;
+        private System.Windows.Forms.Button btnPrintOrder;
+        private System.Windows.Forms.Button btnPrintReceipt;
+        private System.Windows.Forms.Button btnDeleteOrder;
     }
 }

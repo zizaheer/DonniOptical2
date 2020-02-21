@@ -100,6 +100,36 @@ namespace DonniOptical2.BusinessLogic
             return result;
         }
 
+        public List<Customer> GetCustomersByPhone(string customerPhone)
+        {
+            var customerList = dataAccess.GetCustomerList();
+            customerList = customerList.Where(c => string.Equals(c.Telephone, customerPhone, StringComparison.OrdinalIgnoreCase)).ToList();
+
+            return customerList;
+        }
+        public List<Customer> GetCustomersByFirstName(string customerFirstName)
+        {
+            var customerList = dataAccess.GetCustomerList();
+            customerList = customerList.Where(c => string.Equals(c.FirstName, customerFirstName, StringComparison.OrdinalIgnoreCase)).ToList();
+
+            return customerList;
+        }
+
+        public List<Customer> GetCustomersByLastName(string customerLastName)
+        {
+            var customerList = dataAccess.GetCustomerList();
+            customerList = customerList.Where(c => string.Equals(c.LastName, customerLastName, StringComparison.OrdinalIgnoreCase)).ToList();
+
+            return customerList;
+        }
+
+        public List<Customer> GetCustomersByFullName(string customerFullName)
+        {
+            var customerList = dataAccess.GetCustomerList();
+            customerList = customerList.Where(c => string.Equals(c.FirstName + c.LastName, customerFullName, StringComparison.OrdinalIgnoreCase)).ToList();
+
+            return customerList;
+        }
 
     }
 }

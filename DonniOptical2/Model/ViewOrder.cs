@@ -35,7 +35,8 @@ namespace DonniOptical2.Model
         public string PrescriptionPrismLeft { get; set; }
         public decimal? FrameTotalPrice { get; set; }
         public decimal? LensTotalPrice { get; set; }
-        public decimal? OtherAdjustment { get; set; }
+        public decimal? OtherTotal { get; set; }
+        public decimal? DiscountAmount { get; set; }
         public decimal OrderTotal { get; set; }
         public decimal? HstAmount { get; set; }
         public decimal GrandTotal { get; set; }
@@ -45,6 +46,7 @@ namespace DonniOptical2.Model
         public string Remarks { get; set; }
         public DateTime OrderDate { get; set; }
 
+        public string TrayNumber { get; set; }
         public string ModifiedSphereRight { get; set; }
         public string ModifiedCylRight { get; set; }
         public string ModifiedAxisRight { get; set; }
@@ -79,6 +81,8 @@ namespace DonniOptical2.Model
         public string RightLensDescription { get; set; }
         public decimal? RightLensUnitPrice { get; set; }
         public int? RightLensQuantity { get; set; }
-        
+        public string OtherItemDescription { get; set; }
+        public decimal? OtherItemUnitPrice { get; set; }
+        public int? OtherItemQuantity { get; set; }
     }
 }

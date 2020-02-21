@@ -26,7 +26,8 @@ namespace DonniOptical2.Model
         public string PrescriptionPrismLeft { get; set; }
         public decimal? FrameTotalPrice { get; set; }
         public decimal? LensTotalPrice { get; set; }
-        public decimal? OtherAdjustment { get; set; }
+        public decimal? OtherTotal { get; set; }
+        public decimal? DiscountAmount { get; set; }
         public decimal OrderTotal { get; set; }
         public decimal? HstAmount { get; set; }
         public decimal GrandTotal { get; set; }

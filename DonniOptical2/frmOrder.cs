@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 using System.Windows.Forms;
 
 namespace DonniOptical2
@@ -43,15 +44,10 @@ namespace DonniOptical2
             if (rdoNewOrder.Checked)
             {
                 ClearFindByGroupBox();
-                txtOrderNo.Text = "Auto";
-                txtOrderNo.Enabled = false;
-                txtOrderDate.Text = "dd-mmm-yyyy";
-
                 gbFindBy.Enabled = false;
                 PrepareForNewEntry();
             }
         }
-
         private void rdoFindOrder_CheckedChanged(object sender, EventArgs e)
         {
             ClearFindByGroupBox();
@@ -60,12 +56,11 @@ namespace DonniOptical2
             gbFindBy.Enabled = true;
             txtFindByValue.Focus();
         }
-
         private void btnFindOrder_Click(object sender, EventArgs e)
         {
             int orderId = 0;
             lblNoOfOrdersFound.Text = "0";
-            
+
             if (ddlFindBy.SelectedIndex == 0)
             {
                 int.TryParse(txtFindByValue.Text, out orderId);
@@ -158,11 +153,7 @@ namespace DonniOptical2
                 }
             }
 
-
-
-
         }
-
         private void lnkPreviousOrder_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             if (orderFound.Length > 0)
@@ -182,7 +173,6 @@ namespace DonniOptical2
 
             }
         }
-        
         private void lnkNextOrder_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             if (orderFound.Length > 0)
@@ -201,13 +191,11 @@ namespace DonniOptical2
                 }
             }
         }
-
         private void btnCloseOrder_Click(object sender, EventArgs e)
         {
             this.Close();
             //if(txtOrderTotalAmnt.Text)
         }
-
         private void btnFindCustomerForOrder_Click(object sender, EventArgs e)
         {
             int custId = 0;
@@ -217,12 +205,11 @@ namespace DonniOptical2
                 {
                     if (custId > 0)
                     {
-                        GetCustomerInformation(Convert.ToInt32(txtCustomerNo.Text.Trim()));
+                        FillCustomerDetailById(Convert.ToInt32(txtCustomerNo.Text.Trim()));
                     }
                 }
             }
         }
-
         private void txtCustomerNo_TextChanged(object sender, EventArgs e)
         {
             int custId = 0;
@@ -232,12 +219,11 @@ namespace DonniOptical2
                 {
                     if (custId > 0)
                     {
-                        GetCustomerInformation(Convert.ToInt32(txtCustomerNo.Text.Trim()));
+                        FillCustomerDetailById(Convert.ToInt32(txtCustomerNo.Text.Trim()));
                     }
                 }
             }
         }
-
         private void btnSaveOrder_Click(object sender, EventArgs e)
         {
             try
@@ -275,7 +261,8 @@ namespace DonniOptical2
                 orderInfo.PrescriptionPrismLeft = txtPrescriptionPrismLeft.Text;
                 orderInfo.FrameTotalPrice = Convert.ToDecimal(txtFrameTotalPrice.Text);
                 orderInfo.LensTotalPrice = Convert.ToDecimal(txtLensTotalPrice.Text);
-                orderInfo.OtherAdjustment = Convert.ToDecimal(txtOtherTotal.Text);
+                orderInfo.OtherTotal = Convert.ToDecimal(txtOtherTotal.Text);
+                orderInfo.DiscountAmount = Convert.ToDecimal(txtDiscountAmnt.Text);
                 orderInfo.OrderTotal = Convert.ToDecimal(txtOrderTotalAmnt.Text);
                 orderInfo.HstAmount = Convert.ToDecimal(txtHSTAmnt.Text);
                 orderInfo.GrandTotal = Convert.ToDecimal(txtGrandTotal.Text);
@@ -342,11 +329,18 @@ namespace DonniOptical2
                     orderDetailList.Add(orderDetail);
                 }
 
-                orderId = AddNewOrder(orderInfo, orderDetailList);
+                if (orderInfo.Id > 0)
+                {
+                    orderId = UpdateOrder(orderInfo, orderDetailList);
+                }
+                else
+                {
+                    orderId = AddNewOrder(orderInfo, orderDetailList);
+                }
 
                 if (orderId > 0)
                 {
-                    //PrepareForUpdateEntry(orderId);
+                    rdoNewOrder.Checked = true;
                     PrepareForNewEntry();
                     DialogResult dr = MessageBox.Show("The order saved successfully. Do you want to print receipt?", "Successful", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
@@ -368,7 +362,8 @@ namespace DonniOptical2
 
                         frmPrintReceipt.lblFrameTotalPrice.Text = Convert.ToString(orderInfo.FrameTotalPrice);
                         frmPrintReceipt.lblLensTotalPrice.Text = Convert.ToString(orderInfo.LensTotalPrice);
-                        frmPrintReceipt.lblAdjustment.Text = Convert.ToString(orderInfo.OtherAdjustment);
+                        frmPrintReceipt.lblOtherAmount.Text = Convert.ToString(orderInfo.OtherTotal);
+                        frmPrintReceipt.lblDiscountAmnt.Text = Convert.ToString(orderInfo.DiscountAmount);
                         frmPrintReceipt.lblSubtotal.Text = Convert.ToString(orderInfo.OrderTotal);
                         frmPrintReceipt.lblHstAmount.Text = Convert.ToString(orderInfo.HstAmount);
                         frmPrintReceipt.lblGrandTotal.Text = Convert.ToString(orderInfo.GrandTotal);
@@ -400,7 +395,6 @@ namespace DonniOptical2
 
             }
         }
-
         private void btnAddToOrderItemList_Click(object sender, EventArgs e)
         {
 
@@ -476,10 +470,9 @@ namespace DonniOptical2
 
 
             FillOrderDetailGridview(orderDetail);
-            ClearOrderDetailTextboxes();
             CalculateOrderTotal();
+            ClearOrderDetailTextboxes();
         }
-
         private void btnRemoveFromOrderItemList_Click(object sender, EventArgs e)
         {
             int selectedIndex = gvOrderItemList.CurrentCell.RowIndex;
@@ -495,37 +488,30 @@ namespace DonniOptical2
                 }
             }
         }
-
         private void txtPrescriptionSphereRight_Leave(object sender, EventArgs e)
         {
             txtModifiedSphereRight.Text = txtPrescriptionSphereRight.Text;
         }
-
         private void txtPrescriptionCylRight_Leave(object sender, EventArgs e)
         {
             txtModifiedCylRight.Text = txtPrescriptionCylRight.Text;
         }
-
         private void txtPrescriptionAxisRight_Leave(object sender, EventArgs e)
         {
             txtModifiedAxisRight.Text = txtPrescriptionAxisRight.Text;
         }
-
         private void txtPrescriptionAddRight_Leave(object sender, EventArgs e)
         {
             txtModifiedAddRight.Text = txtPrescriptionAddRight.Text;
         }
-
         private void txtPrescriptionPrismRight_Leave(object sender, EventArgs e)
         {
             txtModifiedPrismRight.Text = txtPrescriptionPrismRight.Text;
         }
-
         private void txtPrescriptionSphereLeft_Leave(object sender, EventArgs e)
         {
             txtModifiedSphereLeft.Text = txtPrescriptionSphereLeft.Text;
         }
-
         private void txtPrescriptionCylLeft_Leave(object sender, EventArgs e)
         {
             txtModifiedCylLeft.Text = txtPrescriptionCylLeft.Text;
@@ -730,7 +716,7 @@ namespace DonniOptical2
         {
             CalculateOrderTotal();
         }
-        
+
         private void chkApplyHst_CheckedChanged(object sender, EventArgs e)
         {
             CalculateOrderTotal();
@@ -767,12 +753,12 @@ namespace DonniOptical2
         private void gvOrderItemList_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             var selectedRow = gvOrderItemList.CurrentRow;
-            ShowOrderItemDetail(selectedRow);
+            FillOrderDetailByRow(selectedRow);
         }
         private void gvOrderItemList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             var selectedRow = gvOrderItemList.CurrentRow;
-            ShowOrderItemDetail(selectedRow);
+            FillOrderDetailByRow(selectedRow);
         }
         private void btnClearItemTextboxes_Click(object sender, EventArgs e)
         {
@@ -869,9 +855,9 @@ namespace DonniOptical2
                 int.TryParse(txtRightLensQuantity.Text, out rlensQty);
                 int.TryParse(txtOtherItemQuantity.Text, out otherQty);
 
-                if (frmPrice <= 0 && llensPrice <= 0 && rlensPrice <= 0 && otherPrice<=0)
+                if (frmPrice <= 0 && llensPrice <= 0 && rlensPrice <= 0 && otherPrice <= 0)
                 {
-                    MessageBox.Show("Add item price.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Add item and price.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtFrameUnitPrice.Focus();
                     return false;
                 }
@@ -952,11 +938,156 @@ namespace DonniOptical2
                     }
                 }
 
-                if (txtTrayNumber.Text.Trim() == string.Empty) {
+                if (txtTrayNumber.Text.Trim() == string.Empty)
+                {
                     MessageBox.Show("Please enter tray number.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtTrayNumber.Focus();
                     return false;
                 }
+
+                decimal decimalOut;
+                if (txtMeasurementA.Text.Trim() != string.Empty)
+                {
+                    if (!decimal.TryParse(txtMeasurementA.Text, out decimalOut))
+                    {
+                        MessageBox.Show("Please enter a valid measurement A.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtMeasurementA.Focus();
+                        return false;
+                    }
+                }
+                if (txtMeasurementB.Text.Trim() != string.Empty)
+                {
+                    if (!decimal.TryParse(txtMeasurementB.Text, out decimalOut))
+                    {
+                        MessageBox.Show("Please enter a valid measurement B.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtMeasurementB.Focus();
+                        return false;
+                    }
+                }
+                if (txtMeasurementEd.Text.Trim() != string.Empty)
+                {
+                    if (!decimal.TryParse(txtMeasurementEd.Text, out decimalOut))
+                    {
+                        MessageBox.Show("Please enter a valid measurement ED.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtMeasurementEd.Focus();
+                        return false;
+                    }
+                }
+                if (txtMeasurementDbl.Text.Trim() != string.Empty)
+                {
+                    if (!decimal.TryParse(txtMeasurementDbl.Text, out decimalOut))
+                    {
+                        MessageBox.Show("Please enter a valid measurement DBL.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtMeasurementDbl.Focus();
+                        return false;
+                    }
+                }
+                if (txtMeasurementFpdLeft.Text.Trim() != string.Empty)
+                {
+                    if (!decimal.TryParse(txtMeasurementFpdLeft.Text, out decimalOut))
+                    {
+                        MessageBox.Show("Please enter a valid measurement FPD.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtMeasurementFpdLeft.Focus();
+                        return false;
+                    }
+                }
+
+                if (txtMeasurementFpdRight.Text.Trim() != string.Empty)
+                {
+                    if (!decimal.TryParse(txtMeasurementFpdRight.Text, out decimalOut))
+                    {
+                        MessageBox.Show("Please enter a valid measurement FPD.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtMeasurementFpdRight.Focus();
+                        return false;
+                    }
+                }
+
+                if (txtMeasurementNrPdLeft.Text.Trim() != string.Empty)
+                {
+                    if (!decimal.TryParse(txtMeasurementNrPdLeft.Text, out decimalOut))
+                    {
+                        MessageBox.Show("Please enter a valid measurement Near PD.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtMeasurementNrPdLeft.Focus();
+                        return false;
+                    }
+                }
+
+                if (txtMeasurementNrPdRight.Text.Trim() != string.Empty)
+                {
+                    if (!decimal.TryParse(txtMeasurementNrPdRight.Text, out decimalOut))
+                    {
+                        MessageBox.Show("Please enter a valid measurement Near PD.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtMeasurementNrPdRight.Focus();
+                        return false;
+                    }
+                }
+
+                if (txtMeasurementOcLeft.Text.Trim() != string.Empty)
+                {
+                    if (!decimal.TryParse(txtMeasurementOcLeft.Text, out decimalOut))
+                    {
+                        MessageBox.Show("Please enter a valid OC measurement.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtMeasurementOcLeft.Focus();
+                        return false;
+                    }
+                }
+
+                if (txtMeasurementOcRight.Text.Trim() != string.Empty)
+                {
+                    if (!decimal.TryParse(txtMeasurementOcRight.Text, out decimalOut))
+                    {
+                        MessageBox.Show("Please enter a valid OC measurement.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtMeasurementOcRight.Focus();
+                        return false;
+                    }
+                }
+
+                if (txtMeasurementSegLeft.Text.Trim() != string.Empty)
+                {
+                    if (!decimal.TryParse(txtMeasurementSegLeft.Text, out decimalOut))
+                    {
+                        MessageBox.Show("Please enter a valid Segment measurement.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtMeasurementSegLeft.Focus();
+                        return false;
+                    }
+                }
+
+                if (txtMeasurementSegRight.Text.Trim() != string.Empty)
+                {
+                    if (!decimal.TryParse(txtMeasurementSegRight.Text, out decimalOut))
+                    {
+                        MessageBox.Show("Please enter a valid Segment measurement.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtMeasurementSegRight.Focus();
+                        return false;
+                    }
+                }
+
+
+                if (txtMeasurementBlSizeLeft.Text.Trim() != string.Empty)
+                {
+                    if (!decimal.TryParse(txtMeasurementBlSizeLeft.Text, out decimalOut))
+                    {
+                        MessageBox.Show("Please enter a valid BL size measurement.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtMeasurementBlSizeLeft.Focus();
+                        return false;
+                    }
+                }
+
+                if (txtMeasurementBlSizeRight.Text.Trim() != string.Empty)
+                {
+                    if (!decimal.TryParse(txtMeasurementBlSizeRight.Text, out decimalOut))
+                    {
+                        MessageBox.Show("Please enter a valid BL size measurement.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtMeasurementBlSizeRight.Focus();
+                        return false;
+                    }
+                }
+
+
+
+
+
+
 
                 return true;
             }
@@ -1130,7 +1261,7 @@ namespace DonniOptical2
             txtOtherItemQuantity.Text = "0";
 
         }
-        private void GetCustomerInformation(int customerId)
+        private void FillCustomerDetailById(int customerId)
         {
             customerManager = new CustomerManager();
             var custinfo = customerManager.GetCustomerById(customerId);
@@ -1202,7 +1333,7 @@ namespace DonniOptical2
         }
         private void PrepareForNewEntry()
         {
-            rdoNewOrder.Checked = true;
+            PrepareOrderDetailGridview();
 
             foreach (Control control in Controls)
             {
@@ -1220,16 +1351,18 @@ namespace DonniOptical2
             txtLeftLensUnitPrice.Text = "0.0";
             txtRightLensQuantity.Text = "0";
             txtRightLensUnitPrice.Text = "0.0";
-            txtFrameTotalPrice.Text = "";
+            txtOtherItemQuantity.Text = "0";
+            txtOtherItemUnitPrice.Text = "0.0";
+            txtFrameTotalPrice.Text = "0.00";
             txtLensTotalPrice.Text = "0.00";
             txtOtherTotal.Text = "0.00";
+            txtDiscountAmnt.Text = "0.00";
             txtOrderTotalAmnt.Text = "0.00";
             txtHSTAmnt.Text = "0.00";
             txtGrandTotal.Text = "0.00";
             txtDepositAmnt.Text = "0.00";
             txtBalanceAmnt.Text = "0.00";
-
-            PrepareOrderDetailGridview();
+            txtTrayNumber.Text = "";
         }
         private void PrepareForUpdateEntry(int orderId)
         {
@@ -1261,7 +1394,8 @@ namespace DonniOptical2
                 txtPrescriptionPrismLeft.Text = orderInfo.PrescriptionPrismLeft;
                 txtFrameTotalPrice.Text = ((decimal)orderInfo.FrameTotalPrice).ToString("0.00");
                 txtLensTotalPrice.Text = ((decimal)orderInfo.LensTotalPrice).ToString("0.00");
-                txtOtherTotal.Text = ((decimal)orderInfo.OtherAdjustment).ToString("0.00");
+                txtOtherTotal.Text = ((decimal)orderInfo.OtherTotal).ToString("0.00");
+                txtDiscountAmnt.Text = ((decimal)orderInfo.DiscountAmount).ToString("0.00");
                 txtOrderTotalAmnt.Text = orderInfo.OrderTotal.ToString("0.00");
                 txtHSTAmnt.Text = ((decimal)orderInfo.HstAmount).ToString("0.00");
                 txtGrandTotal.Text = orderInfo.GrandTotal.ToString("0.00");
@@ -1281,7 +1415,7 @@ namespace DonniOptical2
                         FillOrderDetailGridview(orderDetail);
                     }
                     gvOrderItemList.Rows[0].Selected = true;
-                    ShowOrderItemDetail(gvOrderItemList.Rows[0]);
+                    FillOrderDetailByRow(gvOrderItemList.Rows[0]);
                 }
 
             }
@@ -1311,7 +1445,7 @@ namespace DonniOptical2
                 RefreshSerial();
             }
         }
-        private void ShowOrderItemDetail(DataGridViewRow row)
+        private void FillOrderDetailByRow(DataGridViewRow row)
         {
             txtSerialNo.Text = row.Cells["SL#"].Value.ToString();
             txtTrayNumber.Text = row.Cells["TRAY#"].Value.ToString();
@@ -1363,11 +1497,87 @@ namespace DonniOptical2
         }
 
 
-
-
-
         #endregion
 
-       
+        private void btnDeleteOrder_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtMeasurementEd_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtMeasurementFpdRight_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtMeasurementNrPdRight_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtMeasurementFpdLeft_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtMeasurementNrPdLeft_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CalculateMinBlankSize()
+        {
+            decimal ed = 0;
+            //decimal nearPdRight = 0;
+            //decimal nearPdLeft = 0;
+            decimal farPdRight = 0;
+            decimal farPdLeft = 0;
+
+            decimal measureA = 0;
+            decimal measureDbl = 0;
+            decimal measureEd = 0;
+
+            decimal framePd = 0;
+
+            decimal decentrationLeft = 0;
+            decimal decentrationRight = 0;
+
+            decimal blankSizeRight = 0;
+            decimal blankSizeLeft = 0;
+
+
+            decimal.TryParse(txtMeasurementEd.Text, out ed);
+            //decimal.TryParse(txtMeasurementNrPdRight.Text, out nearPdRight);
+            //decimal.TryParse(txtMeasurementNrPdLeft.Text, out nearPdLeft);
+            decimal.TryParse(txtMeasurementFpdRight.Text, out farPdRight);
+            decimal.TryParse(txtMeasurementFpdLeft.Text, out farPdLeft);
+
+            decimal.TryParse(txtMeasurementA.Text, out measureA);
+            decimal.TryParse(txtMeasurementDbl.Text, out measureDbl);
+
+            framePd = measureA + measureDbl;
+
+            decentrationLeft = Math.Abs(framePd - farPdLeft) / 2;
+            decentrationRight = Math.Abs(framePd - farPdRight) / 2;
+
+            blankSizeLeft = measureEd + 2 * decentrationLeft + 2;
+            blankSizeRight = measureEd + 2 * decentrationRight + 2;
+
+            if (blankSizeLeft > 0)
+            {
+                txtMeasurementBlSizeLeft.Text = blankSizeLeft.ToString();
+            }
+
+            if (blankSizeRight > 0)
+            {
+                txtMeasurementBlSizeRight.Text = blankSizeRight.ToString();
+            }
+
+        }
+
     }
 }

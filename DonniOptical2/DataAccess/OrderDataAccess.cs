@@ -54,7 +54,8 @@ namespace DonniOptical2.DataAccess
                         order.PrescriptionPrismLeft = dr["PrescriptionPrismLeft"].ToString();
                         order.FrameTotalPrice = Convert.ToDecimal(dr["FrameTotalPrice"]);
                         order.LensTotalPrice = Convert.ToDecimal(dr["LensTotalPrice"]);
-                        order.OtherAdjustment = Convert.ToDecimal(dr["OtherAdjustment"]);
+                        order.OtherTotal = Convert.ToDecimal(dr["OtherTotal"]);
+                        order.DiscountAmount = Convert.ToDecimal(dr["DiscountAmount"]);
                         order.OrderTotal = Convert.ToDecimal(dr["OrderTotal"]);
                         order.HstAmount = Convert.ToDecimal(dr["HstAmount"]);
                         order.GrandTotal = Convert.ToDecimal(dr["GrandTotal"]);
@@ -139,7 +140,8 @@ namespace DonniOptical2.DataAccess
                     order.PrescriptionPrismLeft = dataReader["PrescriptionPrismLeft"].ToString();
                     order.FrameTotalPrice = Convert.ToDecimal(dataReader["FrameTotalPrice"]);
                     order.LensTotalPrice = Convert.ToDecimal(dataReader["LensTotalPrice"]);
-                    order.OtherAdjustment = Convert.ToDecimal(dataReader["OtherAdjustment"]);
+                    order.OtherTotal = Convert.ToDecimal(dataReader["OtherTotal"]);
+                    order.DiscountAmount = Convert.ToDecimal(dataReader["DiscountAmount"]);
                     order.OrderTotal = Convert.ToDecimal(dataReader["OrderTotal"]);
                     order.HstAmount = Convert.ToDecimal(dataReader["HstAmount"]);
                     order.GrandTotal = Convert.ToDecimal(dataReader["GrandTotal"]);
@@ -172,11 +174,11 @@ namespace DonniOptical2.DataAccess
                 string query = "INSERT INTO dbo.[Order](CustomerId, DoctorName, DoctorPhone, DoctorClinicAddress, DoctorPrescriptionDate, PrescriptionSphereRight";
                 query += ", PrescriptionCylRight, PrescriptionAxisRight, PrescriptionAddRight, PrescriptionPrismRight, PrescriptionSphereLeft";
                 query += ", PrescriptionCylLeft, PrescriptionAxisLeft, PrescriptionAddLeft, PrescriptionPrismLeft, FrameTotalPrice";
-                query += ", LensTotalPrice, OtherAdjustment, OrderTotal, HstAmount, GrandTotal, PaidBy, PaidAmount";
+                query += ", LensTotalPrice, OtherTotal, DiscountAmount, OrderTotal, HstAmount, GrandTotal, PaidBy, PaidAmount";
                 query += ", BalanceDue, Remarks, CreateDate) VALUES(@CustomerId, @DoctorName, @DoctorPhone, @DoctorClinicAddress, @DoctorPrescriptionDate, @PrescriptionSphereRight";
                 query += ", @PrescriptionCylRight, @PrescriptionAxisRight, @PrescriptionAddRight, @PrescriptionPrismRight, @PrescriptionSphereLeft";
                 query += ", @PrescriptionCylLeft, @PrescriptionAxisLeft, @PrescriptionAddLeft, @PrescriptionPrismLeft, @FrameTotalPrice";
-                query += ", @LensTotalPrice, @OtherAdjustment, @OrderTotal, @HstAmount, @GrandTotal, @PaidBy, @PaidAmount";
+                query += ", @LensTotalPrice, @OtherTotal, @DiscountAmount, @OrderTotal, @HstAmount, @GrandTotal, @PaidBy, @PaidAmount";
                 query += ", @BalanceDue, @Remarks, @CreateDate); ";
                 query += " SELECT CAST(scope_identity() AS INT) ";
 
@@ -198,7 +200,8 @@ namespace DonniOptical2.DataAccess
                 sqlCommand.Parameters.AddWithValue("@PrescriptionPrismLeft", order.PrescriptionPrismLeft);
                 sqlCommand.Parameters.AddWithValue("@FrameTotalPrice", order.FrameTotalPrice);
                 sqlCommand.Parameters.AddWithValue("@LensTotalPrice", order.LensTotalPrice);
-                sqlCommand.Parameters.AddWithValue("@OtherAdjustment", order.OtherAdjustment);
+                sqlCommand.Parameters.AddWithValue("@OtherTotal", order.OtherTotal);
+                sqlCommand.Parameters.AddWithValue("@DiscountAmount", order.DiscountAmount);
                 sqlCommand.Parameters.AddWithValue("@OrderTotal", order.OrderTotal);
                 sqlCommand.Parameters.AddWithValue("@HstAmount", order.HstAmount);
                 sqlCommand.Parameters.AddWithValue("@GrandTotal", order.GrandTotal);
@@ -235,7 +238,7 @@ namespace DonniOptical2.DataAccess
                 query += ", PrescriptionAxisRight = @PrescriptionAxisRight, PrescriptionAddRight = @PrescriptionAddRight, PrescriptionPrismRight = @PrescriptionPrismRight";
                 query += ", PrescriptionSphereLeft = @PrescriptionSphereLeft, PrescriptionCylLeft = @PrescriptionCylLeft, PrescriptionAxisLeft = @PrescriptionAxisLeft";
                 query += ", PrescriptionAddLeft = @PrescriptionAddLeft, PrescriptionPrismLeft = @PrescriptionPrismLeft, FrameTotalPrice = @FrameTotalPrice";
-                query += ", LensTotalPrice = @LensTotalPrice, OtherAdjustment = @OtherAdjustment, OrderTotal = @OrderTotal";
+                query += ", LensTotalPrice = @LensTotalPrice, OtherTotal = @OtherTotal, DiscountAmount = @DiscountAmount, OrderTotal = @OrderTotal";
                 query += ", HstAmount = @HstAmount, GrandTotal = @GrandTotal, PaidBy = @PaidBy, PaidAmount = @PaidAmount, BalanceDue = @BalanceDue";
                 query += ", Remarks = @Remarks, CreateDate = @CreateDate";
 
@@ -257,7 +260,8 @@ namespace DonniOptical2.DataAccess
                 sqlCommand.Parameters.AddWithValue("@PrescriptionPrismLeft", order.PrescriptionPrismLeft);
                 sqlCommand.Parameters.AddWithValue("@FrameTotalPrice", order.FrameTotalPrice);
                 sqlCommand.Parameters.AddWithValue("@LensTotalPrice", order.LensTotalPrice);
-                sqlCommand.Parameters.AddWithValue("@OtherAdjustment", order.OtherAdjustment);
+                sqlCommand.Parameters.AddWithValue("@OtherTotal", order.OtherTotal);
+                sqlCommand.Parameters.AddWithValue("@DiscountAmount", order.DiscountAmount);
                 sqlCommand.Parameters.AddWithValue("@OrderTotal", order.OrderTotal);
                 sqlCommand.Parameters.AddWithValue("@HstAmount", order.HstAmount);
                 sqlCommand.Parameters.AddWithValue("@GrandTotal", order.GrandTotal);
@@ -321,15 +325,15 @@ namespace DonniOptical2.DataAccess
                 query += ", C.Email, O.CreateDate AS OrderDate, O.DoctorName, O.DoctorPhone, O.DoctorClinicAddress, O.DoctorPrescriptionDate";
                 query += ", O.PrescriptionSphereRight, O.PrescriptionSphereLeft, O.PrescriptionCylRight, O.PrescriptionCylLeft";
                 query += ", O.PrescriptionAxisRight, O.PrescriptionAxisLeft, O.PrescriptionAddRight, O.PrescriptionAddLeft";
-                query += ", O.PrescriptionPrismRight, O.PrescriptionPrismLeft, O.FrameTotalPrice, O.LensTotalPrice, O.OtherAdjustment";
+                query += ", O.PrescriptionPrismRight, O.PrescriptionPrismLeft, O.FrameTotalPrice, O.LensTotalPrice, O.OtherTotal, O.DiscountAmount";
                 query += ", O.OrderTotal, O.HstAmount, O.GrandTotal, O.PaidBy, O.PaidAmount, O.BalanceDue, O.Remarks";
-                query += ", D.ModifiedSphereRight, D.ModifiedSphereLeft, D.ModifiedCylRight, D.ModifiedCylLeft, D.ModifiedAxisRight";
+                query += ", D.TrayNumber, D.ModifiedSphereRight, D.ModifiedSphereLeft, D.ModifiedCylRight, D.ModifiedCylLeft, D.ModifiedAxisRight";
                 query += ", D.ModifiedAxisLeft, D.ModifiedAddRight, D.ModifiedAddLeft, D.ModifiedPrismRight, D.ModifiedPrismLeft";
                 query += ", D.MeasurementFpdRight, D.MeasurementFpdLeft, D.MeasurementNrPdRight, D.MeasurementNrPdLeft";
                 query += ", D.MeasurementOcRight, D.MeasurementOcLeft, D.MeasurementSegRight, D.MeasurementSegLeft, D.MeasurementBlSizeRight";
                 query += ", D.MeasurementBlSizeLeft, D.MeasurementA, D.MeasurementB, D.MeasurementED, D.MeasurementDBL, D.FrameCode";
                 query += ", D.FrameColor, D.FrameUnitPrice, D.FrameQuantity, D.LeftLensDescription, D.LeftLensQuantity, D.LeftLensUnitPrice";
-                query += ", D.RightLensDescription, D.RightLensQuantity, D.RightLensUnitPrice";
+                query += ", D.RightLensDescription, D.RightLensQuantity, D.RightLensUnitPrice, D.OtherItemDescription, D.OtherItemUnitPrice, D.OtherItemQuantity";
                 query += " FROM [Order] O  ";
                 query += " INNER JOIN OrderDetail D ON D.OrderId = O.Id ";
                 query += " INNER JOIN Customer C ON C.Id = O.CustomerId ";
@@ -351,6 +355,7 @@ namespace DonniOptical2.DataAccess
                         order.DoctorPhone = dr["DoctorPhone"].ToString();
                         order.DoctorClinicAddress = dr["DoctorClinicAddress"].ToString();
                         order.DoctorPrescriptionDate = Convert.ToDateTime(dr["DoctorPrescriptionDate"]);
+                        
                         order.PrescriptionSphereRight = dr["PrescriptionSphereRight"].ToString();
                         order.PrescriptionCylRight = dr["PrescriptionCylRight"].ToString();
                         order.PrescriptionAxisRight = dr["PrescriptionAxisRight"].ToString();
@@ -363,7 +368,8 @@ namespace DonniOptical2.DataAccess
                         order.PrescriptionPrismLeft = dr["PrescriptionPrismLeft"].ToString();
                         order.FrameTotalPrice = Convert.ToDecimal(dr["FrameTotalPrice"]);
                         order.LensTotalPrice = Convert.ToDecimal(dr["LensTotalPrice"]);
-                        order.OtherAdjustment = Convert.ToDecimal(dr["OtherAdjustment"]);
+                        order.OtherTotal = Convert.ToDecimal(dr["OtherTotal"]);
+                        order.DiscountAmount = Convert.ToDecimal(dr["DiscountAmount"]);
                         order.OrderTotal = Convert.ToDecimal(dr["OrderTotal"]);
                         order.HstAmount = Convert.ToDecimal(dr["HstAmount"]);
                         order.GrandTotal = Convert.ToDecimal(dr["GrandTotal"]);
@@ -372,7 +378,6 @@ namespace DonniOptical2.DataAccess
                         order.BalanceDue = Convert.ToDecimal(dr["BalanceDue"]);
                         order.Remarks = dr["Remarks"].ToString();
                         order.OrderDate = Convert.ToDateTime(dr["OrderDate"]);
-
 
                         order.CustomerId = Convert.ToInt32(dr["CustomerId"]);
                         order.FirstName = (dr["FirstName"]).ToString();
@@ -383,6 +388,7 @@ namespace DonniOptical2.DataAccess
                         order.Postcode = (dr["Postcode"]).ToString();
                         order.City = (dr["City"]).ToString();
 
+                        order.TrayNumber = dr["TrayNumber"].ToString();
                         order.ModifiedSphereRight = dr["ModifiedSphereRight"].ToString();
                         order.ModifiedCylRight = dr["ModifiedCylRight"].ToString();
                         order.ModifiedAxisRight = dr["ModifiedAxisRight"].ToString();
@@ -417,6 +423,9 @@ namespace DonniOptical2.DataAccess
                         order.RightLensDescription = dr["RightLensDescription"].ToString();
                         order.RightLensUnitPrice = Convert.ToDecimal(dr["RightLensUnitPrice"]);
                         order.RightLensQuantity = Convert.ToInt16(dr["RightLensQuantity"]);
+                        order.OtherItemDescription = dr["OtherItemDescription"].ToString();
+                        order.OtherItemUnitPrice = Convert.ToDecimal(dr["OtherItemUnitPrice"]);
+                        order.OtherItemQuantity = Convert.ToInt16(dr["OtherItemQuantity"]);
 
                         viewOrders.Add(order);
                     }
