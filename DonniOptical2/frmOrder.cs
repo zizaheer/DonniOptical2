@@ -946,6 +946,204 @@ namespace DonniOptical2
                 }
 
                 decimal decimalOut;
+
+
+                if (txtPrescriptionSphereLeft.Text.Trim() != string.Empty)
+                {
+                    if (!decimal.TryParse(txtPrescriptionSphereLeft.Text, out decimalOut))
+                    {
+                        MessageBox.Show("Please enter a valid SPH measurement.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtPrescriptionSphereLeft.Focus();
+                        return false;
+                    }
+                }
+                if (txtPrescriptionSphereRight.Text.Trim() != string.Empty)
+                {
+                    if (!decimal.TryParse(txtPrescriptionSphereRight.Text, out decimalOut))
+                    {
+                        MessageBox.Show("Please enter a valid SPH measurement.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtPrescriptionSphereRight.Focus();
+                        return false;
+                    }
+                }
+
+                if (txtPrescriptionCylLeft.Text.Trim() != string.Empty)
+                {
+                    if (!decimal.TryParse(txtPrescriptionCylLeft.Text, out decimalOut))
+                    {
+                        MessageBox.Show("Please enter a valid CYL measurement.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtPrescriptionCylLeft.Focus();
+                        return false;
+                    }
+                }
+                if (txtPrescriptionCylRight.Text.Trim() != string.Empty)
+                {
+                    if (!decimal.TryParse(txtPrescriptionCylRight.Text, out decimalOut))
+                    {
+                        MessageBox.Show("Please enter a valid CYL measurement.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtPrescriptionCylRight.Focus();
+                        return false;
+                    }
+                }
+
+                if (txtPrescriptionAxisLeft.Text.Trim() != string.Empty)
+                {
+                    if (!decimal.TryParse(txtPrescriptionAxisLeft.Text, out decimalOut))
+                    {
+                        MessageBox.Show("Please enter a valid AXIS measurement.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtPrescriptionAxisLeft.Focus();
+                        return false;
+                    }
+                }
+                if (txtPrescriptionAxisRight.Text.Trim() != string.Empty)
+                {
+                    if (!decimal.TryParse(txtPrescriptionAxisRight.Text, out decimalOut))
+                    {
+                        MessageBox.Show("Please enter a valid AXIS measurement.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtPrescriptionAxisRight.Focus();
+                        return false;
+                    }
+                }
+
+                if (txtPrescriptionAddLeft.Text.Trim() != string.Empty)
+                {
+                    if (!decimal.TryParse(txtPrescriptionAddLeft.Text, out decimalOut))
+                    {
+                        MessageBox.Show("Please enter a valid ADD measurement.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtPrescriptionAddLeft.Focus();
+                        return false;
+                    }
+                }
+
+                if (txtPrescriptionAddRight.Text.Trim() != string.Empty)
+                {
+                    if (!decimal.TryParse(txtPrescriptionAddRight.Text, out decimalOut))
+                    {
+                        MessageBox.Show("Please enter a valid ADD measurement.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtPrescriptionAddRight.Focus();
+                        return false;
+                    }
+                }
+
+                if (txtPrescriptionPrismLeft.Text.Trim() != string.Empty)
+                {
+                    if (!decimal.TryParse(txtPrescriptionPrismLeft.Text, out decimalOut))
+                    {
+                        MessageBox.Show("Please enter a valid PRISM measurement.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtPrescriptionPrismLeft.Focus();
+                        return false;
+                    }
+                }
+                if (txtPrescriptionPrismRight.Text.Trim() != string.Empty)
+                {
+                    if (!decimal.TryParse(txtPrescriptionPrismRight.Text, out decimalOut))
+                    {
+                        MessageBox.Show("Please enter a valid PRISM measurement.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtPrescriptionPrismRight.Focus();
+                        return false;
+                    }
+                }
+
+                if (txtModifiedSphereLeft.Text.Trim() != string.Empty)
+                {
+                    if (!decimal.TryParse(txtModifiedSphereLeft.Text, out decimalOut))
+                    {
+                        MessageBox.Show("Please enter a valid SPH measurement.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtModifiedSphereLeft.Focus();
+                        return false;
+                    }
+                }
+                if (txtModifiedSphereRight.Text.Trim() != string.Empty)
+                {
+                    if (!decimal.TryParse(txtModifiedSphereRight.Text, out decimalOut))
+                    {
+                        MessageBox.Show("Please enter a valid SPH measurement.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtModifiedSphereRight.Focus();
+                        return false;
+                    }
+                }
+
+                if (txtModifiedCylLeft.Text.Trim() != string.Empty)
+                {
+                    if (!decimal.TryParse(txtModifiedCylLeft.Text, out decimalOut))
+                    {
+                        MessageBox.Show("Please enter a valid CYL measurement.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtModifiedCylLeft.Focus();
+                        return false;
+                    }
+                }
+                if (txtModifiedCylRight.Text.Trim() != string.Empty)
+                {
+                    if (!decimal.TryParse(txtModifiedCylRight.Text, out decimalOut))
+                    {
+                        MessageBox.Show("Please enter a valid CYL measurement.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtModifiedCylRight.Focus();
+                        return false;
+                    }
+                }
+
+                if (txtModifiedAxisLeft.Text.Trim() != string.Empty)
+                {
+                    if (!decimal.TryParse(txtModifiedAxisLeft.Text, out decimalOut))
+                    {
+                        MessageBox.Show("Please enter a valid AXIS measurement.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtModifiedAxisLeft.Focus();
+                        return false;
+                    }
+                }
+                if (txtModifiedAxisRight.Text.Trim() != string.Empty)
+                {
+                    if (!decimal.TryParse(txtModifiedAxisRight.Text, out decimalOut))
+                    {
+                        MessageBox.Show("Please enter a valid AXIS measurement.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtModifiedAxisRight.Focus();
+                        return false;
+                    }
+                }
+
+                if (txtModifiedAddLeft.Text.Trim() != string.Empty)
+                {
+                    if (!decimal.TryParse(txtModifiedAddLeft.Text, out decimalOut))
+                    {
+                        MessageBox.Show("Please enter a valid ADD measurement.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtModifiedAddLeft.Focus();
+                        return false;
+                    }
+                }
+
+                if (txtModifiedAddRight.Text.Trim() != string.Empty)
+                {
+                    if (!decimal.TryParse(txtModifiedAddRight.Text, out decimalOut))
+                    {
+                        MessageBox.Show("Please enter a valid ADD measurement.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtModifiedAddRight.Focus();
+                        return false;
+                    }
+                }
+
+                if (txtModifiedPrismLeft.Text.Trim() != string.Empty)
+                {
+                    if (!decimal.TryParse(txtModifiedPrismLeft.Text, out decimalOut))
+                    {
+                        MessageBox.Show("Please enter a valid PRISM measurement.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtModifiedPrismLeft.Focus();
+                        return false;
+                    }
+                }
+                if (txtModifiedPrismRight.Text.Trim() != string.Empty)
+                {
+                    if (!decimal.TryParse(txtModifiedPrismRight.Text, out decimalOut))
+                    {
+                        MessageBox.Show("Please enter a valid PRISM measurement.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtModifiedPrismRight.Focus();
+                        return false;
+                    }
+                }
+
+
+
+
+
                 if (txtMeasurementA.Text.Trim() != string.Empty)
                 {
                     if (!decimal.TryParse(txtMeasurementA.Text, out decimalOut))
