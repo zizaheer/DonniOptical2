@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnCloseOrder = new System.Windows.Forms.Button();
             this.btnRemoveFromOrderItemList = new System.Windows.Forms.Button();
             this.btnSaveOrder = new System.Windows.Forms.Button();
@@ -166,6 +166,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.txtCustomerAddress = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.btnFindCustomerForOrder = new System.Windows.Forms.Button();
             this.txtCustomerPhone = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtCustomerLastName = new System.Windows.Forms.TextBox();
@@ -185,6 +186,7 @@
             this.ddlFindBy = new System.Windows.Forms.ComboBox();
             this.label85 = new System.Windows.Forms.Label();
             this.gbFindOrder = new System.Windows.Forms.GroupBox();
+            this.btnDeleteOrder = new System.Windows.Forms.Button();
             this.rdoFindOrder = new System.Windows.Forms.RadioButton();
             this.rdoNewOrder = new System.Windows.Forms.RadioButton();
             this.txtOrderDate = new System.Windows.Forms.TextBox();
@@ -197,8 +199,6 @@
             this.btnPrintReceipt = new System.Windows.Forms.Button();
             this.btnPrintOrder = new System.Windows.Forms.Button();
             this.btnClearItemTextboxes = new System.Windows.Forms.Button();
-            this.btnFindCustomerForOrder = new System.Windows.Forms.Button();
-            this.btnDeleteOrder = new System.Windows.Forms.Button();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvOrderItemList)).BeginInit();
@@ -559,23 +559,23 @@
             // 
             this.gvOrderItemList.AllowUserToAddRows = false;
             this.gvOrderItemList.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvOrderItemList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvOrderItemList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.gvOrderItemList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gvOrderItemList.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gvOrderItemList.DefaultCellStyle = dataGridViewCellStyle2;
             this.gvOrderItemList.Location = new System.Drawing.Point(7, 19);
             this.gvOrderItemList.MultiSelect = false;
             this.gvOrderItemList.Name = "gvOrderItemList";
@@ -1610,6 +1610,17 @@
             this.label5.TabIndex = 11;
             this.label5.Text = "Address";
             // 
+            // btnFindCustomerForOrder
+            // 
+            this.btnFindCustomerForOrder.BackgroundImage = global::DonniOptical2.Properties.Resources.magnifier;
+            this.btnFindCustomerForOrder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnFindCustomerForOrder.Location = new System.Drawing.Point(216, 21);
+            this.btnFindCustomerForOrder.Name = "btnFindCustomerForOrder";
+            this.btnFindCustomerForOrder.Size = new System.Drawing.Size(24, 23);
+            this.btnFindCustomerForOrder.TabIndex = 2;
+            this.btnFindCustomerForOrder.UseVisualStyleBackColor = true;
+            this.btnFindCustomerForOrder.Click += new System.EventHandler(this.btnFindCustomerForOrder_Click);
+            // 
             // txtCustomerPhone
             // 
             this.txtCustomerPhone.Enabled = false;
@@ -1802,6 +1813,18 @@
             this.gbFindOrder.TabStop = false;
             this.gbFindOrder.Text = "Order";
             // 
+            // btnDeleteOrder
+            // 
+            this.btnDeleteOrder.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnDeleteOrder.Enabled = false;
+            this.btnDeleteOrder.Image = global::DonniOptical2.Properties.Resources.bin;
+            this.btnDeleteOrder.Location = new System.Drawing.Point(339, 16);
+            this.btnDeleteOrder.Name = "btnDeleteOrder";
+            this.btnDeleteOrder.Size = new System.Drawing.Size(35, 23);
+            this.btnDeleteOrder.TabIndex = 4;
+            this.btnDeleteOrder.UseVisualStyleBackColor = false;
+            this.btnDeleteOrder.Click += new System.EventHandler(this.btnDeleteOrder_Click);
+            // 
             // rdoFindOrder
             // 
             this.rdoFindOrder.AutoSize = true;
@@ -1924,28 +1947,6 @@
             this.btnClearItemTextboxes.TabIndex = 264;
             this.btnClearItemTextboxes.UseVisualStyleBackColor = true;
             this.btnClearItemTextboxes.Click += new System.EventHandler(this.btnClearItemTextboxes_Click);
-            // 
-            // btnFindCustomerForOrder
-            // 
-            this.btnFindCustomerForOrder.BackgroundImage = global::DonniOptical2.Properties.Resources.magnifier;
-            this.btnFindCustomerForOrder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnFindCustomerForOrder.Location = new System.Drawing.Point(216, 21);
-            this.btnFindCustomerForOrder.Name = "btnFindCustomerForOrder";
-            this.btnFindCustomerForOrder.Size = new System.Drawing.Size(24, 23);
-            this.btnFindCustomerForOrder.TabIndex = 2;
-            this.btnFindCustomerForOrder.UseVisualStyleBackColor = true;
-            this.btnFindCustomerForOrder.Click += new System.EventHandler(this.btnFindCustomerForOrder_Click);
-            // 
-            // btnDeleteOrder
-            // 
-            this.btnDeleteOrder.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnDeleteOrder.Image = global::DonniOptical2.Properties.Resources.bin;
-            this.btnDeleteOrder.Location = new System.Drawing.Point(339, 16);
-            this.btnDeleteOrder.Name = "btnDeleteOrder";
-            this.btnDeleteOrder.Size = new System.Drawing.Size(35, 23);
-            this.btnDeleteOrder.TabIndex = 4;
-            this.btnDeleteOrder.UseVisualStyleBackColor = false;
-            this.btnDeleteOrder.Click += new System.EventHandler(this.btnDeleteOrder_Click);
             // 
             // frmOrder
             // 

@@ -1561,6 +1561,7 @@ namespace DonniOptical2
             txtDepositAmnt.Text = "0.00";
             txtBalanceAmnt.Text = "0.00";
             txtTrayNumber.Text = "";
+            btnDeleteOrder.Enabled = false;
         }
         private void PrepareForUpdateEntry(int orderId)
         {
@@ -1575,6 +1576,7 @@ namespace DonniOptical2
             if (orderInfo != null && orderInfo.Id > 0)
             {
                 txtOrderNo.Text = orderInfo.Id.ToString().PadLeft(8, '0');
+                btnDeleteOrder.Enabled = true;
                 txtCustomerNo.Text = orderInfo.CustomerId.ToString();
                 txtDoctorName.Text = orderInfo.DoctorName;
                 txtDoctorPhone.Text = orderInfo.DoctorPhone;
@@ -1699,39 +1701,54 @@ namespace DonniOptical2
 
         private void btnDeleteOrder_Click(object sender, EventArgs e)
         {
+            int orderId = 0;
+            if (int.TryParse(txtOrderNo.Text, out orderId))
+            {
+                if (orderId > 0)
+                {
+
+                    DialogResult result = MessageBox.Show("Are you sure to delete this order?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (result == DialogResult.Yes)
+                    {
+                        if (orderManager.DeleteExistingOrder(orderId) > 0)
+                        {
+                            MessageBox.Show("The order has been deleted successfully.", "Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            rdoNewOrder.Checked = true;
+                            PrepareForNewEntry();
+                        }
+                    }
+                }
+            }
 
         }
 
         private void txtMeasurementEd_TextChanged(object sender, EventArgs e)
         {
-
+            CalculateMinBlankSize();
         }
 
         private void txtMeasurementFpdRight_TextChanged(object sender, EventArgs e)
         {
-
+            CalculateMinBlankSize();
         }
 
         private void txtMeasurementNrPdRight_TextChanged(object sender, EventArgs e)
         {
-
+            CalculateMinBlankSize();
         }
 
         private void txtMeasurementFpdLeft_TextChanged(object sender, EventArgs e)
         {
-
+            CalculateMinBlankSize();
         }
 
         private void txtMeasurementNrPdLeft_TextChanged(object sender, EventArgs e)
         {
-
+            CalculateMinBlankSize();
         }
 
         private void CalculateMinBlankSize()
         {
-            decimal ed = 0;
-            //decimal nearPdRight = 0;
-            //decimal nearPdLeft = 0;
             decimal farPdRight = 0;
             decimal farPdLeft = 0;
 
@@ -1748,9 +1765,7 @@ namespace DonniOptical2
             decimal blankSizeLeft = 0;
 
 
-            decimal.TryParse(txtMeasurementEd.Text, out ed);
-            //decimal.TryParse(txtMeasurementNrPdRight.Text, out nearPdRight);
-            //decimal.TryParse(txtMeasurementNrPdLeft.Text, out nearPdLeft);
+            decimal.TryParse(txtMeasurementEd.Text, out measureEd);
             decimal.TryParse(txtMeasurementFpdRight.Text, out farPdRight);
             decimal.TryParse(txtMeasurementFpdLeft.Text, out farPdLeft);
 
@@ -1762,15 +1777,22 @@ namespace DonniOptical2
             decentrationLeft = Math.Abs(framePd - farPdLeft) / 2;
             decentrationRight = Math.Abs(framePd - farPdRight) / 2;
 
-            blankSizeLeft = measureEd + 2 * decentrationLeft + 2;
-            blankSizeRight = measureEd + 2 * decentrationRight + 2;
+            if (decimal.TryParse(txtMeasurementEd.Text, out measureEd)) {
+                if (decentrationLeft>=0) {
+                    blankSizeLeft = measureEd + 2 * decentrationLeft + 2;
+                }
+                if (decentrationRight >= 0)
+                {
+                    blankSizeRight = measureEd + 2 * decentrationRight + 2;
+                }
+            }
 
-            if (blankSizeLeft > 0)
+            if (decimal.TryParse(blankSizeLeft.ToString(), out blankSizeLeft))
             {
                 txtMeasurementBlSizeLeft.Text = blankSizeLeft.ToString();
             }
 
-            if (blankSizeRight > 0)
+            if (decimal.TryParse(blankSizeRight.ToString(), out blankSizeRight))
             {
                 txtMeasurementBlSizeRight.Text = blankSizeRight.ToString();
             }
