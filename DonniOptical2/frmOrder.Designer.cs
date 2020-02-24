@@ -1,6 +1,6 @@
 ﻿namespace DonniOptical2
 {
-    partial class frmOrder
+    partial class FrmOrder
     {
         /// <summary>
         /// Required designer variable.
@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnCloseOrder = new System.Windows.Forms.Button();
             this.btnRemoveFromOrderItemList = new System.Windows.Forms.Button();
             this.btnSaveOrder = new System.Windows.Forms.Button();
@@ -559,23 +559,23 @@
             // 
             this.gvOrderItemList.AllowUserToAddRows = false;
             this.gvOrderItemList.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvOrderItemList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvOrderItemList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.gvOrderItemList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gvOrderItemList.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gvOrderItemList.DefaultCellStyle = dataGridViewCellStyle4;
             this.gvOrderItemList.Location = new System.Drawing.Point(7, 19);
             this.gvOrderItemList.MultiSelect = false;
             this.gvOrderItemList.Name = "gvOrderItemList";
@@ -1924,6 +1924,7 @@
             this.btnPrintReceipt.Text = "Print receipt";
             this.btnPrintReceipt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnPrintReceipt.UseVisualStyleBackColor = true;
+            this.btnPrintReceipt.Click += new System.EventHandler(this.btnPrintReceipt_Click);
             // 
             // btnPrintOrder
             // 
@@ -1937,6 +1938,7 @@
             this.btnPrintOrder.Text = "Print order";
             this.btnPrintOrder.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnPrintOrder.UseVisualStyleBackColor = true;
+            this.btnPrintOrder.Click += new System.EventHandler(this.btnPrintOrder_Click);
             // 
             // btnClearItemTextboxes
             // 
@@ -1948,7 +1950,7 @@
             this.btnClearItemTextboxes.UseVisualStyleBackColor = true;
             this.btnClearItemTextboxes.Click += new System.EventHandler(this.btnClearItemTextboxes_Click);
             // 
-            // frmOrder
+            // FrmOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -1979,10 +1981,10 @@
             this.Controls.Add(this.gbFindBy);
             this.Controls.Add(this.gbFindOrder);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "frmOrder";
+            this.Name = "FrmOrder";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Order";
-            this.Load += new System.EventHandler(this.frmOrder_Load);
+            this.Load += new System.EventHandler(this.FrmOrder_Load);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -2150,12 +2152,8 @@
         private System.Windows.Forms.LinkLabel lnkNextOrder;
         private System.Windows.Forms.LinkLabel lnkPreviousOrder;
         private System.Windows.Forms.Label lblOrdersFoundText;
-        private System.Windows.Forms.Button btnFindOrder;
-        private System.Windows.Forms.TextBox txtFindByValue;
-        private System.Windows.Forms.ComboBox ddlFindBy;
         private System.Windows.Forms.Label label85;
         private System.Windows.Forms.GroupBox gbFindOrder;
-        private System.Windows.Forms.RadioButton rdoFindOrder;
         private System.Windows.Forms.RadioButton rdoNewOrder;
         private System.Windows.Forms.TextBox txtOrderDate;
         private System.Windows.Forms.TextBox txtOrderNo;
@@ -2178,5 +2176,9 @@
         private System.Windows.Forms.Button btnPrintOrder;
         private System.Windows.Forms.Button btnPrintReceipt;
         private System.Windows.Forms.Button btnDeleteOrder;
+        public System.Windows.Forms.Button btnFindOrder;
+        public System.Windows.Forms.TextBox txtFindByValue;
+        public System.Windows.Forms.ComboBox ddlFindBy;
+        public System.Windows.Forms.RadioButton rdoFindOrder;
     }
 }

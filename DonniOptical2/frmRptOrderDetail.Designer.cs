@@ -1,6 +1,6 @@
 ﻿namespace DonniOptical2
 {
-    partial class frmRptOrderDetail
+    partial class FrmRptOrderDetail
     {
         /// <summary>
         /// Required designer variable.
@@ -40,7 +40,7 @@
             this.rptViewerOrderDetail.Size = new System.Drawing.Size(871, 620);
             this.rptViewerOrderDetail.TabIndex = 0;
             // 
-            // frmRptOrderDetail
+            // FrmRptOrderDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -49,10 +49,10 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmRptOrderDetail";
+            this.Name = "FrmRptOrderDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "rptOrderDetail";
-            this.Load += new System.EventHandler(this.frmRptOrderDetail_Load);
+            this.Load += new System.EventHandler(this.FrmRptOrderDetail_Load);
             this.ResumeLayout(false);
 
         }

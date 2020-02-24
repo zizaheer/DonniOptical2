@@ -1,6 +1,6 @@
 ﻿namespace DonniOptical2
 {
-    partial class frmPrintReceipt
+    partial class FrmPrintReceipt
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPrintReceipt));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPrintReceipt));
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
             this.label1 = new System.Windows.Forms.Label();
@@ -609,7 +609,7 @@
             this.label36.TabIndex = 45;
             this.label36.Text = "Other:";
             // 
-            // frmPrintReceipt
+            // FrmPrintReceipt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -672,7 +672,7 @@
             this.Controls.Add(this.btnPrint);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmPrintReceipt";
+            this.Name = "FrmPrintReceipt";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Print receipt";

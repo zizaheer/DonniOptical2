@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,20 +14,20 @@ using System.Windows.Forms;
 
 namespace DonniOptical2
 {
-    public partial class frmOrder : Form
+    public partial class FrmOrder : Form
     {
         CustomerManager customerManager = new CustomerManager();
         OrderManager orderManager = new OrderManager();
         decimal hstAmount = 0;
         int[] orderFound;
-        public frmOrder()
+        public FrmOrder()
         {
             InitializeComponent();
         }
 
         #region Private Events
 
-        private void frmOrder_Load(object sender, EventArgs e)
+        private void FrmOrder_Load(object sender, EventArgs e)
         {
             orderManager = new OrderManager();
             ddlPaidBy.DataSource = orderManager.GetPaymentMethods();
@@ -346,47 +347,8 @@ namespace DonniOptical2
 
                     if (dr == DialogResult.Yes)
                     {
-                        customerManager = new CustomerManager();
-                        var custInfo = customerManager.GetCustomerById(orderInfo.CustomerId);
-
-                        frmPrintReceipt frmPrintReceipt = new frmPrintReceipt();
-                        frmPrintReceipt.lblOrderNoValue.Text = orderId.ToString().PadLeft(8, '0');
-                        frmPrintReceipt.lblOrderDate.Text = orderInfo.CreateDate.ToString("dd-MMM-yyyy");
-
-                        frmPrintReceipt.lblCustomerNoValue.Text = orderInfo.CustomerId.ToString().PadLeft(6, '0');
-                        frmPrintReceipt.lblCustomerName.Text = custInfo.FirstName + " " + custInfo.LastName;
-                        frmPrintReceipt.lblCustomerAddress.Text = custInfo.Address;
-                        frmPrintReceipt.lblCity.Text = custInfo.City;
-                        frmPrintReceipt.lblPostCode.Text = custInfo.Postcode;
-                        frmPrintReceipt.lblCustomerPhone.Text = custInfo.Telephone;
-
-                        frmPrintReceipt.lblFrameTotalPrice.Text = Convert.ToString(orderInfo.FrameTotalPrice);
-                        frmPrintReceipt.lblLensTotalPrice.Text = Convert.ToString(orderInfo.LensTotalPrice);
-                        frmPrintReceipt.lblOtherAmount.Text = Convert.ToString(orderInfo.OtherTotal);
-                        frmPrintReceipt.lblDiscountAmnt.Text = Convert.ToString(orderInfo.DiscountAmount);
-                        frmPrintReceipt.lblSubtotal.Text = Convert.ToString(orderInfo.OrderTotal);
-                        frmPrintReceipt.lblHstAmount.Text = Convert.ToString(orderInfo.HstAmount);
-                        frmPrintReceipt.lblGrandTotal.Text = Convert.ToString(orderInfo.GrandTotal);
-                        frmPrintReceipt.lblDepositAmount.Text = Convert.ToString(orderInfo.PaidAmount);
-                        frmPrintReceipt.lblBalanceDue.Text = Convert.ToString(orderInfo.BalanceDue);
-
-                        //frmPrintReceipt.lblRemarks.Text = orderInfo.Remarks;
-
-                        var allPrinters = System.Drawing.Printing.PrinterSettings.InstalledPrinters;
-                        int index = 0;
-                        foreach (var printer in allPrinters)
-                        {
-                            frmPrintReceipt.ddlPrinterList.Items.Insert(index, printer.ToString());
-                            index++;
-                        }
-
-                        frmPrintReceipt.ShowDialog();
-
+                        PrintReceipt(orderId);
                     }
-
-
-
-
                 }
 
             }
@@ -1563,7 +1525,7 @@ namespace DonniOptical2
             txtTrayNumber.Text = "";
             btnDeleteOrder.Enabled = false;
         }
-        private void PrepareForUpdateEntry(int orderId)
+        public void PrepareForUpdateEntry(int orderId)
         {
             rdoFindOrder.Checked = true;
             gbFindBy.Enabled = true;
@@ -1749,55 +1711,126 @@ namespace DonniOptical2
 
         private void CalculateMinBlankSize()
         {
-            decimal farPdRight = 0;
-            decimal farPdLeft = 0;
+            decimal farPdRight;
+            decimal farPdLeft;
 
-            decimal measureA = 0;
-            decimal measureDbl = 0;
-            decimal measureEd = 0;
+            decimal measureA;
+            decimal measureDbl;
+            decimal measureEd;
 
-            decimal framePd = 0;
+            decimal framePd;
 
-            decimal decentrationLeft = 0;
-            decimal decentrationRight = 0;
+            decimal decentrationLeft;
+            decimal decentrationRight;
 
-            decimal blankSizeRight = 0;
-            decimal blankSizeLeft = 0;
+            decimal blankSizeRight;
+            decimal blankSizeLeft;
 
 
-            decimal.TryParse(txtMeasurementEd.Text, out measureEd);
-            decimal.TryParse(txtMeasurementFpdRight.Text, out farPdRight);
-            decimal.TryParse(txtMeasurementFpdLeft.Text, out farPdLeft);
-
-            decimal.TryParse(txtMeasurementA.Text, out measureA);
-            decimal.TryParse(txtMeasurementDbl.Text, out measureDbl);
-
-            framePd = measureA + measureDbl;
-
-            decentrationLeft = Math.Abs(framePd - farPdLeft) / 2;
-            decentrationRight = Math.Abs(framePd - farPdRight) / 2;
-
-            if (decimal.TryParse(txtMeasurementEd.Text, out measureEd)) {
-                if (decentrationLeft>=0) {
-                    blankSizeLeft = measureEd + 2 * decentrationLeft + 2;
-                }
-                if (decentrationRight >= 0)
+            if (decimal.TryParse(txtMeasurementA.Text, out measureA) && decimal.TryParse(txtMeasurementDbl.Text, out measureDbl))
+            {
+                framePd = measureA + measureDbl;
+                if (decimal.TryParse(txtMeasurementFpdLeft.Text, out farPdLeft))
                 {
-                    blankSizeRight = measureEd + 2 * decentrationRight + 2;
+                    decentrationLeft = Math.Abs(framePd / 2 - farPdLeft);
+                    if (decimal.TryParse(txtMeasurementEd.Text, out measureEd))
+                    {
+                        if (decentrationLeft >= 0)
+                        {
+                            blankSizeLeft = measureEd + 2 * decentrationLeft + 2;
+                            if (blankSizeLeft > 0)
+                            {
+                                txtMeasurementBlSizeLeft.Text = blankSizeLeft.ToString();
+                            }
+                            else
+                            {
+                                txtMeasurementBlSizeLeft.Text = "";
+                            }
+                        }
+                    }
+                }
+                if (decimal.TryParse(txtMeasurementFpdRight.Text, out farPdRight))
+                {
+                    decentrationRight = Math.Abs(framePd / 2 - farPdRight);
+                    if (decimal.TryParse(txtMeasurementEd.Text, out measureEd))
+                    {
+                        if (decentrationRight >= 0)
+                        {
+                            blankSizeRight = measureEd + 2 * decentrationRight + 2;
+                            if (blankSizeRight > 0)
+                            {
+                                txtMeasurementBlSizeRight.Text = blankSizeRight.ToString();
+                            }
+                            else
+                            {
+                                txtMeasurementBlSizeRight.Text = "";
+                            }
+                        }
+                    }
                 }
             }
+        }
 
-            if (decimal.TryParse(blankSizeLeft.ToString(), out blankSizeLeft))
-            {
-                txtMeasurementBlSizeLeft.Text = blankSizeLeft.ToString();
-            }
-
-            if (decimal.TryParse(blankSizeRight.ToString(), out blankSizeRight))
-            {
-                txtMeasurementBlSizeRight.Text = blankSizeRight.ToString();
-            }
+        private void btnPrintOrder_Click(object sender, EventArgs e)
+        {
 
         }
 
+        private void btnPrintReceipt_Click(object sender, EventArgs e)
+        {
+            int orderId = 0;
+            if (int.TryParse(txtOrderNo.Text, out orderId))
+            {
+                PrintReceipt(orderId);
+            }
+        }
+
+        private void PrintReceipt(int orderId)
+        {
+            var orderInfo = orderManager.GetOrderById(orderId);
+            customerManager = new CustomerManager();
+            var custInfo = customerManager.GetCustomerById(orderInfo.CustomerId);
+
+            FrmPrintReceipt frmPrintRcpt = new FrmPrintReceipt();
+            frmPrintRcpt.lblOrderNoValue.Text = orderId.ToString().PadLeft(8, '0');
+            frmPrintRcpt.lblOrderDate.Text = orderInfo.CreateDate.ToString("dd-MMM-yyyy");
+
+            frmPrintRcpt.lblCustomerNoValue.Text = orderInfo.CustomerId.ToString().PadLeft(6, '0');
+            frmPrintRcpt.lblCustomerName.Text = custInfo.FirstName + " " + custInfo.LastName;
+            frmPrintRcpt.lblCustomerAddress.Text = custInfo.Address;
+            frmPrintRcpt.lblCity.Text = custInfo.City;
+            frmPrintRcpt.lblPostCode.Text = custInfo.Postcode;
+            frmPrintRcpt.lblCustomerPhone.Text = custInfo.Telephone;
+
+            frmPrintRcpt.lblFrameTotalPrice.Text = Convert.ToString(orderInfo.FrameTotalPrice);
+            frmPrintRcpt.lblLensTotalPrice.Text = Convert.ToString(orderInfo.LensTotalPrice);
+            frmPrintRcpt.lblOtherAmount.Text = Convert.ToString(orderInfo.OtherTotal);
+            frmPrintRcpt.lblDiscountAmnt.Text = Convert.ToString(orderInfo.DiscountAmount);
+            frmPrintRcpt.lblSubtotal.Text = Convert.ToString(orderInfo.OrderTotal);
+            frmPrintRcpt.lblHstAmount.Text = Convert.ToString(orderInfo.HstAmount);
+            frmPrintRcpt.lblGrandTotal.Text = Convert.ToString(orderInfo.GrandTotal);
+            frmPrintRcpt.lblDepositAmount.Text = Convert.ToString(orderInfo.PaidAmount);
+            frmPrintRcpt.lblBalanceDue.Text = Convert.ToString(orderInfo.BalanceDue);
+
+            //frmPrintRcpt.lblRemarks.Text = orderInfo.Remarks;
+
+            PrinterSettings printerSettings = new PrinterSettings();
+            frmPrintRcpt.ddlPrinterList.Items.Insert(0, printerSettings.PrinterName);
+
+            var allPrinters = System.Drawing.Printing.PrinterSettings.InstalledPrinters;
+            int index = 1;
+            foreach (var printer in allPrinters)
+            {
+                if (printerSettings.PrinterName == printer.ToString())
+                {
+                    continue;
+                }
+                frmPrintRcpt.ddlPrinterList.Items.Insert(index, printer.ToString());
+                index++;
+            }
+
+            frmPrintRcpt.ddlPrinterList.SelectedIndex = 0;
+            frmPrintRcpt.ShowDialog();
+        }
     }
 }

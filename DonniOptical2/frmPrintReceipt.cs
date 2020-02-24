@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace DonniOptical2
 {
-    public partial class frmPrintReceipt : Form
+    public partial class FrmPrintReceipt : Form
     {
        
-        public frmPrintReceipt()
+        public FrmPrintReceipt()
         {
             InitializeComponent();
         }
@@ -48,6 +48,7 @@ namespace DonniOptical2
             }
 
             btnPrint.Visible = false;
+            ddlPrinterList.Visible = false;
             PrintScreen();
             
             printPreviewDialog.ShowDialog();

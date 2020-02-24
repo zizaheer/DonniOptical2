@@ -34,7 +34,7 @@ namespace DonniOptical2
             }
             else
             {
-                MessageBox.Show("No order found with your seleted date range. ", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("No order found with your seleted date range.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
 
@@ -106,7 +106,7 @@ namespace DonniOptical2
 
             if (index == 2)
             {
-                var orderList = orderManager.GetOrdersByDateAndPhoneNumber(fromDate, toDate, filterValue);
+                var orderList = orderManager.GetOrdersByCustomerPhone(filterValue);
                 if (orderList.Count > 0)
                 {
                     gvOrderList.DataSource = orderList;
@@ -121,7 +121,7 @@ namespace DonniOptical2
 
             if (index == 3)
             {
-                var orderList = orderManager.GetOrdersByDateAndFirstName(fromDate, toDate, filterValue);
+                var orderList = orderManager.GetOrdersByCustomerFirstName(filterValue);
                 if (orderList.Count > 0)
                 {
                     gvOrderList.DataSource = orderList;
@@ -136,7 +136,7 @@ namespace DonniOptical2
 
             if (index == 4)
             {
-                var orderList = orderManager.GetOrdersByDateAndLastName(fromDate, toDate, filterValue);
+                var orderList = orderManager.GetOrdersByLastName(filterValue);
                 if (orderList.Count > 0)
                 {
                     gvOrderList.DataSource = orderList;
@@ -151,7 +151,7 @@ namespace DonniOptical2
 
             if (index == 5)
             {
-                var orderList = orderManager.GetOrdersByDateAndEmail(fromDate, toDate, filterValue);
+                var orderList = orderManager.GetOrdersByEmail(filterValue);
                 if (orderList.Count > 0)
                 {
                     gvOrderList.DataSource = orderList;
@@ -163,6 +163,51 @@ namespace DonniOptical2
                     return;
                 }
             }
+        }
+
+        private void gvOrderList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int orderId = 0;
+            var row = gvOrderList.CurrentRow;
+
+            orderId = Convert.ToInt32(row.Cells["OrderId"].Value);
+            OpenOrderForm(orderId);
+        }
+
+        private void OpenOrderForm(int orderId) {
+            if (orderId > 0)
+            {
+
+                bool isFormOpened = false;
+
+                foreach (Form frm in Application.OpenForms)
+                {
+                    if (frm.Name == "FrmOrder")
+                    {
+                        ((FrmOrder)frm).rdoFindOrder.Checked = true;
+                        ((FrmOrder)frm).ddlFindBy.SelectedIndex = 0;
+                        ((FrmOrder)frm).txtFindByValue.Text = orderId.ToString();
+                        ((FrmOrder)frm).PrepareForUpdateEntry(orderId); 
+                        frm.BringToFront();
+                        
+                        isFormOpened = true;
+                    }
+                }
+
+                if (isFormOpened == false)
+                {
+                    FrmOrder orderForm = new FrmOrder();
+                    orderForm.MdiParent = FrmMain.ActiveForm;
+                    orderForm.Location = new Point(5, 5);
+
+                    orderForm.rdoFindOrder.Checked = true;
+                    orderForm.ddlFindBy.SelectedIndex = 0;
+                    orderForm.txtFindByValue.Text = orderId.ToString();
+                    orderForm.PrepareForUpdateEntry(orderId);
+                    orderForm.Show();
+                }
+            }
+
         }
     }
 }

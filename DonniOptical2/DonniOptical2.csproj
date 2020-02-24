@@ -101,29 +101,29 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DinnoOpticalDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="frmCustomer.cs">
+    <Compile Include="FrmCustomer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmCustomer.Designer.cs">
-      <DependentUpon>frmCustomer.cs</DependentUpon>
+    <Compile Include="FrmCustomer.Designer.cs">
+      <DependentUpon>FrmCustomer.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmOrder.cs">
+    <Compile Include="FrmOrder.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmOrder.Designer.cs">
-      <DependentUpon>frmOrder.cs</DependentUpon>
+    <Compile Include="FrmOrder.Designer.cs">
+      <DependentUpon>FrmOrder.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmMain.cs">
+    <Compile Include="FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMain.Designer.cs">
-      <DependentUpon>frmMain.cs</DependentUpon>
+    <Compile Include="FrmMain.Designer.cs">
+      <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmPrintReceipt.cs">
+    <Compile Include="FrmPrintReceipt.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPrintReceipt.Designer.cs">
-      <DependentUpon>frmPrintReceipt.cs</DependentUpon>
+    <Compile Include="FrmPrintReceipt.Designer.cs">
+      <DependentUpon>FrmPrintReceipt.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmViewOrder.cs">
       <SubType>Form</SubType>
@@ -139,24 +139,24 @@
     <Compile Include="Model\ViewOrder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="frmRptOrderDetail.cs">
+    <Compile Include="FrmRptOrderDetail.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmRptOrderDetail.Designer.cs">
-      <DependentUpon>frmRptOrderDetail.cs</DependentUpon>
+    <Compile Include="FrmRptOrderDetail.Designer.cs">
+      <DependentUpon>FrmRptOrderDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
-    <EmbeddedResource Include="frmCustomer.resx">
-      <DependentUpon>frmCustomer.cs</DependentUpon>
+    <EmbeddedResource Include="FrmCustomer.resx">
+      <DependentUpon>FrmCustomer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmOrder.resx">
-      <DependentUpon>frmOrder.cs</DependentUpon>
+    <EmbeddedResource Include="FrmOrder.resx">
+      <DependentUpon>FrmOrder.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMain.resx">
-      <DependentUpon>frmMain.cs</DependentUpon>
+    <EmbeddedResource Include="FrmMain.resx">
+      <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPrintReceipt.resx">
-      <DependentUpon>frmPrintReceipt.cs</DependentUpon>
+    <EmbeddedResource Include="FrmPrintReceipt.resx">
+      <DependentUpon>FrmPrintReceipt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmViewOrder.resx">
       <DependentUpon>FrmViewOrder.cs</DependentUpon>
@@ -174,8 +174,8 @@
     <EmbeddedResource Include="orderDetailReport.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmRptOrderDetail.resx">
-      <DependentUpon>frmRptOrderDetail.cs</DependentUpon>
+    <EmbeddedResource Include="FrmRptOrderDetail.resx">
+      <DependentUpon>FrmRptOrderDetail.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="DinnoOpticalDataSet.xsc">
       <DependentUpon>DinnoOpticalDataSet.xsd</DependentUpon>

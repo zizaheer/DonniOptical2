@@ -35,13 +35,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtFilterValue = new System.Windows.Forms.TextBox();
             this.ddlFilterBy = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnFilter = new System.Windows.Forms.Button();
             this.gvOrderList = new System.Windows.Forms.DataGridView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnClose = new System.Windows.Forms.Button();
-            this.txtFilterValue = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvOrderList)).BeginInit();
@@ -121,6 +121,13 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Filter";
             // 
+            // txtFilterValue
+            // 
+            this.txtFilterValue.Location = new System.Drawing.Point(178, 29);
+            this.txtFilterValue.Name = "txtFilterValue";
+            this.txtFilterValue.Size = new System.Drawing.Size(175, 20);
+            this.txtFilterValue.TabIndex = 6;
+            // 
             // ddlFilterBy
             // 
             this.ddlFilterBy.FormattingEnabled = true;
@@ -157,11 +164,16 @@
             // 
             // gvOrderList
             // 
+            this.gvOrderList.AllowUserToAddRows = false;
+            this.gvOrderList.AllowUserToDeleteRows = false;
             this.gvOrderList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvOrderList.Location = new System.Drawing.Point(14, 22);
+            this.gvOrderList.MultiSelect = false;
             this.gvOrderList.Name = "gvOrderList";
+            this.gvOrderList.ReadOnly = true;
             this.gvOrderList.Size = new System.Drawing.Size(862, 504);
             this.gvOrderList.TabIndex = 7;
+            this.gvOrderList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvOrderList_CellDoubleClick);
             // 
             // groupBox3
             // 
@@ -182,13 +194,6 @@
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // txtFilterValue
-            // 
-            this.txtFilterValue.Location = new System.Drawing.Point(178, 29);
-            this.txtFilterValue.Name = "txtFilterValue";
-            this.txtFilterValue.Size = new System.Drawing.Size(175, 20);
-            this.txtFilterValue.TabIndex = 6;
             // 
             // FrmViewOrder
             // 

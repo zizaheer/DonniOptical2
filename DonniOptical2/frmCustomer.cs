@@ -13,17 +13,17 @@ using System.Windows.Forms;
 
 namespace DonniOptical2
 {
-    public partial class frmCustomer : Form
+    public partial class FrmCustomer : Form
     {
         CustomerManager customerManager;
         int[] customerFound;
-        public frmCustomer()
+        public FrmCustomer()
         {
             InitializeComponent();
             customerManager = new CustomerManager();
         }
 
-        private void frmCustomer_Load(object sender, EventArgs e)
+        private void FrmCustomer_Load(object sender, EventArgs e)
         {
             LoadCustomerGrid();
             PrepareForNewEntry();
@@ -373,7 +373,7 @@ namespace DonniOptical2
 
             foreach (Form frm in Application.OpenForms)
             {
-                if (frm.Name == "frmOrder")
+                if (frm.Name == "FrmOrder")
                 {
                     frm.BringToFront();
                     isFormOpened = true;
@@ -382,8 +382,8 @@ namespace DonniOptical2
 
             if (isFormOpened == false)
             {
-                frmOrder orderForm = new frmOrder();
-                orderForm.MdiParent = frmMain.ActiveForm;
+                FrmOrder orderForm = new FrmOrder();
+                orderForm.MdiParent = FrmMain.ActiveForm;
                 orderForm.Location = new Point(5, 5);
                 orderForm.Show();
             }

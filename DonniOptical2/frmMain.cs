@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace DonniOptical2
 {
-    public partial class frmMain : Form
+    public partial class FrmMain : Form
     {
 
-        public frmMain()
+        public FrmMain()
         {
             InitializeComponent();
         }
@@ -24,7 +24,7 @@ namespace DonniOptical2
         {
             this.Close();
         }
-        private void frmMain_Load(object sender, EventArgs e)
+        private void FrmMain_Load(object sender, EventArgs e)
         {
             IsMdiContainer = true;
             SetBackgroundColorForChildForm();
@@ -55,7 +55,7 @@ namespace DonniOptical2
 
             foreach (Form frm in Application.OpenForms)
             {
-                if (frm.Name == "frmOrder")
+                if (frm.Name == "FrmOrder")
                 {
                     frm.BringToFront();
                     isFormOpened = true;
@@ -64,7 +64,7 @@ namespace DonniOptical2
 
             if (isFormOpened == false)
             {
-                frmOrder orderForm = new frmOrder();
+                FrmOrder orderForm = new FrmOrder();
                 orderForm.MdiParent = this;
                 orderForm.Location = new Point(5, 5);
                 orderForm.Show();
@@ -76,7 +76,7 @@ namespace DonniOptical2
 
             foreach (Form frm in Application.OpenForms)
             {
-                if (frm.Name == "frmOrder")
+                if (frm.Name == "FrmOrder")
                 {
                     frm.BringToFront();
                     isFormOpened = true;
@@ -85,7 +85,7 @@ namespace DonniOptical2
 
             if (isFormOpened == false)
             {
-                frmOrder orderForm = new frmOrder();
+                FrmOrder orderForm = new FrmOrder();
                 orderForm.MdiParent = this;
                 orderForm.Location = new Point(5, 5);
                 orderForm.Show();
@@ -98,7 +98,7 @@ namespace DonniOptical2
 
             foreach (Form frm in Application.OpenForms)
             {
-                if (frm.Name == "frmCustomer")
+                if (frm.Name == "FrmCustomer")
                 {
                     frm.BringToFront();
                     isFormOpened = true;
@@ -107,7 +107,7 @@ namespace DonniOptical2
 
             if (isFormOpened == false)
             {
-                frmCustomer customerForm = new frmCustomer();
+                FrmCustomer customerForm = new FrmCustomer();
                 customerForm.MdiParent = this;
                 customerForm.Location = new Point(5, 5);
                 customerForm.Show();
@@ -119,7 +119,7 @@ namespace DonniOptical2
 
             foreach (Form frm in Application.OpenForms)
             {
-                if (frm.Name == "frmCustomer")
+                if (frm.Name == "FrmCustomer")
                 {
                     frm.BringToFront();
                     isFormOpened = true;
@@ -128,7 +128,7 @@ namespace DonniOptical2
 
             if (isFormOpened == false)
             {
-                frmCustomer customerForm = new frmCustomer();
+                FrmCustomer customerForm = new FrmCustomer();
                 customerForm.MdiParent = this;
                 customerForm.Location = new Point(5, 5);
                 customerForm.Show();
@@ -137,10 +137,10 @@ namespace DonniOptical2
 
         private void printToolStripButton_Click(object sender, EventArgs e)
         {
-            frmRptOrderDetail frmRptOrderDetail = new frmRptOrderDetail();
-            frmRptOrderDetail.MdiParent = this;
-            frmRptOrderDetail.Location = new Point(5, 5);
-            frmRptOrderDetail.Show();
+            FrmRptOrderDetail rptOrderDetail = new FrmRptOrderDetail();
+            rptOrderDetail.MdiParent = this;
+            rptOrderDetail.Location = new Point(5, 5);
+            rptOrderDetail.Show();
         }
 
         private void toolStripButtonFind_Click(object sender, EventArgs e)

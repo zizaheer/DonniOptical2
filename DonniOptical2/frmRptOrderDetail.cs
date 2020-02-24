@@ -15,10 +15,10 @@ using System.Windows.Forms;
 
 namespace DonniOptical2
 {
-    public partial class frmRptOrderDetail : Form
+    public partial class FrmRptOrderDetail : Form
     {
         OrderManager orderManager;
-        public frmRptOrderDetail()
+        public FrmRptOrderDetail()
         {
             InitializeComponent();
             orderManager = new OrderManager();
@@ -26,7 +26,7 @@ namespace DonniOptical2
 
 
 
-        private void frmRptOrderDetail_Load(object sender, EventArgs e)
+        private void FrmRptOrderDetail_Load(object sender, EventArgs e)
         {
             try
             {
