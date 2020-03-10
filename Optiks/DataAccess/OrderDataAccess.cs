@@ -84,13 +84,11 @@ namespace Optiks.DataAccess
 
         public DataTable GetOrderDataTable()
         {
-            DataTable dt = new DataTable();
+            DataTable dataTable = new DataTable("Order");
 
             try
             {
                 sqlConnection.Open();
-
-                DataTable dataTable = new DataTable();
                 string query = "SELECT * FROM dbo.[Order]";
                 sqlCommand = new SqlCommand(query, sqlConnection);
                 dataAdapter = new SqlDataAdapter(sqlCommand);
@@ -106,7 +104,7 @@ namespace Optiks.DataAccess
                 sqlConnection.Close();
             }
 
-            return dt;
+            return dataTable;
         }
         public int GetMaxOrderId()
         {
@@ -194,13 +192,11 @@ namespace Optiks.DataAccess
 
         public DataTable GetSingleOrderById(int id)
         {
-            DataTable dt = new DataTable();
+            DataTable dataTable = new DataTable("Order");
 
             try
             {
                 sqlConnection.Open();
-
-                DataTable dataTable = new DataTable();
                 string query = "SELECT * FROM dbo.[Order] WHERE Id = @Id";
                 sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@Id", id);
@@ -217,7 +213,7 @@ namespace Optiks.DataAccess
                 sqlConnection.Close();
             }
 
-            return dt;
+            return dataTable;
         }
 
         public int InsertNewOrder(Order order)

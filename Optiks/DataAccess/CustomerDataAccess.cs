@@ -62,13 +62,11 @@ namespace Optiks.DataAccess
 
         public DataTable GetCustomerDataTable()
         {
-            DataTable dt = new DataTable();
+            DataTable dataTable = new DataTable("Customer");
 
             try
             {
                 sqlConnection.Open();
-
-                DataTable dataTable = new DataTable();
                 string query = "SELECT * FROM Customer";
                 sqlCommand = new SqlCommand(query, sqlConnection);
                 dataAdapter = new SqlDataAdapter(sqlCommand);
@@ -84,7 +82,7 @@ namespace Optiks.DataAccess
                 sqlConnection.Close();
             }
 
-            return dt;
+            return dataTable;
         }
         public Customer GetCustomerById(int id)
         {
@@ -126,13 +124,11 @@ namespace Optiks.DataAccess
 
         public DataTable GetCustomerDataTableById(int id)
         {
-            DataTable dt = new DataTable();
+            DataTable dataTable = new DataTable("Customer");
 
             try
             {
                 sqlConnection.Open();
-
-                DataTable dataTable = new DataTable();
                 string query = "SELECT * FROM Customer WHERE Id = @Id";
                 sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@Id", id);
@@ -149,7 +145,7 @@ namespace Optiks.DataAccess
                 sqlConnection.Close();
             }
 
-            return dt;
+            return dataTable;
         }
 
         public int GetMaxCustomerId()

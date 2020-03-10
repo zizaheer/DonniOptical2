@@ -563,8 +563,8 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::OptiksRetoll.Properties.Resources.dinno_logo;
-            this.pictureBox1.InitialImage = global::OptiksRetoll.Properties.Resources.dinno_logo;
+            this.pictureBox1.Image = global::Optiks.Properties.Resources.dinno_logo;
+            this.pictureBox1.InitialImage = global::Optiks.Properties.Resources.dinno_logo;
             this.pictureBox1.Location = new System.Drawing.Point(33, 36);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 50);
@@ -574,7 +574,7 @@
             // 
             // btnPrint
             // 
-            this.btnPrint.Image = global::OptiksRetoll.Properties.Resources.printer;
+            this.btnPrint.Image = global::Optiks.Properties.Resources.printer;
             this.btnPrint.Location = new System.Drawing.Point(769, 513);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(34, 23);

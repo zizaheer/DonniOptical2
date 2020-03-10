@@ -215,7 +215,8 @@
             // 
             // btnFindCustomerById
             // 
-            this.btnFindCustomerById.BackgroundImage = global::OptiksRetoll.Properties.Resources.magnifier;
+            this.btnFindCustomerById.BackgroundImage = global::
+                Optiks.Properties.Resources.magnifier;
             this.btnFindCustomerById.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnFindCustomerById.Enabled = false;
             this.btnFindCustomerById.Location = new System.Drawing.Point(216, 21);

@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace OptiksRetoll {
+namespace Optiks {
     
     
     /// <summary>
@@ -20,9 +20,9 @@ namespace OptiksRetoll {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("DinnoOpticalDataSet")]
+    [global::System.Xml.Serialization.XmlRootAttribute("ReportDataSet")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class DinnoOpticalDataSet : global::System.Data.DataSet {
+    public partial class ReportDataSet : global::System.Data.DataSet {
         
         private CustomerDataTable tableCustomer;
         
@@ -38,7 +38,7 @@ namespace OptiksRetoll {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public DinnoOpticalDataSet() {
+        public ReportDataSet() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -49,7 +49,7 @@ namespace OptiksRetoll {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        protected DinnoOpticalDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        protected ReportDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -161,7 +161,7 @@ namespace OptiksRetoll {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public override global::System.Data.DataSet Clone() {
-            DinnoOpticalDataSet cln = ((DinnoOpticalDataSet)(base.Clone()));
+            ReportDataSet cln = ((ReportDataSet)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
@@ -253,9 +253,9 @@ namespace OptiksRetoll {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitClass() {
-            this.DataSetName = "DinnoOpticalDataSet";
+            this.DataSetName = "ReportDataSet";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/DinnoOpticalDataSet.xsd";
+            this.Namespace = "http://tempuri.org/ReportDataSet.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
             this.tableCustomer = new CustomerDataTable();
@@ -303,7 +303,7 @@ namespace OptiksRetoll {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            DinnoOpticalDataSet ds = new DinnoOpticalDataSet();
+            ReportDataSet ds = new ReportDataSet();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -666,7 +666,7 @@ namespace OptiksRetoll {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DinnoOpticalDataSet ds = new DinnoOpticalDataSet();
+                ReportDataSet ds = new ReportDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -1355,7 +1355,7 @@ namespace OptiksRetoll {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DinnoOpticalDataSet ds = new DinnoOpticalDataSet();
+                ReportDataSet ds = new ReportDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -2236,7 +2236,7 @@ namespace OptiksRetoll {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DinnoOpticalDataSet ds = new DinnoOpticalDataSet();
+                ReportDataSet ds = new ReportDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -4445,7 +4445,7 @@ namespace OptiksRetoll {
         }
     }
 }
-namespace OptiksRetoll.DinnoOpticalDataSetTableAdapters {
+namespace Optiks.ReportDataSetTableAdapters {
     
     
     /// <summary>
@@ -4639,7 +4639,7 @@ SELECT Id, FirstName, LastName, Address, City, Postcode, Telephone, Email FROM C
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::OptiksRetoll.Properties.Settings.Default.DinnoOpticalConnectionString;
+            this._connection.ConnectionString = global::Optiks.Properties.Settings.Default.DinnoOpticalConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4657,7 +4657,7 @@ SELECT Id, FirstName, LastName, Address, City, Postcode, Telephone, Email FROM C
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DinnoOpticalDataSet.CustomerDataTable dataTable) {
+        public virtual int Fill(ReportDataSet.CustomerDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -4670,9 +4670,9 @@ SELECT Id, FirstName, LastName, Address, City, Postcode, Telephone, Email FROM C
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DinnoOpticalDataSet.CustomerDataTable GetData() {
+        public virtual ReportDataSet.CustomerDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DinnoOpticalDataSet.CustomerDataTable dataTable = new DinnoOpticalDataSet.CustomerDataTable();
+            ReportDataSet.CustomerDataTable dataTable = new ReportDataSet.CustomerDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -4680,14 +4680,14 @@ SELECT Id, FirstName, LastName, Address, City, Postcode, Telephone, Email FROM C
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DinnoOpticalDataSet.CustomerDataTable dataTable) {
+        public virtual int Update(ReportDataSet.CustomerDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DinnoOpticalDataSet dataSet) {
+        public virtual int Update(ReportDataSet dataSet) {
             return this.Adapter.Update(dataSet, "Customer");
         }
         
@@ -5422,52 +5422,25 @@ SELECT Id, FirstName, LastName, Address, City, Postcode, Telephone, Email FROM C
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::OptiksRetoll.Properties.Settings.Default.DinnoOpticalConnectionString;
+            this._connection.ConnectionString = global::Optiks.Properties.Settings.Default.DinnoOpticalConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT Id, CustomerId, DoctorName, DoctorPhone, DoctorClinicAddress, DoctorPrescriptionDate, PrescriptionSphereRight, PrescriptionCylRight, PrescriptionAxisRight, PrescriptionAddRight, PrescriptionPrismRight, PrescriptionSphereLeft, PrescriptionCylLeft, PrescriptionAxisLeft, PrescriptionAddLeft, PrescriptionPrismLeft, FrameTotalPrice, LensTotalPrice, OtherTotal, DiscountAmount, OrderTotal, HstAmount, GrandTotal, PaidBy, PaidAmount, BalanceDue, Remarks, CreateDate FROM dbo.[Order] 
-WHERE Id = @OrderId";
+            this._commandCollection[0].CommandText = @"SELECT Id, CustomerId, DoctorName, DoctorPhone, DoctorClinicAddress, DoctorPrescriptionDate, PrescriptionSphereRight, PrescriptionCylRight, PrescriptionAxisRight, PrescriptionAddRight, PrescriptionPrismRight, PrescriptionSphereLeft, PrescriptionCylLeft, PrescriptionAxisLeft, PrescriptionAddLeft, PrescriptionPrismLeft, FrameTotalPrice, LensTotalPrice, OtherTotal, DiscountAmount, OrderTotal, HstAmount, GrandTotal, PaidBy, PaidAmount, BalanceDue, Remarks, CreateDate FROM dbo.[Order]";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OrderId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "SELECT O.Id AS OrderId, O.CustomerId, C.FirstName, C.LastName, C.Address, C.City," +
-                " C.Postcode, C.Telephone\r\n, C.Email, O.CreateDate AS OrderDate, O.DoctorName, O." +
-                "DoctorPhone, O.DoctorClinicAddress, O.DoctorPrescriptionDate\r\n, O.PrescriptionSp" +
-                "hereRight, O.PrescriptionSphereLeft, O.PrescriptionCylRight, O.PrescriptionCylLe" +
-                "ft\r\n, O.PrescriptionAxisRight, O.PrescriptionAxisLeft, O.PrescriptionAddRight, O" +
-                ".PrescriptionAddLeft\r\n, O.PrescriptionPrismRight, O.PrescriptionPrismLeft, O.Fra" +
-                "meTotalPrice, O.LensTotalPrice, O.OtherTotal, O.DiscountAmount\r\n, O.OrderTotal, " +
-                "O.HstAmount, O.GrandTotal, O.PaidBy, O.PaidAmount, O.BalanceDue, O.Remarks\r\n, D." +
-                "TrayNumber, D.ModifiedSphereRight, D.ModifiedSphereLeft, D.ModifiedCylRight, D.M" +
-                "odifiedCylLeft, D.ModifiedAxisRight\r\n, D.ModifiedAxisLeft, D.ModifiedAddRight, D" +
-                ".ModifiedAddLeft, D.ModifiedPrismRight, D.ModifiedPrismLeft\r\n, D.MeasurementFpdR" +
-                "ight, D.MeasurementFpdLeft, D.MeasurementNrPdRight, D.MeasurementNrPdLeft\r\n, D.M" +
-                "easurementOcRight, D.MeasurementOcLeft, D.MeasurementSegRight, D.MeasurementSegL" +
-                "eft, D.MeasurementBlSizeRight\r\n, D.MeasurementBlSizeLeft, D.MeasurementA, D.Meas" +
-                "urementB, D.MeasurementED, D.MeasurementDBL, D.FrameCode\r\n, D.FrameColor, D.Fram" +
-                "eUnitPrice, D.FrameQuantity, D.LeftLensDescription, D.LeftLensQuantity, D.LeftLe" +
-                "nsUnitPrice\r\n, D.RightLensDescription, D.RightLensQuantity, D.RightLensUnitPrice" +
-                ", D.OtherItemDescription, D.OtherItemUnitPrice, D.OtherItemQuantity\r\n FROM [Orde" +
-                "r] O  \r\n INNER JOIN OrderDetail D ON D.OrderId = O.Id \r\n INNER JOIN Customer C O" +
-                "N C.Id = O.CustomerId \r\n WHERE O.Id = @OrderId";
-            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OrderId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "OrderId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DinnoOpticalDataSet.OrderDataTable dataTable, int OrderId) {
+        public virtual int Fill(ReportDataSet.OrderDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(OrderId));
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
             }
@@ -5479,10 +5452,9 @@ WHERE Id = @OrderId";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DinnoOpticalDataSet.OrderDataTable GetData(int OrderId) {
+        public virtual ReportDataSet.OrderDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(OrderId));
-            DinnoOpticalDataSet.OrderDataTable dataTable = new DinnoOpticalDataSet.OrderDataTable();
+            ReportDataSet.OrderDataTable dataTable = new ReportDataSet.OrderDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -5490,40 +5462,14 @@ WHERE Id = @OrderId";
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int FillDetailByOrderId(DinnoOpticalDataSet.OrderDataTable dataTable, int OrderId) {
-            this.Adapter.SelectCommand = this.CommandCollection[1];
-            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(OrderId));
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
-        public virtual DinnoOpticalDataSet.OrderDataTable GetDetailDataByOrderId(int OrderId) {
-            this.Adapter.SelectCommand = this.CommandCollection[1];
-            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(OrderId));
-            DinnoOpticalDataSet.OrderDataTable dataTable = new DinnoOpticalDataSet.OrderDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DinnoOpticalDataSet.OrderDataTable dataTable) {
+        public virtual int Update(ReportDataSet.OrderDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DinnoOpticalDataSet dataSet) {
+        public virtual int Update(ReportDataSet dataSet) {
             return this.Adapter.Update(dataSet, "Order");
         }
         
@@ -7034,7 +6980,7 @@ WHERE Id = @OrderId";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::OptiksRetoll.Properties.Settings.Default.DinnoOpticalConnectionString;
+            this._connection.ConnectionString = global::Optiks.Properties.Settings.Default.DinnoOpticalConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7051,7 +6997,7 @@ WHERE Id = @OrderId";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DinnoOpticalDataSet.OrderDetailDataTable dataTable) {
+        public virtual int Fill(ReportDataSet.OrderDetailDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -7064,9 +7010,9 @@ WHERE Id = @OrderId";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DinnoOpticalDataSet.OrderDetailDataTable GetData() {
+        public virtual ReportDataSet.OrderDetailDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DinnoOpticalDataSet.OrderDetailDataTable dataTable = new DinnoOpticalDataSet.OrderDetailDataTable();
+            ReportDataSet.OrderDetailDataTable dataTable = new ReportDataSet.OrderDetailDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -7074,14 +7020,14 @@ WHERE Id = @OrderId";
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DinnoOpticalDataSet.OrderDetailDataTable dataTable) {
+        public virtual int Update(ReportDataSet.OrderDetailDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DinnoOpticalDataSet dataSet) {
+        public virtual int Update(ReportDataSet dataSet) {
             return this.Adapter.Update(dataSet, "OrderDetail");
         }
         
@@ -8618,7 +8564,7 @@ WHERE Id = @OrderId";
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private int UpdateUpdatedRows(DinnoOpticalDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateUpdatedRows(ReportDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             if ((this._customerTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.Customer.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
@@ -8655,7 +8601,7 @@ WHERE Id = @OrderId";
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private int UpdateInsertedRows(DinnoOpticalDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateInsertedRows(ReportDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             if ((this._customerTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.Customer.Select(null, null, global::System.Data.DataViewRowState.Added);
@@ -8689,7 +8635,7 @@ WHERE Id = @OrderId";
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private int UpdateDeletedRows(DinnoOpticalDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
+        private int UpdateDeletedRows(ReportDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
             if ((this._orderDetailTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.OrderDetail.Select(null, null, global::System.Data.DataViewRowState.Deleted);
@@ -8747,7 +8693,7 @@ WHERE Id = @OrderId";
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public virtual int UpdateAll(DinnoOpticalDataSet dataSet) {
+        public virtual int UpdateAll(ReportDataSet dataSet) {
             if ((dataSet == null)) {
                 throw new global::System.ArgumentNullException("dataSet");
             }

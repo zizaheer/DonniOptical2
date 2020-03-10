@@ -177,13 +177,12 @@ namespace Optiks.DataAccess
 
         public DataTable GetOrderDetailDataTableByOrderId(int orderId)
         {
-            DataTable dt = new DataTable();
+            DataTable dataTable = new DataTable("OrderDetail");
 
             try
             {
                 sqlConnection.Open();
 
-                DataTable dataTable = new DataTable();
                 string query = "SELECT * FROM OrderDetail WHERE OrderId = @OrderId";
                 sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@OrderId", orderId);
@@ -200,7 +199,7 @@ namespace Optiks.DataAccess
                 sqlConnection.Close();
             }
 
-            return dt;
+            return dataTable;
         }
         public int InsertNewOrderDetail(OrderDetail orderDetail)
         {

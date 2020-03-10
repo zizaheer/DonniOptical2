@@ -1348,10 +1348,10 @@ namespace Optiks
 
             if (decimal.TryParse(txtDepositAmnt.Text, out depositAmount))
             {
-                if (depositAmount > 0)
-                {
+                //if (depositAmount > 0)
+                //{
                     balanceAmount = Convert.ToDecimal(txtGrandTotal.Text) - depositAmount;
-                }
+                //}
             }
 
             txtBalanceAmnt.Text = balanceAmount.ToString("0.00");
@@ -1773,16 +1773,34 @@ namespace Optiks
 
         private void btnPrintOrder_Click(object sender, EventArgs e)
         {
-            FrmOrderDetailReport frmRptOrderDetail = new FrmOrderDetailReport();
-            frmRptOrderDetail.ShowDialog();
+            int orderId = 0;
+            int customerId = 0;
+            if (int.TryParse(txtOrderNo.Text, out orderId) && int.TryParse(txtCustomerNo.Text, out customerId))
+            {
+                FrmRptOrderDetail frmRptOrderDetail = new FrmRptOrderDetail();
+                frmRptOrderDetail.orderId = orderId;
+                frmRptOrderDetail.customerId = customerId;
+                frmRptOrderDetail.ShowDialog();
+            }
+            else {
+                MessageBox.Show("Order number and/or customer id was not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         private void btnPrintReceipt_Click(object sender, EventArgs e)
         {
             int orderId = 0;
-            if (int.TryParse(txtOrderNo.Text, out orderId))
+            int customerId = 0;
+            if (int.TryParse(txtOrderNo.Text, out orderId) && int.TryParse(txtCustomerNo.Text, out customerId))
             {
-                PrintReceipt(orderId);
+                FrmRptOrder frmRptOrder = new FrmRptOrder();
+                frmRptOrder.orderId = orderId;
+                frmRptOrder.customerId = customerId;
+                frmRptOrder.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Order number and/or customer id was not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 

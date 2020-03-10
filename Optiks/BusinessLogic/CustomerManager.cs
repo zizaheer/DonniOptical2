@@ -19,8 +19,6 @@ namespace Optiks.BusinessLogic
             dataAccess = new CustomerDataAccess();
         }
 
-
-
         public List<Customer> GetCustomers()
         {
 
@@ -54,13 +52,13 @@ namespace Optiks.BusinessLogic
             return dt;
 
         }
+        
         public DataTable GetCustomerDataTableById(int custId)
         {
             DataTable dt = new DataTable();
             try
             {
                 dt = dataAccess.GetCustomerDataTableById(custId);
-                dt.TableName = "Customer";
             }
             catch (Exception ex)
             {

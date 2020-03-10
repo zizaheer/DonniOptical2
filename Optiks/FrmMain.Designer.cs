@@ -92,7 +92,7 @@
             // 
             // customerToolStripMenuItem
             // 
-            this.customerToolStripMenuItem.Image = global::OptiksRetoll.Properties.Resources.users_men_women;
+            this.customerToolStripMenuItem.Image = global::Optiks.Properties.Resources.users_men_women;
             this.customerToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black;
             this.customerToolStripMenuItem.Name = "customerToolStripMenuItem";
             this.customerToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
@@ -168,7 +168,7 @@
             // customerToolStripButton
             // 
             this.customerToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.customerToolStripButton.Image = global::OptiksRetoll.Properties.Resources.users_men_women;
+            this.customerToolStripButton.Image = global::Optiks.Properties.Resources.users_men_women;
             this.customerToolStripButton.ImageTransparentColor = System.Drawing.Color.Black;
             this.customerToolStripButton.Name = "customerToolStripButton";
             this.customerToolStripButton.Size = new System.Drawing.Size(23, 22);
@@ -183,7 +183,7 @@
             // toolStripButtonFind
             // 
             this.toolStripButtonFind.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonFind.Image = global::OptiksRetoll.Properties.Resources.find;
+            this.toolStripButtonFind.Image = global::Optiks.Properties.Resources.find;
             this.toolStripButtonFind.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonFind.Name = "toolStripButtonFind";
             this.toolStripButtonFind.Size = new System.Drawing.Size(23, 22);
@@ -237,7 +237,7 @@
             // 
             // toolStripStatusLabelIcon
             // 
-            this.toolStripStatusLabelIcon.Image = global::OptiksRetoll.Properties.Resources.lightning;
+            this.toolStripStatusLabelIcon.Image = global::Optiks.Properties.Resources.lightning;
             this.toolStripStatusLabelIcon.Name = "toolStripStatusLabelIcon";
             this.toolStripStatusLabelIcon.Size = new System.Drawing.Size(16, 17);
             // 

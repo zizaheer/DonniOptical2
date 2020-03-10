@@ -351,7 +351,6 @@ namespace Optiks.BusinessLogic
             try
             {
                 dt = dataAccess.GetSingleOrderById(orderId);
-                dt.TableName = "SalesOrder";
             }
             catch (Exception ex)
             {
@@ -367,7 +366,6 @@ namespace Optiks.BusinessLogic
             try
             {
                 dt = dataDetailAccess.GetOrderDetailDataTableByOrderId(orderId);
-                dt.TableName = "SalesOrderDetail";
             }
             catch (Exception ex)
             {
@@ -376,13 +374,5 @@ namespace Optiks.BusinessLogic
 
             return dt;
         }
-
-
-
-
-
-
-
-
     }
 }

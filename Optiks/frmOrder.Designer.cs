@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnCloseOrder = new System.Windows.Forms.Button();
             this.btnRemoveFromOrderItemList = new System.Windows.Forms.Button();
             this.btnSaveOrder = new System.Windows.Forms.Button();
@@ -559,23 +559,23 @@
             // 
             this.gvOrderItemList.AllowUserToAddRows = false;
             this.gvOrderItemList.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvOrderItemList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvOrderItemList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.gvOrderItemList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gvOrderItemList.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gvOrderItemList.DefaultCellStyle = dataGridViewCellStyle2;
             this.gvOrderItemList.Location = new System.Drawing.Point(7, 19);
             this.gvOrderItemList.MultiSelect = false;
             this.gvOrderItemList.Name = "gvOrderItemList";
@@ -1612,7 +1612,7 @@
             // 
             // btnFindCustomerForOrder
             // 
-            this.btnFindCustomerForOrder.BackgroundImage = global::OptiksRetoll.Properties.Resources.magnifier;
+            this.btnFindCustomerForOrder.BackgroundImage = global::Optiks.Properties.Resources.magnifier;
             this.btnFindCustomerForOrder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnFindCustomerForOrder.Location = new System.Drawing.Point(216, 21);
             this.btnFindCustomerForOrder.Name = "btnFindCustomerForOrder";
@@ -1817,7 +1817,7 @@
             // 
             this.btnDeleteOrder.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btnDeleteOrder.Enabled = false;
-            this.btnDeleteOrder.Image = global::OptiksRetoll.Properties.Resources.bin;
+            this.btnDeleteOrder.Image = global::Optiks.Properties.Resources.bin;
             this.btnDeleteOrder.Location = new System.Drawing.Point(339, 16);
             this.btnDeleteOrder.Name = "btnDeleteOrder";
             this.btnDeleteOrder.Size = new System.Drawing.Size(35, 23);
@@ -1915,7 +1915,7 @@
             // btnPrintReceipt
             // 
             this.btnPrintReceipt.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnPrintReceipt.Image = global::OptiksRetoll.Properties.Resources.printer;
+            this.btnPrintReceipt.Image = global::Optiks.Properties.Resources.printer;
             this.btnPrintReceipt.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnPrintReceipt.Location = new System.Drawing.Point(100, 696);
             this.btnPrintReceipt.Name = "btnPrintReceipt";
@@ -1929,7 +1929,7 @@
             // btnPrintOrder
             // 
             this.btnPrintOrder.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnPrintOrder.Image = global::OptiksRetoll.Properties.Resources.printer;
+            this.btnPrintOrder.Image = global::Optiks.Properties.Resources.printer;
             this.btnPrintOrder.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnPrintOrder.Location = new System.Drawing.Point(12, 696);
             this.btnPrintOrder.Name = "btnPrintOrder";
@@ -1942,7 +1942,7 @@
             // 
             // btnClearItemTextboxes
             // 
-            this.btnClearItemTextboxes.Image = global::OptiksRetoll.Properties.Resources.arrow_refresh;
+            this.btnClearItemTextboxes.Image = global::Optiks.Properties.Resources.arrow_refresh;
             this.btnClearItemTextboxes.Location = new System.Drawing.Point(148, 490);
             this.btnClearItemTextboxes.Name = "btnClearItemTextboxes";
             this.btnClearItemTextboxes.Size = new System.Drawing.Size(24, 24);
