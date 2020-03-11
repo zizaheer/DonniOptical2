@@ -65,6 +65,7 @@ namespace Optiks
             PageSettings ps = new PageSettings();
             ps.Landscape = false;
             ps.PaperSize = new PaperSize("Letter", 850, 1100);
+            ps.Margins = new Margins(50,50,50,50);
             reportViewerOrder.SetPageSettings(ps);
             reportViewerOrder.RefreshReport();
 

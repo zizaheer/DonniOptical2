@@ -1010,15 +1010,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:OptiksInstaller"
-        "ProductCode" = "8:{DA22ACEB-F284-456A-8FD1-2980F4F5D73D}"
-        "PackageCode" = "8:{C337747B-8CDC-4282-B246-88D9288286A0}"
+        "ProductCode" = "8:{DD666824-26FB-4830-8FD6-3D8BD443EBA7}"
+        "PackageCode" = "8:{DAEB9F98-4003-4E69-B81E-82B78EE5A9E9}"
         "UpgradeCode" = "8:{C041D81E-2526-4DCF-BA91-92FE19489445}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.0.1"
+        "ProductVersion" = "8:01.00.0001"
         "Manufacturer" = "8:Retoll Inc."
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -1560,7 +1560,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_12F0B9985468496C80DDAD1971BE9CAB"
             {
-            "SourcePath" = "8:..\\Optiks\\obj\\Debug\\Optiks.exe"
+            "SourcePath" = "8:..\\Optiks\\obj\\Debug\\OptiksRetoll.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_9B22442C17FE42D48446F07783D3410B"

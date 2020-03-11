@@ -1350,7 +1350,7 @@ namespace Optiks
             {
                 //if (depositAmount > 0)
                 //{
-                    balanceAmount = Convert.ToDecimal(txtGrandTotal.Text) - depositAmount;
+                balanceAmount = Convert.ToDecimal(txtGrandTotal.Text) - depositAmount;
                 //}
             }
 
@@ -1782,7 +1782,8 @@ namespace Optiks
                 frmRptOrderDetail.customerId = customerId;
                 frmRptOrderDetail.ShowDialog();
             }
-            else {
+            else
+            {
                 MessageBox.Show("Order number and/or customer id was not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
@@ -1790,18 +1791,11 @@ namespace Optiks
         private void btnPrintReceipt_Click(object sender, EventArgs e)
         {
             int orderId = 0;
-            int customerId = 0;
-            if (int.TryParse(txtOrderNo.Text, out orderId) && int.TryParse(txtCustomerNo.Text, out customerId))
+            if (int.TryParse(txtOrderNo.Text, out orderId))
             {
-                FrmRptOrder frmRptOrder = new FrmRptOrder();
-                frmRptOrder.orderId = orderId;
-                frmRptOrder.customerId = customerId;
-                frmRptOrder.ShowDialog();
+                PrintReceipt(orderId);
             }
-            else
-            {
-                MessageBox.Show("Order number and/or customer id was not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
+
         }
 
         private void PrintReceipt(int orderId)
@@ -1810,46 +1804,10 @@ namespace Optiks
             customerManager = new CustomerManager();
             var custInfo = customerManager.GetCustomerById(orderInfo.CustomerId);
 
-            FrmPrintReceipt frmPrintRcpt = new FrmPrintReceipt();
-            frmPrintRcpt.lblOrderNoValue.Text = orderId.ToString().PadLeft(8, '0');
-            frmPrintRcpt.lblOrderDate.Text = orderInfo.CreateDate.ToString("dd-MMM-yyyy");
-
-            frmPrintRcpt.lblCustomerNoValue.Text = orderInfo.CustomerId.ToString().PadLeft(6, '0');
-            frmPrintRcpt.lblCustomerName.Text = custInfo.FirstName + " " + custInfo.LastName;
-            frmPrintRcpt.lblCustomerAddress.Text = custInfo.Address;
-            frmPrintRcpt.lblCity.Text = custInfo.City;
-            frmPrintRcpt.lblPostCode.Text = custInfo.Postcode;
-            frmPrintRcpt.lblCustomerPhone.Text = custInfo.Telephone;
-
-            frmPrintRcpt.lblFrameTotalPrice.Text = Convert.ToString(orderInfo.FrameTotalPrice);
-            frmPrintRcpt.lblLensTotalPrice.Text = Convert.ToString(orderInfo.LensTotalPrice);
-            frmPrintRcpt.lblOtherAmount.Text = Convert.ToString(orderInfo.OtherTotal);
-            frmPrintRcpt.lblDiscountAmnt.Text = Convert.ToString(orderInfo.DiscountAmount);
-            frmPrintRcpt.lblSubtotal.Text = Convert.ToString(orderInfo.OrderTotal);
-            frmPrintRcpt.lblHstAmount.Text = Convert.ToString(orderInfo.HstAmount);
-            frmPrintRcpt.lblGrandTotal.Text = Convert.ToString(orderInfo.GrandTotal);
-            frmPrintRcpt.lblDepositAmount.Text = Convert.ToString(orderInfo.PaidAmount);
-            frmPrintRcpt.lblBalanceDue.Text = Convert.ToString(orderInfo.BalanceDue);
-
-            //frmPrintRcpt.lblRemarks.Text = orderInfo.Remarks;
-
-            PrinterSettings printerSettings = new PrinterSettings();
-            frmPrintRcpt.ddlPrinterList.Items.Insert(0, printerSettings.PrinterName);
-
-            var allPrinters = System.Drawing.Printing.PrinterSettings.InstalledPrinters;
-            int index = 1;
-            foreach (var printer in allPrinters)
-            {
-                if (printerSettings.PrinterName == printer.ToString())
-                {
-                    continue;
-                }
-                frmPrintRcpt.ddlPrinterList.Items.Insert(index, printer.ToString());
-                index++;
-            }
-
-            frmPrintRcpt.ddlPrinterList.SelectedIndex = 0;
-            frmPrintRcpt.ShowDialog();
+            FrmRptOrder frmRptOrder = new FrmRptOrder();
+            frmRptOrder.orderId = orderId;
+            frmRptOrder.customerId = custInfo.Id;
+            frmRptOrder.ShowDialog();
         }
     }
 }
