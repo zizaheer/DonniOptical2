@@ -91,6 +91,7 @@ namespace Optiks.BusinessLogic
             int result = 0;
             try
             {
+                customer.Id = dataAccess.GetMaxCustomerId() + 1;
                 result = dataAccess.InsertNewCustomer(customer);
             }
             catch (Exception ex)

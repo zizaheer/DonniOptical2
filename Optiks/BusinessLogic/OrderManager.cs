@@ -64,6 +64,7 @@ namespace Optiks.BusinessLogic
             {
                 using (var scope = new TransactionScope())
                 {
+                    order.Id = dataAccess.GetMaxOrderId() + 1;
                     orderId = dataAccess.InsertNewOrder(order);
                     if (orderId > 0)
                     {
@@ -178,6 +179,7 @@ namespace Optiks.BusinessLogic
             int result = 0;
             try
             {
+                orderDetail.Id = dataDetailAccess.GetMaxOrderDetailId() + 1;
                 result = dataDetailAccess.InsertNewOrderDetail(orderDetail);
             }
             catch (Exception ex)
@@ -359,6 +361,22 @@ namespace Optiks.BusinessLogic
 
             return dt;
         }
+
+        public DataTable GetOrdersForReport()
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                dt = dataAccess.GetOrders();
+            }
+            catch (Exception ex)
+            {
+                //
+            }
+
+            return dt;
+        }
+
 
         public DataTable GetOrderDetailDataTableByOrderId(int orderId)
         {

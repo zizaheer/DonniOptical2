@@ -156,7 +156,7 @@ namespace Optiks.DataAccess
                 sqlConnection.Open();
 
                 DataTable dataTable = new DataTable();
-                string query = "SELECT MAX(Id) FROM Customer";
+                string query = "SELECT ISNULL(MAX(Id), 0) FROM Customer";
                 sqlCommand = new SqlCommand(query, sqlConnection);
 
                 orderId = Convert.ToInt32(sqlCommand.ExecuteScalar());
@@ -181,11 +181,12 @@ namespace Optiks.DataAccess
             {
                 sqlConnection.Open();
                 
-                string query = "INSERT INTO Customer(FirstName, LastName, Address, City, Postcode, Telephone";
-                query += ", Email) VALUES(@FirstName, @LastName, @Address, @City, @Postcode, @Telephone, @Email); ";
+                string query = "INSERT INTO Customer(Id, FirstName, LastName, Address, City, Postcode, Telephone";
+                query += ", Email) VALUES(@Id, @FirstName, @LastName, @Address, @City, @Postcode, @Telephone, @Email); ";
                 query += " SELECT CAST(scope_identity() AS INT) ";
                 
                 sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@Id", customer.Id);
                 sqlCommand.Parameters.AddWithValue("@FirstName", customer.FirstName);
                 sqlCommand.Parameters.AddWithValue("@LastName", customer.LastName);
                 sqlCommand.Parameters.AddWithValue("@Address", customer.Address);

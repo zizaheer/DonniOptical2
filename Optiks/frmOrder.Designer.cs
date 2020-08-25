@@ -694,7 +694,7 @@
             this.txtRightLensQuantity.Name = "txtRightLensQuantity";
             this.txtRightLensQuantity.Size = new System.Drawing.Size(33, 20);
             this.txtRightLensQuantity.TabIndex = 17;
-            this.txtRightLensQuantity.Text = "0";
+            this.txtRightLensQuantity.Text = "1";
             this.txtRightLensQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtRightLensQuantity.Enter += new System.EventHandler(this.txtRightLensQuantity_Enter);
             this.txtRightLensQuantity.Leave += new System.EventHandler(this.txtRightLensQuantity_Leave);
@@ -715,7 +715,7 @@
             this.txtLeftLensQuantity.Name = "txtLeftLensQuantity";
             this.txtLeftLensQuantity.Size = new System.Drawing.Size(33, 20);
             this.txtLeftLensQuantity.TabIndex = 11;
-            this.txtLeftLensQuantity.Text = "0";
+            this.txtLeftLensQuantity.Text = "1";
             this.txtLeftLensQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtLeftLensQuantity.Enter += new System.EventHandler(this.txtLeftLensQuantity_Enter);
             this.txtLeftLensQuantity.Leave += new System.EventHandler(this.txtLeftLensQuantity_Leave);
@@ -736,7 +736,7 @@
             this.txtFrameQuantity.Name = "txtFrameQuantity";
             this.txtFrameQuantity.Size = new System.Drawing.Size(33, 20);
             this.txtFrameQuantity.TabIndex = 5;
-            this.txtFrameQuantity.Text = "0";
+            this.txtFrameQuantity.Text = "1";
             this.txtFrameQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtFrameQuantity.Enter += new System.EventHandler(this.txtFrameQuantity_Enter);
             this.txtFrameQuantity.Leave += new System.EventHandler(this.txtFrameQuantity_Leave);

@@ -332,7 +332,12 @@ namespace Optiks
 
                 if (orderInfo.Id > 0)
                 {
-                    orderId = UpdateOrder(orderInfo, orderDetailList);
+                    DialogResult dr = MessageBox.Show("You are going to update the order # " + orderInfo.Id + ". Are you sure to continue?", "Warning!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+
+                    if (dr == DialogResult.Yes)
+                    {
+                        orderId = UpdateOrder(orderInfo, orderDetailList);
+                    }
                 }
                 else
                 {
@@ -898,6 +903,20 @@ namespace Optiks
                         txtOtherItemUnitPrice.Focus();
                         return false;
                     }
+                }
+
+                if (txtMeasurementFpdLeft.Text.Trim() == string.Empty)
+                {
+                    MessageBox.Show("Please enter FPD measurement.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txtMeasurementFpdLeft.Focus();
+                    return false;
+                }
+
+                if (txtMeasurementFpdRight.Text.Trim() == string.Empty)
+                {
+                    MessageBox.Show("Please enter FPD measurement.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txtMeasurementFpdRight.Focus();
+                    return false;
                 }
 
                 if (txtTrayNumber.Text.Trim() == string.Empty)
@@ -1505,11 +1524,11 @@ namespace Optiks
 
             txtOrderNo.Text = "Auto";
             txtOrderDate.Text = "dd-mmm-yyyy";
-            txtFrameQuantity.Text = "0";
+            txtFrameQuantity.Text = "1";
             txtFrameUnitPrice.Text = "0.0";
-            txtLeftLensQuantity.Text = "0";
+            txtLeftLensQuantity.Text = "1";
             txtLeftLensUnitPrice.Text = "0.0";
-            txtRightLensQuantity.Text = "0";
+            txtRightLensQuantity.Text = "1";
             txtRightLensUnitPrice.Text = "0.0";
             txtOtherItemQuantity.Text = "0";
             txtOtherItemUnitPrice.Text = "0.0";

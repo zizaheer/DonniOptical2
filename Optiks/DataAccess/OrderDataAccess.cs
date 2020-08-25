@@ -114,7 +114,7 @@ namespace Optiks.DataAccess
                 sqlConnection.Open();
 
                 DataTable dataTable = new DataTable();
-                string query = "SELECT MAX(Id) FROM dbo.[Order]";
+                string query = "SELECT ISNULL(MAX(Id),0) FROM dbo.[Order]";
                 sqlCommand = new SqlCommand(query, sqlConnection);
 
                 orderId = Convert.ToInt32(sqlCommand.ExecuteScalar());
@@ -216,6 +216,32 @@ namespace Optiks.DataAccess
             return dataTable;
         }
 
+        public DataTable GetOrders()
+        {
+            DataTable dataTable = new DataTable("Order");
+
+            try
+            {
+                sqlConnection.Open();
+                string query = "SELECT * FROM dbo.[Order] ORDER BY Id DESC";
+                sqlCommand = new SqlCommand(query, sqlConnection);
+                dataAdapter = new SqlDataAdapter(sqlCommand);
+                dataAdapter.Fill(dataTable);
+            }
+            catch (Exception ex)
+            {
+                //
+            }
+
+            finally
+            {
+                sqlConnection.Close();
+            }
+
+            return dataTable;
+        }
+
+
         public int InsertNewOrder(Order order)
         {
             int orderId = 0;
@@ -223,18 +249,19 @@ namespace Optiks.DataAccess
             {
                 sqlConnection.Open();
 
-                string query = "INSERT INTO dbo.[Order](CustomerId, DoctorName, DoctorPhone, DoctorClinicAddress, DoctorPrescriptionDate, PrescriptionSphereRight";
+                string query = "INSERT INTO dbo.[Order](Id, CustomerId, DoctorName, DoctorPhone, DoctorClinicAddress, DoctorPrescriptionDate, PrescriptionSphereRight";
                 query += ", PrescriptionCylRight, PrescriptionAxisRight, PrescriptionAddRight, PrescriptionPrismRight, PrescriptionSphereLeft";
                 query += ", PrescriptionCylLeft, PrescriptionAxisLeft, PrescriptionAddLeft, PrescriptionPrismLeft, FrameTotalPrice";
                 query += ", LensTotalPrice, OtherTotal, DiscountAmount, OrderTotal, HstAmount, GrandTotal, PaidBy, PaidAmount";
-                query += ", BalanceDue, Remarks, CreateDate) VALUES(@CustomerId, @DoctorName, @DoctorPhone, @DoctorClinicAddress, @DoctorPrescriptionDate, @PrescriptionSphereRight";
+                query += ", BalanceDue, Remarks, CreateDate) VALUES(@Id, @CustomerId, @DoctorName, @DoctorPhone, @DoctorClinicAddress, @DoctorPrescriptionDate, @PrescriptionSphereRight";
                 query += ", @PrescriptionCylRight, @PrescriptionAxisRight, @PrescriptionAddRight, @PrescriptionPrismRight, @PrescriptionSphereLeft";
                 query += ", @PrescriptionCylLeft, @PrescriptionAxisLeft, @PrescriptionAddLeft, @PrescriptionPrismLeft, @FrameTotalPrice";
                 query += ", @LensTotalPrice, @OtherTotal, @DiscountAmount, @OrderTotal, @HstAmount, @GrandTotal, @PaidBy, @PaidAmount";
                 query += ", @BalanceDue, @Remarks, @CreateDate); ";
-                query += " SELECT CAST(scope_identity() AS INT) ";
+                query += " SELECT ISNULL(MAX(Id), 0) FROM dbo.[order] ";
 
                 sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@Id", order.Id);
                 sqlCommand.Parameters.AddWithValue("@CustomerId", order.CustomerId);
                 sqlCommand.Parameters.AddWithValue("@DoctorName", order.DoctorName);
                 sqlCommand.Parameters.AddWithValue("@DoctorPhone", order.DoctorPhone);
@@ -262,9 +289,10 @@ namespace Optiks.DataAccess
                 sqlCommand.Parameters.AddWithValue("@BalanceDue", order.BalanceDue);
                 sqlCommand.Parameters.AddWithValue("@Remarks", order.Remarks);
                 sqlCommand.Parameters.AddWithValue("@CreateDate", order.CreateDate);
-                
 
                 orderId = (int)sqlCommand.ExecuteScalar();
+
+                
             }
             catch (Exception ex)
             {
@@ -292,9 +320,10 @@ namespace Optiks.DataAccess
                 query += ", PrescriptionAddLeft = @PrescriptionAddLeft, PrescriptionPrismLeft = @PrescriptionPrismLeft, FrameTotalPrice = @FrameTotalPrice";
                 query += ", LensTotalPrice = @LensTotalPrice, OtherTotal = @OtherTotal, DiscountAmount = @DiscountAmount, OrderTotal = @OrderTotal";
                 query += ", HstAmount = @HstAmount, GrandTotal = @GrandTotal, PaidBy = @PaidBy, PaidAmount = @PaidAmount, BalanceDue = @BalanceDue";
-                query += ", Remarks = @Remarks, CreateDate = @CreateDate";
+                query += ", Remarks = @Remarks, CreateDate = @CreateDate WHERE Id = @Id";
 
                 sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@Id", order.Id);
                 sqlCommand.Parameters.AddWithValue("@CustomerId", order.CustomerId);
                 sqlCommand.Parameters.AddWithValue("@DoctorName", order.DoctorName);
                 sqlCommand.Parameters.AddWithValue("@DoctorPhone", order.DoctorPhone);

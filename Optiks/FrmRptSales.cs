@@ -27,7 +27,7 @@ namespace Optiks
         {
 
             LocalReport localReport = reportViewerOrder.LocalReport;
-            localReport.ReportPath = "RptOrder.rdlc";
+            localReport.ReportPath = "RptSales.rdlc";
             localReport.DataSources.Clear();
 
             //// Create a report data source   
@@ -43,7 +43,7 @@ namespace Optiks
 
             ds = new DataSet();
             DataTable dtOrder = new DataTable();
-            dtOrder = GetOrderById(orderId);
+            dtOrder = GetOrders();
             ds.Tables.Add(dtOrder);
             rptSource = new ReportDataSource();
             rptSource.Name = "DataSetOrder";
@@ -60,16 +60,56 @@ namespace Optiks
             rptSource.Value = ds.Tables["OrderDetail"];
             localReport.DataSources.Add(rptSource);
 
+            //ds = new DataSet();
+            //DataTable dtOrderSales = new DataTable();
+            //dtOrderSales = GetOrderById(orderId);
+            //ds.Tables.Add(dtOrder);
+            //rptSource = new ReportDataSource();
+            //rptSource.Name = "DataSetSales";
+            //rptSource.Value = ds.Tables["Order"];
+            //localReport.DataSources.Add(rptSource);
+
 
             // Refresh the report  
             PageSettings ps = new PageSettings();
             ps.Landscape = false;
             ps.PaperSize = new PaperSize("Letter", 850, 1100);
+            ps.Margins = new Margins(50, 50, 50, 50);
             reportViewerOrder.SetPageSettings(ps);
             reportViewerOrder.RefreshReport();
 
             localReport.Refresh();
         }
+
+
+
+        private DataTable GetOrders()
+        {
+            DataTable dt = new DataTable();
+            //dt.Columns.Add("Order#");
+            //dt.Columns.Add("Customer#");
+            //dt.Columns.Add("Name");
+            //dt.Columns.Add("Date");
+            //dt.Columns.Add("Order Total");
+            //dt.Columns.Add("Paid Amount");
+            //dt.Columns.Add("Due");
+            OrderManager orderManager = new OrderManager();
+            dt = orderManager.GetOrdersForReport();
+
+            return dt;
+
+        }
+
+        private DataTable GetOrderDetailByOrderId(int orderId)
+        {
+            DataTable dt = new DataTable();
+            OrderManager orderManager = new OrderManager();
+            dt = orderManager.GetOrderDetailDataTableByOrderId(orderId);
+
+            return dt;
+
+        }
+
 
         private DataTable GetCustomerById(int custId)
         {
@@ -90,15 +130,6 @@ namespace Optiks
 
         }
 
-        private DataTable GetOrderDetailByOrderId(int orderId)
-        {
-            DataTable dt = new DataTable();
-            OrderManager orderManager = new OrderManager();
-            dt = orderManager.GetOrderDetailDataTableByOrderId(orderId);
-
-            return dt;
-
-        }
-
+        
     }
 }

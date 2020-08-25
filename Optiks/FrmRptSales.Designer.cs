@@ -34,20 +34,20 @@
             // reportViewerOrder
             // 
             this.reportViewerOrder.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.reportViewerOrder.LocalReport.ReportEmbeddedResource = "Optiks.RptOrder.rdlc";
+            this.reportViewerOrder.LocalReport.ReportEmbeddedResource = "Optiks.RptSales.rdlc";
             this.reportViewerOrder.Location = new System.Drawing.Point(0, 0);
             this.reportViewerOrder.Name = "reportViewerOrder";
             this.reportViewerOrder.ServerReport.BearerToken = null;
             this.reportViewerOrder.Size = new System.Drawing.Size(836, 655);
             this.reportViewerOrder.TabIndex = 0;
             // 
-            // FrmRptOrder
+            // FrmRptSales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(836, 655);
             this.Controls.Add(this.reportViewerOrder);
-            this.Name = "FrmRptOrder";
+            this.Name = "FrmRptSales";
             this.Text = "Order - Receipt";
             this.Load += new System.EventHandler(this.FrmRptOrder_Load);
             this.ResumeLayout(false);

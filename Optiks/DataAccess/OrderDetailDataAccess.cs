@@ -201,6 +201,32 @@ namespace Optiks.DataAccess
 
             return dataTable;
         }
+
+        public int GetMaxOrderDetailId()
+        {
+            int orderId = 0;
+            try
+            {
+                sqlConnection.Open();
+
+                DataTable dataTable = new DataTable();
+                string query = "SELECT ISNULL(MAX(Id), 0) FROM dbo.[OrderDetail]";
+                sqlCommand = new SqlCommand(query, sqlConnection);
+
+                orderId = Convert.ToInt32(sqlCommand.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                //
+            }
+
+            finally
+            {
+                sqlConnection.Close();
+            }
+
+            return orderId;
+        }
         public int InsertNewOrderDetail(OrderDetail orderDetail)
         {
             int result = 0;
@@ -208,13 +234,13 @@ namespace Optiks.DataAccess
             {
                 sqlConnection.Open();
 
-                string query = "INSERT INTO OrderDetail(OrderId, TrayNumber, ModifiedSphereRight, ModifiedCylRight, ModifiedAxisRight, ModifiedAddRight, ModifiedPrismRight";
+                string query = "INSERT INTO OrderDetail(Id, OrderId, TrayNumber, ModifiedSphereRight, ModifiedCylRight, ModifiedAxisRight, ModifiedAddRight, ModifiedPrismRight";
                 query += ", ModifiedSphereLeft, ModifiedCylLeft, ModifiedAxisLeft, ModifiedAddLeft, ModifiedPrismLeft, MeasurementFpdRight";
                 query += ", MeasurementNrPdRight, MeasurementOcRight, MeasurementSegRight, MeasurementBlSizeRight, MeasurementFpdLeft";
                 query += ", MeasurementNrPdLeft, MeasurementOcLeft, MeasurementSegLeft, MeasurementBlSizeLeft, MeasurementA, MeasurementB";
                 query += ", MeasurementED, MeasurementDBL, FrameCode, FrameColor, FrameUnitPrice, FrameQuantity, LeftLensDescription";
                 query += ", LeftLensUnitPrice, LeftLensQuantity, RightLensDescription, RightLensUnitPrice, RightLensQuantity";
-                query += ", OtherItemDescription, OtherItemUnitPrice, OtherItemQuantity) VALUES(@OrderId, @TrayNumber";
+                query += ", OtherItemDescription, OtherItemUnitPrice, OtherItemQuantity) VALUES(@Id, @OrderId, @TrayNumber";
 
                 query += ", @ModifiedSphereRight, @ModifiedCylRight, @ModifiedAxisRight, @ModifiedAddRight, @ModifiedPrismRight";
                 query += ", @ModifiedSphereLeft, @ModifiedCylLeft, @ModifiedAxisLeft, @ModifiedAddLeft, @ModifiedPrismLeft, @MeasurementFpdRight";
@@ -225,6 +251,7 @@ namespace Optiks.DataAccess
                 query += ", @OtherItemDescription, @OtherItemUnitPrice, @OtherItemQuantity)";
                
                 sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@Id", orderDetail.Id);
                 sqlCommand.Parameters.AddWithValue("@OrderId", orderDetail.OrderId);
                 sqlCommand.Parameters.AddWithValue("@TrayNumber", orderDetail.TrayNumber);
                 sqlCommand.Parameters.AddWithValue("@ModifiedSphereRight", orderDetail.ModifiedSphereRight);

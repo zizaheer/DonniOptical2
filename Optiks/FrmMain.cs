@@ -138,9 +138,10 @@ namespace Optiks
         private void printToolStripButton_Click(object sender, EventArgs e)
         {
             //FrmRptOrderDetail rptOrderDetail = new FrmRptOrderDetail();
-            //rptOrderDetail.MdiParent = this;
-            //rptOrderDetail.Location = new Point(5, 5);
-            //rptOrderDetail.Show();
+            FrmRptSales rptOrderDetail = new FrmRptSales();
+            rptOrderDetail.MdiParent = this;
+            rptOrderDetail.Location = new Point(5, 5);
+            rptOrderDetail.Show();
         }
 
         private void toolStripButtonFind_Click(object sender, EventArgs e)
