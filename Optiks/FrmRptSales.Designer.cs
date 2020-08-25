@@ -35,6 +35,7 @@
             // 
             this.reportViewerOrder.Dock = System.Windows.Forms.DockStyle.Fill;
             this.reportViewerOrder.LocalReport.ReportEmbeddedResource = "Optiks.RptSales.rdlc";
+            this.reportViewerOrder.LocalReport.ReportPath = "RptSales.rdlc";
             this.reportViewerOrder.Location = new System.Drawing.Point(0, 0);
             this.reportViewerOrder.Name = "reportViewerOrder";
             this.reportViewerOrder.ServerReport.BearerToken = null;

@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.489
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30406.217
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Optiks", "Optiks\Optiks.csproj", "{B3DDFA6E-4F9F-4A60-9AEE-C851965C03F3}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "OptiksSetup", "OptiksSetup\OptiksSetup.vdproj", "{392BBBF1-E6ED-4185-93A3-2C62AACC6644}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,8 @@ Global
 		{B3DDFA6E-4F9F-4A60-9AEE-C851965C03F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3DDFA6E-4F9F-4A60-9AEE-C851965C03F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3DDFA6E-4F9F-4A60-9AEE-C851965C03F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{392BBBF1-E6ED-4185-93A3-2C62AACC6644}.Debug|Any CPU.ActiveCfg = Debug
+		{392BBBF1-E6ED-4185-93A3-2C62AACC6644}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
