@@ -267,8 +267,15 @@ namespace Optiks
                 orderInfo.OrderTotal = Convert.ToDecimal(txtOrderTotalAmnt.Text);
                 orderInfo.HstAmount = Convert.ToDecimal(txtHSTAmnt.Text);
                 orderInfo.GrandTotal = Convert.ToDecimal(txtGrandTotal.Text);
-                orderInfo.PaidBy = ddlPaidBy.SelectedValue.ToString();
+                
                 orderInfo.PaidAmount = Convert.ToDecimal(txtDepositAmnt.Text);
+                if (orderInfo.PaidAmount > 0)
+                {
+                    orderInfo.PaidBy = ddlPaidBy.SelectedValue.ToString();
+                }
+                else {
+                    orderInfo.PaidBy = "N/A";
+                }
                 orderInfo.BalanceDue = Convert.ToDecimal(txtBalanceAmnt.Text);
                 orderInfo.Remarks = txtRemarks.Text;
                 orderInfo.CreateDate = Convert.ToDateTime(DateTime.Now.ToString("dd-MMM-yyyy"));
@@ -1540,6 +1547,7 @@ namespace Optiks
             txtHSTAmnt.Text = "0.00";
             txtGrandTotal.Text = "0.00";
             txtDepositAmnt.Text = "0.00";
+            ddlPaidBy.SelectedIndex = 0;
             txtBalanceAmnt.Text = "0.00";
             txtTrayNumber.Text = "";
             btnDeleteOrder.Enabled = false;
@@ -1580,7 +1588,7 @@ namespace Optiks
                 txtOrderTotalAmnt.Text = orderInfo.OrderTotal.ToString("0.00");
                 txtHSTAmnt.Text = ((decimal)orderInfo.HstAmount).ToString("0.00");
                 txtGrandTotal.Text = orderInfo.GrandTotal.ToString("0.00");
-                ddlPaidBy.SelectedItem = orderInfo.PaidBy;
+                ddlPaidBy.SelectedValue = orderInfo.PaidBy;
                 txtDepositAmnt.Text = ((decimal)orderInfo.PaidAmount).ToString("0.00");
                 txtBalanceAmnt.Text = ((decimal)orderInfo.BalanceDue).ToString("0.00");
                 txtRemarks.Text = orderInfo.Remarks;

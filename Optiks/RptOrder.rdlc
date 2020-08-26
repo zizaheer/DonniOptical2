@@ -3748,7 +3748,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>4.88834in</Top>
+            <Top>4.90084in</Top>
             <Left>6.31978in</Left>
             <Height>0.13542in</Height>
             <Width>0.7604in</Width>
@@ -3778,7 +3778,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>4.88834in</Top>
+            <Top>4.90084in</Top>
             <Left>7.13888in</Left>
             <Height>0.13542in</Height>
             <Width>0.13645in</Width>
@@ -3808,7 +3808,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>GrandTotal</rd:DefaultName>
-            <Top>4.88834in</Top>
+            <Top>4.90084in</Top>
             <Left>7.33089in</Left>
             <Height>0.13542in</Height>
             <Width>0.54096in</Width>
@@ -3940,6 +3940,68 @@
               <BackgroundColor>LightGrey</BackgroundColor>
             </Style>
           </Rectangle>
+          <Textbox Name="Textbox107">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Paid by: </Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>5.18021in</Top>
+            <Left>6.34897in</Left>
+            <Height>0.13542in</Height>
+            <Width>0.7604in</Width>
+            <ZIndex>72</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Textbox>
+          <Textbox Name="GrandTotal10">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!PaidBy.Value, "DataSetOrder")</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>GrandTotal</rd:DefaultName>
+            <Top>5.18021in</Top>
+            <Left>7.25222in</Left>
+            <Height>0.13542in</Height>
+            <Width>0.94465in</Width>
+            <ZIndex>73</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Textbox>
         </ReportItems>
         <Height>8in</Height>
         <Style />
