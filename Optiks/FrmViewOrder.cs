@@ -136,7 +136,7 @@ namespace Optiks
 
             if (index == 4)
             {
-                var orderList = orderManager.GetOrdersByLastName(filterValue);
+                var orderList = orderManager.GetOrdersByCustomerLastName(filterValue);
                 if (orderList.Count > 0)
                 {
                     gvOrderList.DataSource = orderList;

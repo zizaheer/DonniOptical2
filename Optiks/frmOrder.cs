@@ -134,7 +134,7 @@ namespace Optiks
 
                 if (custLastName.Trim().Length > 0)
                 {
-                    var orderList = orderManager.GetOrdersByCustomerFirstName(custLastName).Select(c => c.OrderId).Distinct().ToArray();
+                    var orderList = orderManager.GetOrdersByCustomerLastName(custLastName).Select(c => c.OrderId).Distinct().ToArray();
                     if (orderList.Length > 0)
                     {
                         lblNoOfOrdersFound.Text = orderList.Length.ToString();

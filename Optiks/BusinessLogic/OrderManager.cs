@@ -284,7 +284,7 @@ namespace Optiks.BusinessLogic
             return orderList;
 
         }
-        public List<ViewOrder> GetOrdersByLastName(string customerLastName)
+        public List<ViewOrder> GetOrdersByCustomerLastName(string customerLastName)
         {
             var orderList = dataAccess.GetViewOrderList();
             orderList = orderList.Where(c => string.Equals(c.LastName, customerLastName, StringComparison.OrdinalIgnoreCase)).ToList();
@@ -303,14 +303,14 @@ namespace Optiks.BusinessLogic
         public List<ViewOrder> GetOrdersByCustomerPhone(string customerPhone)
         {
             var orderList = dataAccess.GetViewOrderList();
-            orderList = orderList.Where(c => string.Equals(c.Telephone, customerPhone, StringComparison.OrdinalIgnoreCase)).ToList();
+            orderList = orderList.Where(c => string.Equals(c.Telephone.Replace("-",""), customerPhone.Replace("-", ""), StringComparison.OrdinalIgnoreCase)).ToList();
 
             return orderList;
         }
         public List<ViewOrder> GetOrdersByDateAndPhoneNumber(DateTime fromDate, DateTime toDate, string customerPhone)
         {
             var orderList = dataAccess.GetViewOrderList();
-            orderList = orderList.Where(c => c.OrderDate >= fromDate && c.OrderDate <= toDate && string.Equals(c.Telephone, customerPhone, StringComparison.OrdinalIgnoreCase)).ToList();
+            orderList = orderList.Where(c => c.OrderDate >= fromDate && c.OrderDate <= toDate && string.Equals(c.Telephone.Replace("-", ""), customerPhone.Replace("-", ""), StringComparison.OrdinalIgnoreCase)).ToList();
 
             return orderList;
 
