@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="SalesReportDataSource" targetNamespace="http://tempuri.org/SalesReportDataSource.xsd" xmlns:mstns="http://tempuri.org/SalesReportDataSource.xsd" xmlns="http://tempuri.org/SalesReportDataSource.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="DinnoOpticalConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="DinnoOpticalConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.Optiks.Properties.Settings.GlobalReference.Default.DinnoOpticalConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="OrderCustomerTableAdapter" GeneratorDataComponentClassName="OrderCustomerTableAdapter" Name="OrderCustomer" UserDataComponentName="OrderCustomerTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DinnoOpticalConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        [Order].Id, [Order].CustomerId, Customer.FirstName, Customer.LastName, [Order].HstAmount, [Order].GrandTotal, [Order].PaidAmount, [Order].BalanceDue, [Order].CreateDate
+FROM            Customer INNER JOIN
+                         [Order] ON Customer.Id = [Order].CustomerId</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Id" DataSetColumn="Id" />
+              <Mapping SourceColumn="CustomerId" DataSetColumn="CustomerId" />
+              <Mapping SourceColumn="FirstName" DataSetColumn="FirstName" />
+              <Mapping SourceColumn="LastName" DataSetColumn="LastName" />
+              <Mapping SourceColumn="HstAmount" DataSetColumn="HstAmount" />
+              <Mapping SourceColumn="GrandTotal" DataSetColumn="GrandTotal" />
+              <Mapping SourceColumn="PaidAmount" DataSetColumn="PaidAmount" />
+              <Mapping SourceColumn="BalanceDue" DataSetColumn="BalanceDue" />
+              <Mapping SourceColumn="CreateDate" DataSetColumn="CreateDate" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="VoidOrderTableAdapter" GeneratorDataComponentClassName="VoidOrderTableAdapter" Name="VoidOrder" UserDataComponentName="VoidOrderTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DinnoOpticalConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        [Order].Id, [Order].CustomerId, Customer.FirstName, Customer.LastName, [Order].IsVoid, [Order].VoidDate, [Order].Remarks, [Order].CreateDate, [Order].BalanceDue, [Order].PaidAmount, [Order].GrandTotal, 
+                         [Order].HstAmount
+FROM            [Order] INNER JOIN
+                         Customer ON [Order].CustomerId = Customer.Id</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Id" DataSetColumn="Id" />
+              <Mapping SourceColumn="CustomerId" DataSetColumn="CustomerId" />
+              <Mapping SourceColumn="FirstName" DataSetColumn="FirstName" />
+              <Mapping SourceColumn="LastName" DataSetColumn="LastName" />
+              <Mapping SourceColumn="IsVoid" DataSetColumn="IsVoid" />
+              <Mapping SourceColumn="VoidDate" DataSetColumn="VoidDate" />
+              <Mapping SourceColumn="Remarks" DataSetColumn="Remarks" />
+              <Mapping SourceColumn="CreateDate" DataSetColumn="CreateDate" />
+              <Mapping SourceColumn="BalanceDue" DataSetColumn="BalanceDue" />
+              <Mapping SourceColumn="PaidAmount" DataSetColumn="PaidAmount" />
+              <Mapping SourceColumn="GrandTotal" DataSetColumn="GrandTotal" />
+              <Mapping SourceColumn="HstAmount" DataSetColumn="HstAmount" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="SalesReportDataSource" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="SalesReportDataSource" msprop:Generator_UserDSName="SalesReportDataSource">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="OrderCustomer" msprop:Generator_TableClassName="OrderCustomerDataTable" msprop:Generator_TableVarName="tableOrderCustomer" msprop:Generator_RowChangedName="OrderCustomerRowChanged" msprop:Generator_TablePropName="OrderCustomer" msprop:Generator_RowDeletingName="OrderCustomerRowDeleting" msprop:Generator_RowChangingName="OrderCustomerRowChanging" msprop:Generator_RowEvHandlerName="OrderCustomerRowChangeEventHandler" msprop:Generator_RowDeletedName="OrderCustomerRowDeleted" msprop:Generator_RowClassName="OrderCustomerRow" msprop:Generator_UserTableName="OrderCustomer" msprop:Generator_RowEvArgName="OrderCustomerRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Id" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />
+              <xs:element name="CustomerId" msprop:Generator_ColumnVarNameInTable="columnCustomerId" msprop:Generator_ColumnPropNameInRow="CustomerId" msprop:Generator_ColumnPropNameInTable="CustomerIdColumn" msprop:Generator_UserColumnName="CustomerId" type="xs:int" />
+              <xs:element name="FirstName" msprop:Generator_ColumnVarNameInTable="columnFirstName" msprop:Generator_ColumnPropNameInRow="FirstName" msprop:Generator_ColumnPropNameInTable="FirstNameColumn" msprop:Generator_UserColumnName="FirstName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LastName" msprop:Generator_ColumnVarNameInTable="columnLastName" msprop:Generator_ColumnPropNameInRow="LastName" msprop:Generator_ColumnPropNameInTable="LastNameColumn" msprop:Generator_UserColumnName="LastName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="HstAmount" msprop:Generator_ColumnVarNameInTable="columnHstAmount" msprop:Generator_ColumnPropNameInRow="HstAmount" msprop:Generator_ColumnPropNameInTable="HstAmountColumn" msprop:Generator_UserColumnName="HstAmount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="GrandTotal" msprop:Generator_ColumnVarNameInTable="columnGrandTotal" msprop:Generator_ColumnPropNameInRow="GrandTotal" msprop:Generator_ColumnPropNameInTable="GrandTotalColumn" msprop:Generator_UserColumnName="GrandTotal" type="xs:decimal" />
+              <xs:element name="PaidAmount" msprop:Generator_ColumnVarNameInTable="columnPaidAmount" msprop:Generator_ColumnPropNameInRow="PaidAmount" msprop:Generator_ColumnPropNameInTable="PaidAmountColumn" msprop:Generator_UserColumnName="PaidAmount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="BalanceDue" msprop:Generator_ColumnVarNameInTable="columnBalanceDue" msprop:Generator_ColumnPropNameInRow="BalanceDue" msprop:Generator_ColumnPropNameInTable="BalanceDueColumn" msprop:Generator_UserColumnName="BalanceDue" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CreateDate" msprop:Generator_ColumnVarNameInTable="columnCreateDate" msprop:Generator_ColumnPropNameInRow="CreateDate" msprop:Generator_ColumnPropNameInTable="CreateDateColumn" msprop:Generator_UserColumnName="CreateDate" type="xs:dateTime" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="VoidOrder" msprop:Generator_TableClassName="VoidOrderDataTable" msprop:Generator_TableVarName="tableVoidOrder" msprop:Generator_TablePropName="VoidOrder" msprop:Generator_RowDeletingName="VoidOrderRowDeleting" msprop:Generator_RowChangingName="VoidOrderRowChanging" msprop:Generator_RowEvHandlerName="VoidOrderRowChangeEventHandler" msprop:Generator_RowDeletedName="VoidOrderRowDeleted" msprop:Generator_UserTableName="VoidOrder" msprop:Generator_RowChangedName="VoidOrderRowChanged" msprop:Generator_RowEvArgName="VoidOrderRowChangeEvent" msprop:Generator_RowClassName="VoidOrderRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Id" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />
+              <xs:element name="CustomerId" msprop:Generator_ColumnVarNameInTable="columnCustomerId" msprop:Generator_ColumnPropNameInRow="CustomerId" msprop:Generator_ColumnPropNameInTable="CustomerIdColumn" msprop:Generator_UserColumnName="CustomerId" type="xs:int" />
+              <xs:element name="FirstName" msprop:Generator_ColumnVarNameInTable="columnFirstName" msprop:Generator_ColumnPropNameInRow="FirstName" msprop:Generator_ColumnPropNameInTable="FirstNameColumn" msprop:Generator_UserColumnName="FirstName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LastName" msprop:Generator_ColumnVarNameInTable="columnLastName" msprop:Generator_ColumnPropNameInRow="LastName" msprop:Generator_ColumnPropNameInTable="LastNameColumn" msprop:Generator_UserColumnName="LastName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IsVoid" msprop:Generator_ColumnVarNameInTable="columnIsVoid" msprop:Generator_ColumnPropNameInRow="IsVoid" msprop:Generator_ColumnPropNameInTable="IsVoidColumn" msprop:Generator_UserColumnName="IsVoid" type="xs:boolean" />
+              <xs:element name="VoidDate" msprop:Generator_ColumnVarNameInTable="columnVoidDate" msprop:Generator_ColumnPropNameInRow="VoidDate" msprop:Generator_ColumnPropNameInTable="VoidDateColumn" msprop:Generator_UserColumnName="VoidDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Remarks" msprop:Generator_ColumnVarNameInTable="columnRemarks" msprop:Generator_ColumnPropNameInRow="Remarks" msprop:Generator_ColumnPropNameInTable="RemarksColumn" msprop:Generator_UserColumnName="Remarks" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="150" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CreateDate" msprop:Generator_ColumnVarNameInTable="columnCreateDate" msprop:Generator_ColumnPropNameInRow="CreateDate" msprop:Generator_ColumnPropNameInTable="CreateDateColumn" msprop:Generator_UserColumnName="CreateDate" type="xs:dateTime" />
+              <xs:element name="BalanceDue" msprop:Generator_ColumnVarNameInTable="columnBalanceDue" msprop:Generator_ColumnPropNameInRow="BalanceDue" msprop:Generator_ColumnPropNameInTable="BalanceDueColumn" msprop:Generator_UserColumnName="BalanceDue" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PaidAmount" msprop:Generator_ColumnVarNameInTable="columnPaidAmount" msprop:Generator_ColumnPropNameInRow="PaidAmount" msprop:Generator_ColumnPropNameInTable="PaidAmountColumn" msprop:Generator_UserColumnName="PaidAmount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="GrandTotal" msprop:Generator_ColumnVarNameInTable="columnGrandTotal" msprop:Generator_ColumnPropNameInRow="GrandTotal" msprop:Generator_ColumnPropNameInTable="GrandTotalColumn" msprop:Generator_UserColumnName="GrandTotal" type="xs:decimal" />
+              <xs:element name="HstAmount" msprop:Generator_ColumnVarNameInTable="columnHstAmount" msprop:Generator_ColumnPropNameInRow="HstAmount" msprop:Generator_ColumnPropNameInTable="HstAmountColumn" msprop:Generator_UserColumnName="HstAmount" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:OrderCustomer" />
+      <xs:field xpath="mstns:Id" />
+    </xs:unique>
+    <xs:unique name="VoidOrder_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:VoidOrder" />
+      <xs:field xpath="mstns:Id" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

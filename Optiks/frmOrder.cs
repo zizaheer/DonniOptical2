@@ -18,6 +18,8 @@ namespace Optiks
     {
         CustomerManager customerManager = new CustomerManager();
         OrderManager orderManager = new OrderManager();
+        public string CustomerNo { get; set; }
+
         decimal hstAmount = 0;
         int[] orderFound;
         public FrmOrder()
@@ -36,8 +38,32 @@ namespace Optiks
 
             hstAmount = orderManager.GetHstAmount();
             lblHstAmnt.Text = "(" + hstAmount.ToString("0.00") + "%)";
-            PrepareOrderDetailGridview();
+            
+            if (rdoNewOrder.Checked) {
+                PrepareForNewEntry();
+            }
+            
+            if (!string.IsNullOrEmpty(CustomerNo)) {
+                txtCustomerNo.Text = CustomerNo;
+                int custId;
+                if (txtCustomerNo.Text.Trim() != string.Empty)
+                {
+                    if (int.TryParse(txtCustomerNo.Text, out custId))
+                    {
+                        if (custId > 0)
+                        {
+                            FillCustomerDetailById(Convert.ToInt32(txtCustomerNo.Text.Trim()));
+                        }
+                    }
+                }
+            }
+            
+
+
             txtCustomerNo.Focus();
+
+            btnVoidOrder.Visible = false;
+            btnUnvoidOrder.Visible = false;
         }
 
         private void rdoNewOrder_CheckedChanged(object sender, EventArgs e)
@@ -211,7 +237,7 @@ namespace Optiks
                 }
             }
         }
-        private void txtCustomerNo_TextChanged(object sender, EventArgs e)
+        public void txtCustomerNo_TextChanged(object sender, EventArgs e)
         {
             int custId = 0;
             if (txtCustomerNo.Text.Trim() != string.Empty)
@@ -243,99 +269,8 @@ namespace Optiks
                     return;
                 }
 
-                Order orderInfo = new Order();
-                orderInfo.Id = txtOrderNo.Text != "" && txtOrderNo.Text != "Auto" ? Convert.ToInt32(txtOrderNo.Text) : 0;
-                orderInfo.CustomerId = Convert.ToInt32(txtCustomerNo.Text);
-                orderInfo.DoctorName = txtDoctorName.Text;
-                orderInfo.DoctorPhone = txtDoctorPhone.Text;
-                orderInfo.DoctorClinicAddress = txtDoctorClinicAddress.Text;
-                orderInfo.DoctorPrescriptionDate = Convert.ToDateTime(txtPrescriptionDate.Text);
-                orderInfo.PrescriptionSphereRight = txtPrescriptionSphereRight.Text;
-                orderInfo.PrescriptionCylRight = txtPrescriptionCylRight.Text;
-                orderInfo.PrescriptionAxisRight = txtPrescriptionAxisRight.Text;
-                orderInfo.PrescriptionAddRight = txtPrescriptionAddRight.Text;
-                orderInfo.PrescriptionPrismRight = txtPrescriptionPrismRight.Text;
-                orderInfo.PrescriptionSphereLeft = txtPrescriptionSphereLeft.Text;
-                orderInfo.PrescriptionCylLeft = txtPrescriptionCylLeft.Text;
-                orderInfo.PrescriptionAxisLeft = txtPrescriptionAxisLeft.Text;
-                orderInfo.PrescriptionAddLeft = txtPrescriptionAddLeft.Text;
-                orderInfo.PrescriptionPrismLeft = txtPrescriptionPrismLeft.Text;
-                orderInfo.FrameTotalPrice = Convert.ToDecimal(txtFrameTotalPrice.Text);
-                orderInfo.LensTotalPrice = Convert.ToDecimal(txtLensTotalPrice.Text);
-                orderInfo.OtherTotal = Convert.ToDecimal(txtOtherTotal.Text);
-                orderInfo.DiscountAmount = Convert.ToDecimal(txtDiscountAmnt.Text);
-                orderInfo.OrderTotal = Convert.ToDecimal(txtOrderTotalAmnt.Text);
-                orderInfo.HstAmount = Convert.ToDecimal(txtHSTAmnt.Text);
-                orderInfo.GrandTotal = Convert.ToDecimal(txtGrandTotal.Text);
-                
-                orderInfo.PaidAmount = Convert.ToDecimal(txtDepositAmnt.Text);
-                if (orderInfo.PaidAmount > 0)
-                {
-                    orderInfo.PaidBy = ddlPaidBy.SelectedValue.ToString();
-                }
-                else {
-                    orderInfo.PaidBy = "N/A";
-                }
-                orderInfo.BalanceDue = Convert.ToDecimal(txtBalanceAmnt.Text);
-                orderInfo.Remarks = txtRemarks.Text;
-                orderInfo.CreateDate = Convert.ToDateTime(DateTime.Now.ToString("dd-MMM-yyyy"));
-
-                List<OrderDetail> orderDetailList = new List<OrderDetail>();
-
-                foreach (DataGridViewRow row in gvOrderItemList.Rows)
-                {
-                    OrderDetail orderDetail = new OrderDetail();
-
-                    orderDetail.OrderId = orderInfo.Id;
-
-                    orderDetail.TrayNumber = row.Cells["TRAY#"].Value.ToString();
-
-                    orderDetail.ModifiedSphereRight = row.Cells["SPH_R"].Value.ToString();
-                    orderDetail.ModifiedCylRight = row.Cells["CYL_R"].Value.ToString();
-                    orderDetail.ModifiedAxisRight = row.Cells["AXIS_R"].Value.ToString();
-                    orderDetail.ModifiedAddRight = row.Cells["ADD_R"].Value.ToString();
-                    orderDetail.ModifiedPrismRight = row.Cells["PRISM_R"].Value.ToString();
-
-                    orderDetail.ModifiedSphereLeft = row.Cells["SPH_L"].Value.ToString();
-                    orderDetail.ModifiedCylLeft = row.Cells["CYL_L"].Value.ToString();
-                    orderDetail.ModifiedAxisLeft = row.Cells["AXIS_L"].Value.ToString();
-                    orderDetail.ModifiedAddLeft = row.Cells["ADD_L"].Value.ToString();
-                    orderDetail.ModifiedPrismLeft = row.Cells["PRISM_L"].Value.ToString();
-
-                    orderDetail.MeasurementFpdRight = row.Cells["FPD_R"].Value.ToString();
-                    orderDetail.MeasurementNrPdRight = row.Cells["NR.PD_R"].Value.ToString();
-                    orderDetail.MeasurementOcRight = row.Cells["OC_R"].Value.ToString();
-                    orderDetail.MeasurementSegRight = row.Cells["SEG_R"].Value.ToString();
-                    orderDetail.MeasurementBlSizeRight = row.Cells["BL.SIZE_R"].Value.ToString();
-
-                    orderDetail.MeasurementFpdLeft = row.Cells["FPD_L"].Value.ToString();
-                    orderDetail.MeasurementNrPdLeft = row.Cells["NR.PD_L"].Value.ToString();
-                    orderDetail.MeasurementOcLeft = row.Cells["OC_L"].Value.ToString();
-                    orderDetail.MeasurementSegLeft = row.Cells["SEG_L"].Value.ToString();
-                    orderDetail.MeasurementBlSizeLeft = row.Cells["BL.SIZE_L"].Value.ToString();
-
-                    orderDetail.MeasurementA = row.Cells["MSRMNT_A"].Value.ToString();
-                    orderDetail.MeasurementB = row.Cells["MSRMNT_B"].Value.ToString();
-                    orderDetail.MeasurementED = row.Cells["MSRMNT_ED"].Value.ToString();
-                    orderDetail.MeasurementDBL = row.Cells["MSRMNT_DBL"].Value.ToString();
-
-                    orderDetail.FrameCode = row.Cells["FRM_CODE"].Value.ToString();
-                    orderDetail.FrameColor = row.Cells["FRM_COLOR"].Value.ToString();
-                    orderDetail.FrameUnitPrice = Convert.ToDecimal(row.Cells["FRM_UNT_PRICE"].Value);
-                    orderDetail.FrameQuantity = Convert.ToInt32(row.Cells["FRM_QTY"].Value);
-                    orderDetail.LeftLensDescription = row.Cells["LL_DESC"].Value.ToString();
-                    orderDetail.LeftLensUnitPrice = Convert.ToDecimal(row.Cells["LL_UNT_PRICE"].Value);
-                    orderDetail.LeftLensQuantity = Convert.ToInt32(row.Cells["LL_QTY"].Value);
-                    orderDetail.RightLensDescription = row.Cells["RL_DESC"].Value.ToString();
-                    orderDetail.RightLensUnitPrice = Convert.ToDecimal(row.Cells["RL_UNT_PRICE"].Value);
-                    orderDetail.RightLensQuantity = Convert.ToInt32(row.Cells["RL_QTY"].Value);
-
-                    orderDetail.OtherItemDescription = row.Cells["OTHR_DESC"].Value.ToString();
-                    orderDetail.OtherItemUnitPrice = Convert.ToDecimal(row.Cells["OTHR_UNT_PRICE"].Value);
-                    orderDetail.OtherItemQuantity = Convert.ToInt32(row.Cells["OTHR_QTY"].Value);
-
-                    orderDetailList.Add(orderDetail);
-                }
+                var orderInfo = GetOrderData();
+                var orderDetailList = GetOrderDetailData();
 
                 if (orderInfo.Id > 0)
                 {
@@ -1447,12 +1382,13 @@ namespace Optiks
             txtOtherItemQuantity.Text = "0";
 
         }
-        private void FillCustomerDetailById(int customerId)
+        public void FillCustomerDetailById(int customerId)
         {
             customerManager = new CustomerManager();
             var custinfo = customerManager.GetCustomerById(customerId);
             if (custinfo != null)
             {
+                txtCustomerNo.Text = customerId.ToString();
                 txtCustomerFirstName.Text = custinfo.FirstName;
                 txtCustomerLastName.Text = custinfo.LastName;
                 txtCustomerEmail.Text = custinfo.Email;
@@ -1551,6 +1487,9 @@ namespace Optiks
             txtBalanceAmnt.Text = "0.00";
             txtTrayNumber.Text = "";
             btnDeleteOrder.Enabled = false;
+            btnSaveOrder.Enabled = true;
+            btnVoidOrder.Visible = true;
+            btnUnvoidOrder.Visible = false;
         }
         public void PrepareForUpdateEntry(int orderId)
         {
@@ -1564,9 +1503,10 @@ namespace Optiks
 
             if (orderInfo != null && orderInfo.Id > 0)
             {
+                CustomerNo = orderInfo.CustomerId.ToString();
                 txtOrderNo.Text = orderInfo.Id.ToString().PadLeft(8, '0');
                 btnDeleteOrder.Enabled = true;
-                txtCustomerNo.Text = orderInfo.CustomerId.ToString();
+                txtCustomerNo.Text = CustomerNo;
                 txtDoctorName.Text = orderInfo.DoctorName;
                 txtDoctorPhone.Text = orderInfo.DoctorPhone;
                 txtDoctorClinicAddress.Text = orderInfo.DoctorClinicAddress;
@@ -1591,6 +1531,20 @@ namespace Optiks
                 ddlPaidBy.SelectedValue = orderInfo.PaidBy;
                 txtDepositAmnt.Text = ((decimal)orderInfo.PaidAmount).ToString("0.00");
                 txtBalanceAmnt.Text = ((decimal)orderInfo.BalanceDue).ToString("0.00");
+                if (orderInfo.IsVoid)
+                {
+                    btnVoidOrder.Visible = false;
+                    btnUnvoidOrder.Visible = true;
+                    btnSaveOrder.Enabled = false;
+                    lblVoidStatus.Text = "This order has been voided. Unvoid to modify it.";
+                }
+                else
+                {
+                    btnVoidOrder.Visible = true;
+                    btnUnvoidOrder.Visible = false;
+                    btnSaveOrder.Enabled = true;
+                    lblVoidStatus.Text = "";
+                }
                 txtRemarks.Text = orderInfo.Remarks;
                 txtOrderDate.Text = orderInfo.CreateDate.ToString("dd-MMM-yyyy");
 
@@ -1603,6 +1557,9 @@ namespace Optiks
                     {
                         FillOrderDetailGridview(orderDetail);
                     }
+
+                    //gvOrderItemList.Update(); // not required
+                    //gvOrderItemList.Refresh(); // not required
                     gvOrderItemList.Rows[0].Selected = true;
                     FillOrderDetailByRow(gvOrderItemList.Rows[0]);
                 }
@@ -1685,6 +1642,110 @@ namespace Optiks
             txtOtherItemQuantity.Text = row.Cells["OTHR_QTY"].Value.ToString();
         }
 
+        private Order GetOrderData()
+        {
+            Order orderInfo = new Order();
+            orderInfo.Id = txtOrderNo.Text != "" && txtOrderNo.Text != "Auto" ? Convert.ToInt32(txtOrderNo.Text) : 0;
+            orderInfo.CustomerId = Convert.ToInt32(txtCustomerNo.Text);
+            orderInfo.DoctorName = txtDoctorName.Text;
+            orderInfo.DoctorPhone = txtDoctorPhone.Text;
+            orderInfo.DoctorClinicAddress = txtDoctorClinicAddress.Text;
+            orderInfo.DoctorPrescriptionDate = Convert.ToDateTime(txtPrescriptionDate.Text);
+            orderInfo.PrescriptionSphereRight = txtPrescriptionSphereRight.Text;
+            orderInfo.PrescriptionCylRight = txtPrescriptionCylRight.Text;
+            orderInfo.PrescriptionAxisRight = txtPrescriptionAxisRight.Text;
+            orderInfo.PrescriptionAddRight = txtPrescriptionAddRight.Text;
+            orderInfo.PrescriptionPrismRight = txtPrescriptionPrismRight.Text;
+            orderInfo.PrescriptionSphereLeft = txtPrescriptionSphereLeft.Text;
+            orderInfo.PrescriptionCylLeft = txtPrescriptionCylLeft.Text;
+            orderInfo.PrescriptionAxisLeft = txtPrescriptionAxisLeft.Text;
+            orderInfo.PrescriptionAddLeft = txtPrescriptionAddLeft.Text;
+            orderInfo.PrescriptionPrismLeft = txtPrescriptionPrismLeft.Text;
+            orderInfo.FrameTotalPrice = Convert.ToDecimal(txtFrameTotalPrice.Text);
+            orderInfo.LensTotalPrice = Convert.ToDecimal(txtLensTotalPrice.Text);
+            orderInfo.OtherTotal = Convert.ToDecimal(txtOtherTotal.Text);
+            orderInfo.DiscountAmount = Convert.ToDecimal(txtDiscountAmnt.Text);
+            orderInfo.OrderTotal = Convert.ToDecimal(txtOrderTotalAmnt.Text);
+            orderInfo.HstAmount = Convert.ToDecimal(txtHSTAmnt.Text);
+            orderInfo.GrandTotal = Convert.ToDecimal(txtGrandTotal.Text);
+
+            orderInfo.PaidAmount = Convert.ToDecimal(txtDepositAmnt.Text);
+            if (orderInfo.PaidAmount > 0)
+            {
+                orderInfo.PaidBy = ddlPaidBy.SelectedValue.ToString();
+            }
+            else
+            {
+                orderInfo.PaidBy = "N/A";
+            }
+            orderInfo.BalanceDue = Convert.ToDecimal(txtBalanceAmnt.Text);
+            orderInfo.Remarks = txtRemarks.Text;
+            orderInfo.CreateDate = Convert.ToDateTime(DateTime.Now.ToString("dd-MMM-yyyy"));
+
+            return orderInfo;
+        }
+
+        private List<OrderDetail> GetOrderDetailData()
+        {
+            List<OrderDetail> orderDetailList = new List<OrderDetail>();
+
+            foreach (DataGridViewRow row in gvOrderItemList.Rows)
+            {
+                OrderDetail orderDetail = new OrderDetail();
+
+                orderDetail.OrderId = txtOrderNo.Text != "" && txtOrderNo.Text != "Auto" ? Convert.ToInt32(txtOrderNo.Text) : 0;
+
+                orderDetail.TrayNumber = row.Cells["TRAY#"].Value.ToString();
+
+                orderDetail.ModifiedSphereRight = row.Cells["SPH_R"].Value.ToString();
+                orderDetail.ModifiedCylRight = row.Cells["CYL_R"].Value.ToString();
+                orderDetail.ModifiedAxisRight = row.Cells["AXIS_R"].Value.ToString();
+                orderDetail.ModifiedAddRight = row.Cells["ADD_R"].Value.ToString();
+                orderDetail.ModifiedPrismRight = row.Cells["PRISM_R"].Value.ToString();
+
+                orderDetail.ModifiedSphereLeft = row.Cells["SPH_L"].Value.ToString();
+                orderDetail.ModifiedCylLeft = row.Cells["CYL_L"].Value.ToString();
+                orderDetail.ModifiedAxisLeft = row.Cells["AXIS_L"].Value.ToString();
+                orderDetail.ModifiedAddLeft = row.Cells["ADD_L"].Value.ToString();
+                orderDetail.ModifiedPrismLeft = row.Cells["PRISM_L"].Value.ToString();
+
+                orderDetail.MeasurementFpdRight = row.Cells["FPD_R"].Value.ToString();
+                orderDetail.MeasurementNrPdRight = row.Cells["NR.PD_R"].Value.ToString();
+                orderDetail.MeasurementOcRight = row.Cells["OC_R"].Value.ToString();
+                orderDetail.MeasurementSegRight = row.Cells["SEG_R"].Value.ToString();
+                orderDetail.MeasurementBlSizeRight = row.Cells["BL.SIZE_R"].Value.ToString();
+
+                orderDetail.MeasurementFpdLeft = row.Cells["FPD_L"].Value.ToString();
+                orderDetail.MeasurementNrPdLeft = row.Cells["NR.PD_L"].Value.ToString();
+                orderDetail.MeasurementOcLeft = row.Cells["OC_L"].Value.ToString();
+                orderDetail.MeasurementSegLeft = row.Cells["SEG_L"].Value.ToString();
+                orderDetail.MeasurementBlSizeLeft = row.Cells["BL.SIZE_L"].Value.ToString();
+
+                orderDetail.MeasurementA = row.Cells["MSRMNT_A"].Value.ToString();
+                orderDetail.MeasurementB = row.Cells["MSRMNT_B"].Value.ToString();
+                orderDetail.MeasurementED = row.Cells["MSRMNT_ED"].Value.ToString();
+                orderDetail.MeasurementDBL = row.Cells["MSRMNT_DBL"].Value.ToString();
+
+                orderDetail.FrameCode = row.Cells["FRM_CODE"].Value.ToString();
+                orderDetail.FrameColor = row.Cells["FRM_COLOR"].Value.ToString();
+                orderDetail.FrameUnitPrice = Convert.ToDecimal(row.Cells["FRM_UNT_PRICE"].Value);
+                orderDetail.FrameQuantity = Convert.ToInt32(row.Cells["FRM_QTY"].Value);
+                orderDetail.LeftLensDescription = row.Cells["LL_DESC"].Value.ToString();
+                orderDetail.LeftLensUnitPrice = Convert.ToDecimal(row.Cells["LL_UNT_PRICE"].Value);
+                orderDetail.LeftLensQuantity = Convert.ToInt32(row.Cells["LL_QTY"].Value);
+                orderDetail.RightLensDescription = row.Cells["RL_DESC"].Value.ToString();
+                orderDetail.RightLensUnitPrice = Convert.ToDecimal(row.Cells["RL_UNT_PRICE"].Value);
+                orderDetail.RightLensQuantity = Convert.ToInt32(row.Cells["RL_QTY"].Value);
+
+                orderDetail.OtherItemDescription = row.Cells["OTHR_DESC"].Value.ToString();
+                orderDetail.OtherItemUnitPrice = Convert.ToDecimal(row.Cells["OTHR_UNT_PRICE"].Value);
+                orderDetail.OtherItemQuantity = Convert.ToInt32(row.Cells["OTHR_QTY"].Value);
+
+                orderDetailList.Add(orderDetail);
+            }
+
+            return orderDetailList;
+        }
 
         #endregion
 
@@ -1824,7 +1885,6 @@ namespace Optiks
             }
 
         }
-
         private void PrintReceipt(int orderId)
         {
             var orderInfo = orderManager.GetOrderById(orderId);
@@ -1835,6 +1895,62 @@ namespace Optiks
             frmRptOrder.orderId = orderId;
             frmRptOrder.customerId = custInfo.Id;
             frmRptOrder.ShowDialog();
+        }
+        private void btnUnvoid_Click(object sender, EventArgs e)
+        {
+            int orderId;
+            string remarks = txtRemarks.Text;
+            if (int.TryParse(txtOrderNo.Text, out orderId))
+            {
+                if (orderId > 0)
+                {
+
+                    DialogResult result = MessageBox.Show("Are you sure to unvoid this order?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (result == DialogResult.Yes)
+                    {
+                        if (orderManager.UnvoidExistingOrder(orderId, remarks) > 0)
+                        {
+                            MessageBox.Show("The order has been unvoided successfully.", "UnVoided", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            btnVoidOrder.Visible = true;
+                            btnSaveOrder.Enabled = true;
+                            btnUnvoidOrder.Visible = false;
+                            //rdoNewOrder.Checked = true;
+                            //PrepareForNewEntry();
+                        }
+                    }
+                }
+            }
+        }
+        private void btnVoidOrder_Click(object sender, EventArgs e)
+        {
+            int orderId;
+            string remarks = txtRemarks.Text;
+
+            if (remarks.Trim() == "") {
+                MessageBox.Show("Remarks cannot be empty to void an order. ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (int.TryParse(txtOrderNo.Text, out orderId))
+            {
+                if (orderId > 0)
+                {
+
+                    DialogResult result = MessageBox.Show("Are you sure to void this order?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (result == DialogResult.Yes)
+                    {
+                        if (orderManager.VoidExistingOrder(orderId, remarks) > 0)
+                        {
+                            MessageBox.Show("The order has been voided successfully.", "Voided", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            btnVoidOrder.Visible = false;
+                            btnSaveOrder.Enabled = false;
+                            btnUnvoidOrder.Visible = true;
+                            //rdoNewOrder.Checked = true;
+                            //PrepareForNewEntry();
+                        }
+                    }
+                }
+            }
         }
     }
 }

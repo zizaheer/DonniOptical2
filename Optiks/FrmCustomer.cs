@@ -197,7 +197,8 @@ namespace Optiks
             lblNoOfCustomersFound.Text = "0";
             string suppliedValue = txtFindByValue.Text;
 
-            if (suppliedValue.Length < 1) {
+            if (suppliedValue.Length < 1)
+            {
                 MessageBox.Show("Please enter value to search.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtFindByValue.Focus();
                 return;
@@ -225,7 +226,7 @@ namespace Optiks
                     MessageBox.Show("Please enter valid customer first name.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-            
+
             if (ddlFindBy.SelectedIndex == 1)
             {
                 if (suppliedValue.Trim().Length > 0)
@@ -370,21 +371,38 @@ namespace Optiks
         private void btnPlaceOrder_Click(object sender, EventArgs e)
         {
             bool isFormOpened = false;
+            int customerNo = 0;
+
+            int.TryParse(txtCustomerNo.Text, out customerNo);
+
+            if (customerNo < 1)
+            {
+                MessageBox.Show("Please select a customer to place an order.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            FrmOrder orderForm;
 
             foreach (Form frm in Application.OpenForms)
             {
                 if (frm.Name == "FrmOrder")
                 {
-                    frm.BringToFront();
                     isFormOpened = true;
+                    orderForm = (FrmOrder)frm;
+                    orderForm.MdiParent = ActiveForm;
+                    //orderForm.Location = new Point(5, 5);
+                    orderForm.CustomerNo = customerNo.ToString();
+                    orderForm.FillCustomerDetailById(customerNo);
+                    orderForm.BringToFront();
                 }
             }
 
             if (isFormOpened == false)
             {
-                FrmOrder orderForm = new FrmOrder();
+                orderForm = new FrmOrder();
                 orderForm.MdiParent = FrmMain.ActiveForm;
                 orderForm.Location = new Point(5, 5);
+                orderForm.CustomerNo = customerNo.ToString();
                 orderForm.Show();
             }
         }

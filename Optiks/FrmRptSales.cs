@@ -25,50 +25,41 @@ namespace Optiks
         public int customerId;
         private void FrmRptOrder_Load(object sender, EventArgs e)
         {
+            dtPickerFromDate.Value = DateTime.Now.AddDays(-7);
+            dtPickerToDate.Value = DateTime.Now;
+
+            
+
+        }
+
+        private void LoadReport(DateTime fromDate, DateTime toDate) {
 
             LocalReport localReport = reportViewerOrder.LocalReport;
             localReport.ReportPath = "RptSales.rdlc";
             localReport.DataSources.Clear();
 
+            ReportParameter[] reportParameters = new ReportParameter[2];
+            reportParameters[0] = new ReportParameter("fromDate", dtPickerFromDate.Value.ToString());
+            reportParameters[1] = new ReportParameter("toDate", dtPickerToDate.Value.ToString());
+            localReport.SetParameters(reportParameters);
+
             //// Create a report data source   
             DataSet ds = new DataSet();
-            DataTable dtCustomer = new DataTable();
-            dtCustomer = GetCustomerById(customerId);
-            ds.Tables.Add(dtCustomer);
             ReportDataSource rptSource = new ReportDataSource();
-            rptSource.Name = "DataSetCustomer";
-            rptSource.Value = ds.Tables["Customer"];
-            localReport.DataSources.Add(rptSource);
-
 
             ds = new DataSet();
-            DataTable dtOrder = new DataTable();
-            dtOrder = GetOrders();
-            ds.Tables.Add(dtOrder);
+            ds.Tables.Add(GetOrdersForSalesReport(fromDate, toDate));
             rptSource = new ReportDataSource();
-            rptSource.Name = "DataSetOrder";
-            rptSource.Value = ds.Tables["Order"];
+            rptSource.Name = "SalesReportDataSet";
+            rptSource.Value = ds.Tables["OrderCustomer"];
             localReport.DataSources.Add(rptSource);
-
 
             ds = new DataSet();
-            DataTable dtOrderDetail = new DataTable();
-            dtOrderDetail = GetOrderDetailByOrderId(orderId);
-            ds.Tables.Add(dtOrderDetail);
+            ds.Tables.Add(GetVoidOrders(fromDate, toDate));
             rptSource = new ReportDataSource();
-            rptSource.Name = "DataSetOrderDetail";
-            rptSource.Value = ds.Tables["OrderDetail"];
+            rptSource.Name = "VoidOrderDataSet";
+            rptSource.Value = ds.Tables["VoidOrder"];
             localReport.DataSources.Add(rptSource);
-
-            //ds = new DataSet();
-            //DataTable dtOrderSales = new DataTable();
-            //dtOrderSales = GetOrderById(orderId);
-            //ds.Tables.Add(dtOrder);
-            //rptSource = new ReportDataSource();
-            //rptSource.Name = "DataSetSales";
-            //rptSource.Value = ds.Tables["Order"];
-            //localReport.DataSources.Add(rptSource);
-
 
             // Refresh the report  
             PageSettings ps = new PageSettings();
@@ -78,26 +69,22 @@ namespace Optiks
             reportViewerOrder.SetPageSettings(ps);
             reportViewerOrder.RefreshReport();
 
+            
+
             localReport.Refresh();
+
         }
 
-
-
-        private DataTable GetOrders()
+        private DataTable GetOrdersForSalesReport(DateTime fromDate, DateTime toDate)
         {
-            DataTable dt = new DataTable();
-            //dt.Columns.Add("Order#");
-            //dt.Columns.Add("Customer#");
-            //dt.Columns.Add("Name");
-            //dt.Columns.Add("Date");
-            //dt.Columns.Add("Order Total");
-            //dt.Columns.Add("Paid Amount");
-            //dt.Columns.Add("Due");
             OrderManager orderManager = new OrderManager();
-            dt = orderManager.GetOrdersForReport();
+            return orderManager.GetOrdersForSalesReport(fromDate, toDate);
+        }
 
-            return dt;
-
+        private DataTable GetVoidOrders(DateTime fromDate, DateTime toDate)
+        {
+            OrderManager orderManager = new OrderManager();
+            return orderManager.GetVoidOrders(fromDate, toDate);
         }
 
         private DataTable GetOrderDetailByOrderId(int orderId)
@@ -130,6 +117,17 @@ namespace Optiks
 
         }
 
-        
+        private void btnShowReport_Click(object sender, EventArgs e)
+        {
+            DateTime fromDate;
+            DateTime toDate;
+            string fromDateString = dtPickerFromDate.Text;
+            string toDateString = dtPickerToDate.Text;
+
+            DateTime.TryParse(fromDateString, out fromDate);
+            DateTime.TryParse(toDateString, out toDate);
+
+            LoadReport(fromDate, toDate);
+        }
     }
 }

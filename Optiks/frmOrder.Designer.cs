@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnCloseOrder = new System.Windows.Forms.Button();
             this.btnRemoveFromOrderItemList = new System.Windows.Forms.Button();
             this.btnSaveOrder = new System.Windows.Forms.Button();
@@ -199,6 +199,9 @@
             this.btnPrintReceipt = new System.Windows.Forms.Button();
             this.btnPrintOrder = new System.Windows.Forms.Button();
             this.btnClearItemTextboxes = new System.Windows.Forms.Button();
+            this.btnVoidOrder = new System.Windows.Forms.Button();
+            this.btnUnvoidOrder = new System.Windows.Forms.Button();
+            this.lblVoidStatus = new System.Windows.Forms.Label();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvOrderItemList)).BeginInit();
@@ -238,9 +241,9 @@
             // 
             // btnSaveOrder
             // 
-            this.btnSaveOrder.Location = new System.Drawing.Point(699, 696);
+            this.btnSaveOrder.Location = new System.Drawing.Point(737, 696);
             this.btnSaveOrder.Name = "btnSaveOrder";
-            this.btnSaveOrder.Size = new System.Drawing.Size(169, 25);
+            this.btnSaveOrder.Size = new System.Drawing.Size(131, 25);
             this.btnSaveOrder.TabIndex = 14;
             this.btnSaveOrder.Text = "Save";
             this.btnSaveOrder.UseVisualStyleBackColor = true;
@@ -559,23 +562,23 @@
             // 
             this.gvOrderItemList.AllowUserToAddRows = false;
             this.gvOrderItemList.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvOrderItemList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvOrderItemList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.gvOrderItemList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gvOrderItemList.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gvOrderItemList.DefaultCellStyle = dataGridViewCellStyle6;
             this.gvOrderItemList.Location = new System.Drawing.Point(7, 19);
             this.gvOrderItemList.MultiSelect = false;
             this.gvOrderItemList.Name = "gvOrderItemList";
@@ -1815,12 +1818,13 @@
             // 
             // btnDeleteOrder
             // 
-            this.btnDeleteOrder.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnDeleteOrder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btnDeleteOrder.Enabled = false;
+            this.btnDeleteOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeleteOrder.Image = global::Optiks.Properties.Resources.bin;
             this.btnDeleteOrder.Location = new System.Drawing.Point(339, 16);
             this.btnDeleteOrder.Name = "btnDeleteOrder";
-            this.btnDeleteOrder.Size = new System.Drawing.Size(35, 23);
+            this.btnDeleteOrder.Size = new System.Drawing.Size(35, 21);
             this.btnDeleteOrder.TabIndex = 4;
             this.btnDeleteOrder.UseVisualStyleBackColor = false;
             this.btnDeleteOrder.Click += new System.EventHandler(this.btnDeleteOrder_Click);
@@ -1950,6 +1954,40 @@
             this.btnClearItemTextboxes.UseVisualStyleBackColor = true;
             this.btnClearItemTextboxes.Click += new System.EventHandler(this.btnClearItemTextboxes_Click);
             // 
+            // btnVoidOrder
+            // 
+            this.btnVoidOrder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnVoidOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVoidOrder.Location = new System.Drawing.Point(259, 697);
+            this.btnVoidOrder.Name = "btnVoidOrder";
+            this.btnVoidOrder.Size = new System.Drawing.Size(121, 23);
+            this.btnVoidOrder.TabIndex = 267;
+            this.btnVoidOrder.Text = "Void this order";
+            this.btnVoidOrder.UseVisualStyleBackColor = false;
+            this.btnVoidOrder.Click += new System.EventHandler(this.btnVoidOrder_Click);
+            // 
+            // btnUnvoidOrder
+            // 
+            this.btnUnvoidOrder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnUnvoidOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUnvoidOrder.Location = new System.Drawing.Point(259, 697);
+            this.btnUnvoidOrder.Name = "btnUnvoidOrder";
+            this.btnUnvoidOrder.Size = new System.Drawing.Size(121, 23);
+            this.btnUnvoidOrder.TabIndex = 268;
+            this.btnUnvoidOrder.Text = "Unvoid this order";
+            this.btnUnvoidOrder.UseVisualStyleBackColor = false;
+            this.btnUnvoidOrder.Click += new System.EventHandler(this.btnUnvoid_Click);
+            // 
+            // lblVoidStatus
+            // 
+            this.lblVoidStatus.AutoSize = true;
+            this.lblVoidStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVoidStatus.ForeColor = System.Drawing.Color.Brown;
+            this.lblVoidStatus.Location = new System.Drawing.Point(392, 702);
+            this.lblVoidStatus.Name = "lblVoidStatus";
+            this.lblVoidStatus.Size = new System.Drawing.Size(0, 13);
+            this.lblVoidStatus.TabIndex = 269;
+            // 
             // FrmOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1957,6 +1995,9 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.CancelButton = this.btnCloseOrder;
             this.ClientSize = new System.Drawing.Size(965, 730);
+            this.Controls.Add(this.lblVoidStatus);
+            this.Controls.Add(this.btnUnvoidOrder);
+            this.Controls.Add(this.btnVoidOrder);
             this.Controls.Add(this.btnPrintReceipt);
             this.Controls.Add(this.btnPrintOrder);
             this.Controls.Add(this.btnClearItemTextboxes);
@@ -2040,7 +2081,6 @@
         private System.Windows.Forms.TextBox txtFrameTotalPrice;
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DataGridView gvOrderItemList;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.TextBox txtRightLensQuantity;
@@ -2180,5 +2220,9 @@
         public System.Windows.Forms.TextBox txtFindByValue;
         public System.Windows.Forms.ComboBox ddlFindBy;
         public System.Windows.Forms.RadioButton rdoFindOrder;
+        private System.Windows.Forms.Button btnVoidOrder;
+        private System.Windows.Forms.Button btnUnvoidOrder;
+        public System.Windows.Forms.DataGridView gvOrderItemList;
+        private System.Windows.Forms.Label lblVoidStatus;
     }
 }

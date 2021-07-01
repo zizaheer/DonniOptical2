@@ -43,6 +43,8 @@ namespace Optiks.Model
         public string PaidBy { get; set; }
         public decimal? PaidAmount { get; set; }
         public decimal? BalanceDue { get; set; }
+        public bool IsVoid { get; set; }
+        public DateTime? VoidDate { get; set; }
         public string Remarks { get; set; }
         public DateTime OrderDate { get; set; }
 

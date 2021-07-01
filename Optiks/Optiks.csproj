@@ -27,7 +27,7 @@
     <ProductName>Optiks</ProductName>
     <PublisherName>Retoll Inc.</PublisherName>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>12</ApplicationRevision>
+    <ApplicationRevision>14</ApplicationRevision>
     <ApplicationVersion>1.3232.0212.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -154,13 +154,10 @@
     <Compile Include="Model\ViewOrder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReportDataSet.cs">
-      <DependentUpon>ReportDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="ReportDataSet.Designer.cs">
+    <Compile Include="SalesReportDataSource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ReportDataSet.xsd</DependentUpon>
+      <DependentUpon>SalesReportDataSource.xsd</DependentUpon>
     </Compile>
     <EmbeddedResource Include="FrmCustomer.resx">
       <DependentUpon>FrmCustomer.cs</DependentUpon>
@@ -214,22 +211,22 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="SalesReportDataSource.xsc">
+      <DependentUpon>SalesReportDataSource.xsd</DependentUpon>
+    </None>
+    <None Include="SalesReportDataSource.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SalesReportDataSource.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="SalesReportDataSource.xss">
+      <DependentUpon>SalesReportDataSource.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ReportDataSet.xsc">
-      <DependentUpon>ReportDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="ReportDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>ReportDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="ReportDataSet.xss">
-      <DependentUpon>ReportDataSet.xsd</DependentUpon>
-    </None>
     <None Include="Resources\magnifier.png" />
     <None Include="Resources\calendar.png" />
     <None Include="Resources\plus_light_blue.png" />

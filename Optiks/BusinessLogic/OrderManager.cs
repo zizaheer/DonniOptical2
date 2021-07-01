@@ -12,11 +12,13 @@ namespace Optiks.BusinessLogic
 {
     public class OrderManager
     {
-        OrderDataAccess dataAccess;
+        OrderDataAccess orderDataAccess;
+        CustomerDataAccess customerDataAccess;
         OrderDetailDataAccess dataDetailAccess;
         public OrderManager()
         {
-            dataAccess = new OrderDataAccess();
+            orderDataAccess = new OrderDataAccess();
+            customerDataAccess = new CustomerDataAccess();
             dataDetailAccess = new OrderDetailDataAccess();
         }
 
@@ -26,7 +28,7 @@ namespace Optiks.BusinessLogic
             List<Order> orderList = new List<Order>();
             try
             {
-                orderList = dataAccess.GetOrderList();
+                orderList = orderDataAccess.GetOrderList();
 
             }
             catch (Exception ex)
@@ -38,14 +40,14 @@ namespace Optiks.BusinessLogic
 
         }
 
-       
+
         public Order GetOrderById(int id)
         {
 
             Order order = new Order();
             try
             {
-                order = dataAccess.GetOrderById(id);
+                order = orderDataAccess.GetOrderById(id);
             }
             catch (Exception ex)
             {
@@ -64,8 +66,8 @@ namespace Optiks.BusinessLogic
             {
                 using (var scope = new TransactionScope())
                 {
-                    order.Id = dataAccess.GetMaxOrderId() + 1;
-                    orderId = dataAccess.InsertNewOrder(order);
+                    order.Id = orderDataAccess.GetMaxOrderId() + 1;
+                    orderId = orderDataAccess.InsertNewOrder(order);
                     if (orderId > 0)
                     {
                         foreach (var orderDetail in orderDetails)
@@ -74,7 +76,8 @@ namespace Optiks.BusinessLogic
                             isDetailInserted = InsertNewOrderDetail(orderDetail);
                         }
 
-                        if (isDetailInserted > 0) {
+                        if (isDetailInserted > 0)
+                        {
                             scope.Complete();
                         }
                     }
@@ -105,7 +108,7 @@ namespace Optiks.BusinessLogic
 
                     if (isDetailInserted > 0)
                     {
-                        dataAccess.UpdateExistingOrder(order);
+                        orderDataAccess.UpdateExistingOrder(order);
                         scope.Complete();
                         orderId = order.Id;
                     }
@@ -132,7 +135,37 @@ namespace Optiks.BusinessLogic
                     dataDetailAccess.DeleteOrderDetailByOrderId(orderId);
                 }
 
-                result = dataAccess.DeleteExistingOrder(orderId);
+                result = orderDataAccess.DeleteExistingOrder(orderId);
+            }
+            catch (Exception ex)
+            {
+                //
+            }
+
+            return result;
+        }
+
+        public int VoidExistingOrder(int orderId, string remarks)
+        {
+            int result = 0;
+            try
+            {
+                result = orderDataAccess.VoidExistingOrder(orderId, remarks);
+            }
+            catch (Exception ex)
+            {
+                //
+            }
+
+            return result;
+        }
+
+        public int UnvoidExistingOrder(int orderId, string remarks)
+        {
+            int result = 0;
+            try
+            {
+                result = orderDataAccess.UnvoidExistingOrder(orderId, remarks);
             }
             catch (Exception ex)
             {
@@ -249,36 +282,37 @@ namespace Optiks.BusinessLogic
 
         public List<ViewOrder> GetOrdersByOrderId(int orderId)
         {
-            var orderList = dataAccess.GetViewOrderList();
+            var orderList = orderDataAccess.GetViewOrderList();
             orderList = orderList.Where(c => c.OrderId == orderId).ToList();
 
             return orderList;
         }
         public List<ViewOrder> GetOrdersByCustomerId(int customerId)
         {
-            var orderList = dataAccess.GetViewOrderList();
+            var orderList = orderDataAccess.GetViewOrderList();
             orderList = orderList.Where(c => c.CustomerId == customerId).ToList();
 
             return orderList;
         }
-        public List<ViewOrder> GetOrdersByDate(DateTime fromDate, DateTime toDate) {
+        public List<ViewOrder> GetOrdersByDate(DateTime fromDate, DateTime toDate)
+        {
 
-            var orderList = dataAccess.GetViewOrderList();
-            orderList  = orderList.Where(c => c.OrderDate >= fromDate && c.OrderDate <= toDate).ToList();
+            var orderList = orderDataAccess.GetViewOrderList();
+            orderList = orderList.Where(c => c.OrderDate >= fromDate && c.OrderDate <= toDate).ToList();
 
             return orderList;
-        
+
         }
         public List<ViewOrder> GetOrdersByCustomerFirstName(string customerFirstName)
         {
-            var orderList = dataAccess.GetViewOrderList();
+            var orderList = orderDataAccess.GetViewOrderList();
             orderList = orderList.Where(c => string.Equals(c.FirstName, customerFirstName, StringComparison.OrdinalIgnoreCase)).ToList();
 
             return orderList;
         }
         public List<ViewOrder> GetOrdersByDateAndFirstName(DateTime fromDate, DateTime toDate, string customerFirstName)
         {
-            var orderList = dataAccess.GetViewOrderList();
+            var orderList = orderDataAccess.GetViewOrderList();
             orderList = orderList.Where(c => c.OrderDate >= fromDate && c.OrderDate <= toDate && string.Equals(c.FirstName, customerFirstName, StringComparison.OrdinalIgnoreCase)).ToList();
 
             return orderList;
@@ -286,7 +320,7 @@ namespace Optiks.BusinessLogic
         }
         public List<ViewOrder> GetOrdersByCustomerLastName(string customerLastName)
         {
-            var orderList = dataAccess.GetViewOrderList();
+            var orderList = orderDataAccess.GetViewOrderList();
             orderList = orderList.Where(c => string.Equals(c.LastName, customerLastName, StringComparison.OrdinalIgnoreCase)).ToList();
 
             return orderList;
@@ -294,7 +328,7 @@ namespace Optiks.BusinessLogic
         }
         public List<ViewOrder> GetOrdersByDateAndLastName(DateTime fromDate, DateTime toDate, string customerLastName)
         {
-            var orderList = dataAccess.GetViewOrderList();
+            var orderList = orderDataAccess.GetViewOrderList();
             orderList = orderList.Where(c => c.OrderDate >= fromDate && c.OrderDate <= toDate && string.Equals(c.LastName, customerLastName, StringComparison.OrdinalIgnoreCase)).ToList();
 
             return orderList;
@@ -302,14 +336,14 @@ namespace Optiks.BusinessLogic
         }
         public List<ViewOrder> GetOrdersByCustomerPhone(string customerPhone)
         {
-            var orderList = dataAccess.GetViewOrderList();
-            orderList = orderList.Where(c => string.Equals(c.Telephone.Replace("-",""), customerPhone.Replace("-", ""), StringComparison.OrdinalIgnoreCase)).ToList();
+            var orderList = orderDataAccess.GetViewOrderList();
+            orderList = orderList.Where(c => string.Equals(c.Telephone.Replace("-", ""), customerPhone.Replace("-", ""), StringComparison.OrdinalIgnoreCase)).ToList();
 
             return orderList;
         }
         public List<ViewOrder> GetOrdersByDateAndPhoneNumber(DateTime fromDate, DateTime toDate, string customerPhone)
         {
-            var orderList = dataAccess.GetViewOrderList();
+            var orderList = orderDataAccess.GetViewOrderList();
             orderList = orderList.Where(c => c.OrderDate >= fromDate && c.OrderDate <= toDate && string.Equals(c.Telephone.Replace("-", ""), customerPhone.Replace("-", ""), StringComparison.OrdinalIgnoreCase)).ToList();
 
             return orderList;
@@ -317,7 +351,7 @@ namespace Optiks.BusinessLogic
         }
         public List<ViewOrder> GetOrdersByEmail(string customerEmail)
         {
-            var orderList = dataAccess.GetViewOrderList();
+            var orderList = orderDataAccess.GetViewOrderList();
             orderList = orderList.Where(c => string.Equals(c.Email, customerEmail, StringComparison.OrdinalIgnoreCase)).ToList();
 
             return orderList;
@@ -325,19 +359,18 @@ namespace Optiks.BusinessLogic
         }
         public List<ViewOrder> GetOrdersByDateAndEmail(DateTime fromDate, DateTime toDate, string customerEmail)
         {
-            var orderList = dataAccess.GetViewOrderList();
+            var orderList = orderDataAccess.GetViewOrderList();
             orderList = orderList.Where(c => c.OrderDate >= fromDate && c.OrderDate <= toDate && string.Equals(c.Email, customerEmail, StringComparison.OrdinalIgnoreCase)).ToList();
 
             return orderList;
 
         }
-
         public DataTable GetOrderDataTable()
         {
             DataTable dt = new DataTable();
             try
             {
-                dt = dataAccess.GetOrderDataTable();
+                dt = orderDataAccess.GetOrderDataTable();
             }
             catch (Exception ex)
             {
@@ -346,13 +379,12 @@ namespace Optiks.BusinessLogic
 
             return dt;
         }
-
         public DataTable GetSingleOrderById(int orderId)
         {
             DataTable dt = new DataTable();
             try
             {
-                dt = dataAccess.GetSingleOrderById(orderId);
+                dt = orderDataAccess.GetSingleOrderById(orderId);
             }
             catch (Exception ex)
             {
@@ -361,23 +393,107 @@ namespace Optiks.BusinessLogic
 
             return dt;
         }
-
-        public DataTable GetOrdersForReport()
+        public DataTable GetOrdersForSalesReport(DateTime fromDate, DateTime toDate)
         {
-            DataTable dt = new DataTable();
+            DataTable dtOrderData = new DataTable();
+            dtOrderData.TableName = "OrderCustomer";
+
+            dtOrderData.Columns.Add("CreateDate");
+            dtOrderData.Columns.Add("Id");
+            dtOrderData.Columns.Add("FirstName");
+            dtOrderData.Columns.Add("LastName");
+            dtOrderData.Columns.Add("CustomerId");
+            dtOrderData.Columns.Add("GrandTotal");
+            dtOrderData.Columns.Add("HstAmount");
+            dtOrderData.Columns.Add("PaidAmount");
+            dtOrderData.Columns.Add("BalanceDue");
+
             try
             {
-                dt = dataAccess.GetOrders();
+                var orders = orderDataAccess.GetCompleteOrders(fromDate, toDate);
+                for (int i = 0; i < orders.Rows.Count; i++)
+                {
+                    DataRow dr = dtOrderData.NewRow();
+                    dr["CreateDate"] = orders.Rows[i]["CreateDate"];
+                    dr["Id"] = orders.Rows[i]["Id"];
+                    dr["CustomerId"] = orders.Rows[i]["CustomerId"];
+
+                    var customerInfo = customerDataAccess.GetCustomerById(Convert.ToInt32(dr["CustomerId"]));
+                    if (customerInfo != null)
+                    {
+                        dr["FirstName"] = customerInfo.FirstName;
+                        dr["LastName"] = customerInfo.LastName;
+                    }
+
+                    dr["GrandTotal"] = orders.Rows[i]["GrandTotal"];
+                    dr["HstAmount"] = orders.Rows[i]["HstAmount"];
+                    dr["PaidAmount"] = orders.Rows[i]["PaidAmount"];
+                    dr["BalanceDue"] = orders.Rows[i]["BalanceDue"];
+
+                    dtOrderData.Rows.Add(dr);
+                }
+
             }
             catch (Exception ex)
             {
                 //
             }
 
-            return dt;
+            return dtOrderData;
         }
 
+        public DataTable GetVoidOrders(DateTime fromDate, DateTime toDate)
+        {
+            DataTable dtOrderData = new DataTable();
+            dtOrderData.TableName = "VoidOrder";
 
+            dtOrderData.Columns.Add("CreateDate");
+            dtOrderData.Columns.Add("Id");
+            dtOrderData.Columns.Add("FirstName");
+            dtOrderData.Columns.Add("LastName");
+            dtOrderData.Columns.Add("CustomerId");
+            dtOrderData.Columns.Add("GrandTotal");
+            dtOrderData.Columns.Add("HstAmount");
+            dtOrderData.Columns.Add("PaidAmount");
+            dtOrderData.Columns.Add("BalanceDue");
+            dtOrderData.Columns.Add("VoidDate");
+            dtOrderData.Columns.Add("Remarks");
+
+            try
+            {
+                var orders = orderDataAccess.GetVoidOrders(fromDate, toDate);
+                for (int i = 0; i < orders.Rows.Count; i++)
+                {
+                    DataRow dr = dtOrderData.NewRow();
+                    dr["CreateDate"] = orders.Rows[i]["CreateDate"];
+                    dr["Id"] = orders.Rows[i]["Id"];
+                    dr["CustomerId"] = orders.Rows[i]["CustomerId"];
+
+                    var customerInfo = customerDataAccess.GetCustomerById(Convert.ToInt32(dr["CustomerId"]));
+                    if (customerInfo != null)
+                    {
+                        dr["FirstName"] = customerInfo.FirstName;
+                        dr["LastName"] = customerInfo.LastName;
+                    }
+
+                    dr["GrandTotal"] = orders.Rows[i]["GrandTotal"];
+                    dr["HstAmount"] = orders.Rows[i]["HstAmount"];
+                    dr["PaidAmount"] = orders.Rows[i]["PaidAmount"];
+                    dr["BalanceDue"] = orders.Rows[i]["BalanceDue"];
+                    dr["VoidDate"] = orders.Rows[i]["VoidDate"];
+                    dr["Remarks"] = orders.Rows[i]["Remarks"];
+
+                    dtOrderData.Rows.Add(dr);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                //
+            }
+
+            return dtOrderData;
+        }
         public DataTable GetOrderDetailDataTableByOrderId(int orderId)
         {
             DataTable dt = new DataTable();

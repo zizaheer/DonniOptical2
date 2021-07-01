@@ -62,6 +62,12 @@ namespace Optiks.DataAccess
                         order.PaidBy = dr["PaidBy"].ToString();
                         order.PaidAmount = Convert.ToDecimal(dr["PaidAmount"]);
                         order.BalanceDue = Convert.ToDecimal(dr["BalanceDue"]);
+                        order.IsVoid = Convert.ToBoolean(dataReader["IsVoid"]);
+
+                        if (!string.IsNullOrEmpty(dataReader["VoidDate"].ToString()))
+                        {
+                            order.VoidDate = Convert.ToDateTime(dataReader["VoidDate"]);
+                        }
                         order.Remarks = dr["Remarks"].ToString();
                         order.CreateDate = Convert.ToDateTime(dr["CreateDate"]);
                         
@@ -173,6 +179,13 @@ namespace Optiks.DataAccess
                     order.PaidBy = dataReader["PaidBy"].ToString();
                     order.PaidAmount = Convert.ToDecimal(dataReader["PaidAmount"]);
                     order.BalanceDue = Convert.ToDecimal(dataReader["BalanceDue"]);
+                    order.IsVoid = Convert.ToBoolean(dataReader["IsVoid"]);
+
+                    if (!string.IsNullOrEmpty(dataReader["VoidDate"].ToString()))
+                    {
+                        order.VoidDate = Convert.ToDateTime(dataReader["VoidDate"]);
+                    }
+                    
                     order.Remarks = dataReader["Remarks"].ToString();
                     order.CreateDate = Convert.ToDateTime(dataReader["CreateDate"]);
                 }
@@ -215,8 +228,7 @@ namespace Optiks.DataAccess
 
             return dataTable;
         }
-
-        public DataTable GetOrders()
+        public DataTable GetAllOrders()
         {
             DataTable dataTable = new DataTable("Order");
 
@@ -240,7 +252,54 @@ namespace Optiks.DataAccess
 
             return dataTable;
         }
+        public DataTable GetCompleteOrders(DateTime fromDate, DateTime toDate)
+        {
+            DataTable dataTable = new DataTable("Order");
 
+            try
+            {
+                sqlConnection.Open();
+                string query = "SELECT * FROM dbo.[Order] WHERE CreateDate >='" + fromDate + "' AND CreateDate <='" + toDate + "' AND IsVoid = 0 ORDER BY Id DESC"; 
+                sqlCommand = new SqlCommand(query, sqlConnection);
+                dataAdapter = new SqlDataAdapter(sqlCommand);
+                dataAdapter.Fill(dataTable);
+            }
+            catch (Exception ex)
+            {
+                //
+            }
+
+            finally
+            {
+                sqlConnection.Close();
+            }
+
+            return dataTable;
+        }
+        public DataTable GetVoidOrders(DateTime fromDate, DateTime toDate)
+        {
+            DataTable dataTable = new DataTable("Order");
+
+            try
+            {
+                sqlConnection.Open();
+                string query = "SELECT * FROM dbo.[Order] WHERE CreateDate >='" + fromDate + "' AND CreateDate <='" + toDate + "' AND IsVoid = 1 ORDER BY Id DESC";
+                sqlCommand = new SqlCommand(query, sqlConnection);
+                dataAdapter = new SqlDataAdapter(sqlCommand);
+                dataAdapter.Fill(dataTable);
+            }
+            catch (Exception ex)
+            {
+                //
+            }
+
+            finally
+            {
+                sqlConnection.Close();
+            }
+
+            return dataTable;
+        }
 
         public int InsertNewOrder(Order order)
         {
@@ -252,12 +311,12 @@ namespace Optiks.DataAccess
                 string query = "INSERT INTO dbo.[Order](Id, CustomerId, DoctorName, DoctorPhone, DoctorClinicAddress, DoctorPrescriptionDate, PrescriptionSphereRight";
                 query += ", PrescriptionCylRight, PrescriptionAxisRight, PrescriptionAddRight, PrescriptionPrismRight, PrescriptionSphereLeft";
                 query += ", PrescriptionCylLeft, PrescriptionAxisLeft, PrescriptionAddLeft, PrescriptionPrismLeft, FrameTotalPrice";
-                query += ", LensTotalPrice, OtherTotal, DiscountAmount, OrderTotal, HstAmount, GrandTotal, PaidBy, PaidAmount";
-                query += ", BalanceDue, Remarks, CreateDate) VALUES(@Id, @CustomerId, @DoctorName, @DoctorPhone, @DoctorClinicAddress, @DoctorPrescriptionDate, @PrescriptionSphereRight";
+                query += ", LensTotalPrice, OtherTotal, DiscountAmount, OrderTotal, HstAmount, GrandTotal, PaidBy, PaidAmount, BalanceDue";
+                query += ", IsVoid, VoidDate, Remarks, CreateDate) VALUES(@Id, @CustomerId, @DoctorName, @DoctorPhone, @DoctorClinicAddress, @DoctorPrescriptionDate, @PrescriptionSphereRight";
                 query += ", @PrescriptionCylRight, @PrescriptionAxisRight, @PrescriptionAddRight, @PrescriptionPrismRight, @PrescriptionSphereLeft";
                 query += ", @PrescriptionCylLeft, @PrescriptionAxisLeft, @PrescriptionAddLeft, @PrescriptionPrismLeft, @FrameTotalPrice";
                 query += ", @LensTotalPrice, @OtherTotal, @DiscountAmount, @OrderTotal, @HstAmount, @GrandTotal, @PaidBy, @PaidAmount";
-                query += ", @BalanceDue, @Remarks, @CreateDate); ";
+                query += ", @BalanceDue, 0, NULL, @Remarks, @CreateDate); ";
                 query += " SELECT ISNULL(MAX(Id), 0) FROM dbo.[order] ";
 
                 sqlCommand = new SqlCommand(query, sqlConnection);
@@ -320,7 +379,7 @@ namespace Optiks.DataAccess
                 query += ", PrescriptionAddLeft = @PrescriptionAddLeft, PrescriptionPrismLeft = @PrescriptionPrismLeft, FrameTotalPrice = @FrameTotalPrice";
                 query += ", LensTotalPrice = @LensTotalPrice, OtherTotal = @OtherTotal, DiscountAmount = @DiscountAmount, OrderTotal = @OrderTotal";
                 query += ", HstAmount = @HstAmount, GrandTotal = @GrandTotal, PaidBy = @PaidBy, PaidAmount = @PaidAmount, BalanceDue = @BalanceDue";
-                query += ", Remarks = @Remarks, CreateDate = @CreateDate WHERE Id = @Id";
+                query += ", IsVoid = 0, VoidDate = NULL, Remarks = @Remarks, CreateDate = @CreateDate WHERE Id = @Id";
 
                 sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@Id", order.Id);
@@ -392,7 +451,62 @@ namespace Optiks.DataAccess
 
             return result;
         }
+        public int VoidExistingOrder(int orderId, string remarks)
+        {
+            int result = 0;
+            try
+            {
+                sqlConnection.Open();
 
+                string query = "UPDATE dbo.[Order] SET  IsVoid = 1";
+                query += ", VoidDate = '"+ DateTime.Now +"', Remarks = @Remarks  WHERE Id = @Id";
+
+                sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@Id", orderId);
+                sqlCommand.Parameters.AddWithValue("@Remarks", remarks);
+
+                result = sqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                //
+            }
+
+            finally
+            {
+                sqlConnection.Close();
+            }
+
+            return result;
+        }
+        public int UnvoidExistingOrder(int orderId, string remarks)
+        {
+            int result = 0;
+            try
+            {
+                sqlConnection.Open();
+
+                string query = "UPDATE dbo.[Order] SET  IsVoid = 0";
+                query += ", VoidDate = NULL, Remarks = @Remarks  WHERE Id = @Id";
+
+                sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@Id", orderId);
+                sqlCommand.Parameters.AddWithValue("@Remarks", remarks);
+
+                result = sqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                //
+            }
+
+            finally
+            {
+                sqlConnection.Close();
+            }
+
+            return result;
+        }
         public List<ViewOrder> GetViewOrderList() {
 
             List<ViewOrder> viewOrders = new List<ViewOrder>();
@@ -407,7 +521,7 @@ namespace Optiks.DataAccess
                 query += ", O.PrescriptionSphereRight, O.PrescriptionSphereLeft, O.PrescriptionCylRight, O.PrescriptionCylLeft";
                 query += ", O.PrescriptionAxisRight, O.PrescriptionAxisLeft, O.PrescriptionAddRight, O.PrescriptionAddLeft";
                 query += ", O.PrescriptionPrismRight, O.PrescriptionPrismLeft, O.FrameTotalPrice, O.LensTotalPrice, O.OtherTotal, O.DiscountAmount";
-                query += ", O.OrderTotal, O.HstAmount, O.GrandTotal, O.PaidBy, O.PaidAmount, O.BalanceDue, O.Remarks";
+                query += ", O.OrderTotal, O.HstAmount, O.GrandTotal, O.PaidBy, O.PaidAmount, O.BalanceDue, O.IsVoid, O.VoidDate, O.Remarks";
                 //query += ", D.TrayNumber, D.ModifiedSphereRight, D.ModifiedSphereLeft, D.ModifiedCylRight, D.ModifiedCylLeft, D.ModifiedAxisRight";
                 //query += ", D.ModifiedAxisLeft, D.ModifiedAddRight, D.ModifiedAddLeft, D.ModifiedPrismRight, D.ModifiedPrismLeft";
                 //query += ", D.MeasurementFpdRight, D.MeasurementFpdLeft, D.MeasurementNrPdRight, D.MeasurementNrPdLeft";
@@ -457,6 +571,13 @@ namespace Optiks.DataAccess
                         order.PaidBy = dr["PaidBy"].ToString();
                         order.PaidAmount = Convert.ToDecimal(dr["PaidAmount"]);
                         order.BalanceDue = Convert.ToDecimal(dr["BalanceDue"]);
+                        order.IsVoid = Convert.ToBoolean(dr["IsVoid"]);
+
+                        if (!string.IsNullOrEmpty(dr["VoidDate"].ToString()))
+                        {
+                            order.VoidDate = Convert.ToDateTime(dr["VoidDate"]);
+                        }
+
                         order.Remarks = dr["Remarks"].ToString();
                         order.OrderDate = Convert.ToDateTime(dr["OrderDate"]);
 
